@@ -1,0 +1,32 @@
+{
+  "name": "gradia-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/heda-firm/gradia-fronend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/heda-firm/gradia-fronend/issues"
+  },
+  "homepage": "https://gitlab.com/heda-firm/gradia-fronend#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "joi": "^18.0.1",
+    "mongoose": "^8.19.3",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.10",
+    "path": "^0.12.7",
+    "randomstring": "^1.3.1"
+  }
+}
