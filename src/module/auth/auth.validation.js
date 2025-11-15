@@ -19,3 +19,32 @@ export const signupVal = joi.object({
     ).min(1).required(),
     civilIdPic: joi.string().optional(),
 })
+
+//login
+export const signinVal = joi.object({
+    email: joi.string().email().required(),
+    password: joi.string().required(),
+})
+
+// refresh token
+export const refreshToken = joi.object({
+    refresh_token: joi.string().required()
+})
+
+export const vrefiy = joi.object({
+    email: joi.string().email().required(),
+    otp: joi.string().required()
+})
+
+export const forgetPassword = joi.object({
+    email: joi.string().email().required()
+})
+
+
+export const changePassword = joi.object({
+    email: joi.string().email().required(),
+    otp: joi.string().required(),
+    password: joi.string().required(),
+    repassword: joi.string().valid(joi.ref('password')),
+})
+

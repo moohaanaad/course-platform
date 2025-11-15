@@ -1,5 +1,6 @@
 import mongoose, { model, Schema } from "mongoose";
-import { genderTypes } from "../../common/constant/index.js";
+import { genderTypes, roleTypes } from "../../common/constant/index.js";
+import { hashPassword } from "../../utils/bcrypt/index.js";
 
 const userSchema = new Schema({
     firstname: {
@@ -19,10 +20,19 @@ const userSchema = new Schema({
         trim: true,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     gender: {
         type: String,
         enum: Object.values(genderTypes),
         required: true,
+    },
+    role: {
+        type: String,
+        enum: Object.values(roleTypes),
+        default: roleTypes.STUDENT
     },
     phone: {
         type: String,
@@ -56,7 +66,22 @@ const userSchema = new Schema({
     profilePic: {
         type: String,
         trim: true
-    }
+    },
+    isConfirmed: {
+        type: Boolean,
+        default: false
+    },
+    isActive: {
+        type: Boolean,
+        default: false
+    },
+}, { timestamps: true })
+
+userSchema.pre("save", function (next) {
+    //isModified => check if password was changed
+    if (this.isModified("password")) this.password = hashPassword(this.password)
+
+    return next()
 })
 
 export const User = model('User', userSchema)

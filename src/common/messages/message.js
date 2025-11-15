@@ -5,6 +5,9 @@ const generateMessage = (entity) => ({
     failToUpdate: `fail to update ${entity}`,
     createdSuccessfully: `${entity} created Successfully`,
     updatedSuccessfully: `${entity} updated Successfully`,
+
+    getAll: `get all ${entity} successfully`,
+    getSpecific: `get specific ${entity} successfully`,
     changedPasswordSuccessfully: `${entity} password changed Successfully, please login`,
     changedEmailSuccessfully: `${entity} email changed Successfully, please check your email to verify`,
     deletedSuccessfully: `${entity} deleted Successfully`,
@@ -21,9 +24,10 @@ export const messages = {
         alreadyVerified: "account is alreadyverified",
         verifiedSuccessfully: "account verified successfully",
         login: "login successfully",
-        signupSuccess:"signup successfully.",
-        setPasswordSuccessfully:"Password entered successfully, Please login.",
+        signupSuccess: "signup successfully.",
+        setPasswordSuccessfully: "Password entered successfully, Please login.",
         invalidcrendential: "invalid credential",
+        verfiedSuccessfully: "vrefied successfully please login",
         friend: {
             alreadyInFriendList: "you are in friend list",
             alreadySentFriendRequest: "you are already sent friend request",
@@ -32,17 +36,17 @@ export const messages = {
             emptyFriend: "friend was empty",
             emptyFriendRequest: "friend request was empty",
             emptySentFriendRequest: "sent friend request was empty",
-            
+
         }
     },
-    image:{
-        coverUploaded:  "cover images uploaded successfully",
+    image: {
+        coverUploaded: "cover images uploaded successfully",
         invalidImage: "invalid image",
         notFoundImage: "you don't have any image"
     },
-    OTP:{
+    OTP: {
         haveOTP: "you already have OTP",
-        expiredOTP:"OTP has been expired",
+        expiredOTP: "OTP has been expired",
         OTPSent: "check your email",
         invalidOTP: "invalid OTP"
     },
@@ -50,14 +54,10 @@ export const messages = {
         invalid: "invalid bearer token",
         unauthenticate: "unauthenticate"
     },
-    post:{
-        ...generateMessage("post"),
-        notAuthorized: "You are not authorized to do this.",
-        archive: "post archived successfully",
-        restore: "post restored successfully"
+    banner: {
+        ...generateMessage("banner"),
+        requiredBanner: 'banner is required'
     },
-    comment:{
-      ...generateMessage("comment")  
-    },
+    notAuthorized: "You are not authorized to do this.",
     internalServicerError: "please try again later"
 }

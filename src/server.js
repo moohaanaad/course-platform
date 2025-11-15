@@ -1,5 +1,6 @@
 import connectDb from "./db/connection.js"
 import authRouter from "./module/auth/auth.route.js"
+import bannerRouter from "./module/banner/banner.route.js"
 import { globalErrorHandling } from "./utils/error/global-errorhandling.js"
 
 
@@ -13,6 +14,7 @@ const server = async (app, express) => {
     
     //routes
     app.use('/auth', authRouter)
+    app.use('/banner', bannerRouter)
     
     app.use(globalErrorHandling)
 }

@@ -1,4 +1,4 @@
-import { genderTypes } from "./user.js";
+import { genderTypes, roleTypes } from "./user.js";
 
 
-export { genderTypes }
+export { genderTypes, roleTypes }
