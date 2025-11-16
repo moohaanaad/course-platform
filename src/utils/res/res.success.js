@@ -1,6 +1,6 @@
 
 
-export const successResponse = ({ res, data, message = 'Success', statusCode = 200 }) => {
+export const successResponse = ({ res, message, data, statusCode = 200 }) => {
     return res.status(statusCode).json({
         success: true,
         message,

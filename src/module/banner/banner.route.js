@@ -25,4 +25,15 @@ bannerRouter.get('/:id',
     asyncHandler(bannerController.specificBanner)
 )
 
+//update banner 
+bannerRouter.put('/:id',
+    fileupload({ mainFolder: 'image',partFolder: 'banner' }).single('banner'),
+    asyncHandler(bannerController.updateBanner)
+)
+
+//delete banner 
+bannerRouter.delete('/:id',
+    asyncHandler(bannerController.deleteBanner)
+)
+
 export default bannerRouter
