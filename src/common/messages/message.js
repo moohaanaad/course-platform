@@ -18,29 +18,18 @@ export const messages = {
     user: {
         ...generateMessage('user'),
         phone: "phone already exist",
-        username: "username already exist",
         email: "email already exist",
         notConfirmed: " please confirm your email first",
         alreadyVerified: "account is alreadyverified",
         verifiedSuccessfully: "account verified successfully",
         login: "login successfully",
-        signupSuccess: "signup successfully.",
-        setPasswordSuccessfully: "Password entered successfully, Please login.",
+        signupSuccess: "signup successfully",
+        setPasswordSuccessfully: "Password entered successfully, Please login",
         invalidcrendential: "invalid credential",
         verfiedSuccessfully: "vrefied successfully please login",
-        friend: {
-            alreadyInFriendList: "you are in friend list",
-            alreadySentFriendRequest: "you are already sent friend request",
-            alreadyReceivedFriendRequest: "you are already received friend request",
-            addedFriendRequest: "friend requested successfulyy",
-            emptyFriend: "friend was empty",
-            emptyFriendRequest: "friend request was empty",
-            emptySentFriendRequest: "sent friend request was empty",
-
-        }
     },
     image: {
-        coverUploaded: "cover images uploaded successfully",
+        uploaded: "images uploaded successfully",
         invalidImage: "invalid image",
         notFoundImage: "you don't have any image"
     },
