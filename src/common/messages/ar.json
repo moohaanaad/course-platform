@@ -1,0 +1,53 @@
+{
+	"user": {
+		"notFound": "المستخدم غير موجود",
+		"alreadyExist": "المستخدم موجود بالفعل",
+		"failToCreate": "فشل في إنشاء المستخدم",
+		"failToUpdate": "فشل في تحديث المستخدم",
+		"createdSuccessfully": "تم إنشاء المستخدم بنجاح",
+		"updatedSuccessfully": "تم تحديث المستخدم بنجاح",
+		"getAll": "تم جلب جميع المستخدمين بنجاح",
+		"getSpecific": "تم جلب المستخدم بنجاح",
+		"changedPasswordSuccessfully": "تم تغيير كلمة المرور، يرجى تسجيل الدخول",
+		"changedEmailSuccessfully": "تم تغيير البريد الإلكتروني، يرجى التحقق من بريدك",
+		"deletedSuccessfully": "تم حذف المستخدم بنجاح",
+		"invalid": "بيانات المستخدم غير صحيحة",
+		"phone": "رقم الهاتف موجود بالفعل",
+		"email": "البريد الإلكتروني موجود بالفعل",
+		"notConfirmed": "يرجى تأكيد بريدك الإلكتروني أولاً",
+		"alreadyVerified": "الحساب مفعل بالفعل",
+		"verifiedSuccessfully": "تم تفعيل الحساب بنجاح",
+		"login": "تم تسجيل الدخول بنجاح",
+		"signupSuccess": "تم التسجيل بنجاح",
+		"setPasswordSuccessfully": "تم تعيين كلمة المرور بنجاح، يرجى تسجيل الدخول",
+		"invalidcrendential": "بيانات تسجيل الدخول غير صحيحة",
+		"verfiedSuccessfully": "تم التفعيل بنجاح، يرجى تسجيل الدخول"
+	},
+	"image": {
+		"coverUploaded": "تم رفع صورة الغلاف بنجاح",
+		"invalidImage": "صورة غير صالحة",
+		"notFoundImage": "لا يوجد لديك أي صور"
+	},
+	"OTP": {
+		"haveOTP": "لديك كود تحقق بالفعل",
+		"expiredOTP": "كود التحقق منتهي",
+		"OTPSent": "افحص بريدك الإلكتروني",
+		"invalidOTP": "كود التحقق غير صحيح"
+	},
+	"token": {
+		"invalid": "توكن غير صالح",
+		"unauthenticate": "غير مصرح"
+	},
+	"banner": {
+		"notFound": "البانر غير موجود",
+		"getAll": "تم جلب جميع البانر بنجاح",
+		"getSpecific": "تم جلب البانر بنجاح",
+		"alreadyExist": "البانر موجود بالفعل",
+		"requiredBanner": "البانر مطلوب",
+		"createdSuccessfully": "تم إنشاء البانر بنجاح",
+    "updatedSuccessfully": "تم تحديث البانر بنجاح",
+		"deletedSuccessfully": "تم حذف البانر بنجاح"
+	},
+	"notAuthorized": "غير مصرح لك بالقيام بهذا",
+	"internalServicerError": "يرجى المحاولة مرة أخرى لاحقاً"
+}

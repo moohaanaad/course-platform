@@ -1,0 +1,60 @@
+
+{
+  "user": {
+    "notFound": "user not found",
+    "alreadyExist": "user already exist",
+    "failToCreate": "fail to create user",
+    "failToUpdate": "fail to update user",
+    "createdSuccessfully": "user created Successfully",
+    "updatedSuccessfully": "user updated Successfully",
+    "getAll": "get all users successfully",
+    "getSpecific": "get specific user successfully",
+    "changedPasswordSuccessfully": "user password changed Successfully, please login",
+    "changedEmailSuccessfully": "user email changed Successfully, please check your email to verify",
+    "deletedSuccessfully": "user deleted Successfully",
+    "invalid": "user invalid",
+
+    "phone": "phone already exist",
+    "email": "email already exist",
+    "notConfirmed": "please confirm your email first",
+    "alreadyVerified": "account is already verified",
+    "verifiedSuccessfully": "account verified successfully",
+    "login": "login successfully",
+    "signupSuccess": "signup successfully.",
+    "setPasswordSuccessfully": "Password entered successfully, Please login.",
+    "invalidcrendential": "invalid credential",
+    "verfiedSuccessfully": "verified successfully please login"
+  },
+
+  "image": {
+    "coverUploaded": "cover images uploaded successfully",
+    "invalidImage": "invalid image",
+    "notFoundImage": "you don't have any image"
+  },
+
+  "OTP": {
+    "haveOTP": "you already have OTP",
+    "expiredOTP": "OTP has expired",
+    "OTPSent": "check your email",
+    "invalidOTP": "invalid OTP"
+  },
+
+  "token": {
+    "invalid": "invalid bearer token",
+    "unauthenticate": "unauthenticated"
+  },
+
+  "banner": {
+    "notFound": "banner not found",
+    "getAll": "get all banner successfully",
+    "getSpecific": "get specific banner successfully",
+    "alreadyExist": "banner already exists",
+    "requiredBanner": "banner is required",
+    "createdSuccessfully": "banner created successfully",
+    "updatedSuccessfully": "banner updated successfully",
+    "deletedSuccessfully": "banner deleted Successfully"
+  },
+
+  "notAuthorized": "You are not authorized to do this.",
+  "internalServicerError": "please try again later"
+}

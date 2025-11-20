@@ -6,7 +6,7 @@ import { errorResponse, successResponse } from "../../utils/res/index.js"
 //create banner
 export const createBanner = async (req, res, next) => {
 
-    if (!req.file) errorResponse({ message: messages.banner.requiredBanner, statusCode: 422 })
+    if (!req.file) errorResponse({ res, message: messages.banner.requiredBanner, statusCode: 422 })
 
     //prepare data
     const preparedData = {
