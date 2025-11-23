@@ -5,19 +5,21 @@ import randomstring from 'randomstring'
 
 
 export const fileValidationType = {
-    image: ['image/png', 'image/jpeg'],
-    file: ['application/pdf']
+    image: ['image/png', 'image/jpeg', 'application/pdf'],
+    file: ['application/pdf'],
+    course: ['video/mp4','application/pdf'],
+    video: ['video/mp4', 'video/mov', 'video/avi', 'video/mkv']
 }
 
 export const fileupload = ({ mainFolder, partFolder, allowTypes = fileValidationType.image }) => {
     const storage = diskStorage({
 
         destination: (req, file, cb) => {
-            
+
             const fullPath = path.resolve(`uploads/${mainFolder}/${partFolder}`)
-            
+
             fs.mkdirSync(fullPath, { recursive: true })
-            
+
             cb(null, `uploads/${mainFolder}/${partFolder}`)
         },
 
