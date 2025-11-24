@@ -77,13 +77,21 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
-}, { timestamps: true })
+}, {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+})
 
 userSchema.pre("save", function (next) {
     //isModified => check if password was changed
     if (this.isModified("password")) this.password = hashPassword(this.password)
 
     return next()
+})
+
+userSchema.virtual('username').get(function () {
+    return this.firstname + ' ' + this.lastname
 })
 
 export const User = model('User', userSchema)

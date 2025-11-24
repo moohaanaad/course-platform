@@ -7,6 +7,7 @@ import randomstring from 'randomstring'
 import { generateToken } from "../../utils/token/generate.js"
 import { comparePassword } from "../../utils/bcrypt/index.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
+import { verifyToken } from "../../utils/token/verify.js"
 
 export const sendOtpToEmail = async (email) => {
     //check Existence 
@@ -51,7 +52,7 @@ export const signup = async (req, res, next) => {
     //send email
     await sendOtpToEmail(email)
 
-    successResponse({
+    return successResponse({
         res,
         message: messages.user.signupSuccess,
         statusCode: 200,
@@ -66,7 +67,7 @@ export const resendOTP = async (req, res, next) => {
 
     await sendOtpToEmail(email)
 
-    successResponse({
+    return successResponse({
         res,
         message: messages.OTP.OTPSent,
         statusCode: 200
@@ -94,7 +95,7 @@ export const verify = async (req, res, next) => {
 
     //update user
     await updatedUser.save()
-    successResponse({
+    return successResponse({
         res,
         message: messages.user.verfiedSuccessfully,
         statusCode: 200,
@@ -168,7 +169,7 @@ export const forgetPassword = async (req, res, next) => {
     //send otp email
     await sendOtpToEmail(email)
 
-    successResponse({
+    return successResponse({
         res,
         statusCode: 200,
         message: messages.OTP.OTPSent

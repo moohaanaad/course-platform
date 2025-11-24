@@ -16,15 +16,9 @@ export const createCourseVal = joi.object({
     sections: joi.array().items(
         joi.object({
             name: joi.string().trim().required(),
-
+            price: joi.number().required(),
             videos: joi.array().items(
                 joi.object({ name: joi.string().trim().required() })
             ).min(1),
-
-            price: joi.number().required(),
-
-
         })).min(1),
-
-
 })

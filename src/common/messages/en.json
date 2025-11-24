@@ -52,5 +52,9 @@
 	"internalServicerError": "please try again later",
 	"course created successfully": "course created successfully",
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
-	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded"
+	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",
+	"all courses": "all courses",
+	"get specific course": "get specific course",
+	"sections": "sections",
+	"User is not enrolled in this course or any section": "User is not enrolled in this course or any section"
 }
