@@ -3,7 +3,6 @@ import { messages } from "../../common/messages/message.js"
 import { Otp } from "../../db/model/otp.js"
 import { User } from "../../db/model/user.js"
 import { sendEmail } from "../../utils/sendEmail.js"
-import randomstring from 'randomstring'
 import { generateToken } from "../../utils/token/generate.js"
 import { comparePassword } from "../../utils/bcrypt/index.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
@@ -12,7 +11,7 @@ import { verifyToken } from "../../utils/token/verify.js"
 export const sendOtpToEmail = async (email) => {
     //check Existence 
     const userOTP = await Otp.findOne({ email })
-    if (userOTP) errorResponse({ message: messages.OTP.haveOTP, statusCode: 400 })
+    if (userOTP) errorResponse({ res, message: messages.OTP.haveOTP, statusCode: 400 })
 
     //send email
     const otp = randomstring.generate({ length: 5, charset: "numeric" })
@@ -31,7 +30,7 @@ export const signup = async (req, res, next) => {
 
     //check exictence
     const userExict = await User.findOne({ $or: [{ email }, { phone }] })
-    if (userExict) errorResponse({ message: messages.user.alreadyExist, statusCode: 400 })
+    if (userExict) errorResponse({ res, message: messages.user.alreadyExist, statusCode: 400 })
 
     //prepare data  
     if (req.body.gender == genderTypes.MALE) {
@@ -41,9 +40,6 @@ export const signup = async (req, res, next) => {
     }
 
     // prepare data 
-    const code = randomstring.generate(7)
-
-    req.body.code = code
     req.body.civilIdPic = req.file.path
 
     //save acc
@@ -81,14 +77,14 @@ export const verify = async (req, res, next) => {
     // check otp existence
     const user = await Otp.findOne({ email })
     if (!user) {
-        errorResponse({ message: messages.OTP.expiredOTP, statusCode: 400 })
+        errorResponse({ res, message: messages.OTP.expiredOTP, statusCode: 400 })
     }
-    if (otp !== user.otp) errorResponse({ message: messages.OTP.invalidOTP, statusCode: 401 })
+    if (otp !== user.otp) errorResponse({ res, message: messages.OTP.invalidOTP, statusCode: 401 })
 
     //check user existence
     const updatedUser = await User.findOne({ email })
-    if (!updatedUser) errorResponse({ message: messages.user.notFound, statusCode: 404 })
-    if (updatedUser.isConfirmed) errorResponse({ message: messages.user.alreadyVerified, statusCode: 400 })
+    if (!updatedUser) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+    if (updatedUser.isConfirmed) errorResponse({ res, message: messages.user.alreadyVerified, statusCode: 400 })
 
     //preapre data
     updatedUser.isConfirmed = true
@@ -109,11 +105,11 @@ export const login = async (req, res, next) => {
     const { email, password } = req.body
 
     const userExist = await User.findOne({ email })
-    if (!userExist) errorResponse({ message: messages.user.notFound, statusCode: 404 })
-    if (userExist?.isConfirmed == false) errorResponse({ message: messages.user.notConfirmed, statusCode: 403 })
+    if (!userExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+    if (userExist?.isConfirmed == false) errorResponse({ res, message: messages.user.notConfirmed, statusCode: 403 })
 
     const comparedPassword = await comparePassword(password, userExist.password)
-    if (!comparedPassword) errorResponse({ message: messages.user.notFound, statusCode: 404 })
+    if (!comparedPassword) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
 
 
     //prepare data 
@@ -163,8 +159,8 @@ export const forgetPassword = async (req, res, next) => {
 
     //check existence
     const userExist = await User.findOne({ email })
-    if (!userExist) errorResponse({ message: messages.user.notFound, statusCode: 404 })
-    if (userExist.isConfirmed == false) errorResponse({ message: messages.user.notConfirmed, statusCode: 403 })
+    if (!userExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+    if (userExist.isConfirmed == false) errorResponse({ res, message: messages.user.notConfirmed, statusCode: 403 })
 
     //send otp email
     await sendOtpToEmail(email)
@@ -183,10 +179,10 @@ export const changePassword = async (req, res, next) => {
 
     //check existence
     const otpExist = await Otp.findOne({ email, otp })
-    if (!otpExist) errorResponse({ message: messages.OTP.invalidOTP, statusCode: 409 })
+    if (!otpExist) errorResponse({ res, message: messages.OTP.invalidOTP, statusCode: 409 })
 
     const userExist = await User.findOne({ email })
-    if (!userExist) errorResponse({ message: messages.user.notFound, statusCode: 404 })
+    if (!userExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
 
 
     //prepare data

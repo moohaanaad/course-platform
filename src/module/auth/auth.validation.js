@@ -13,10 +13,9 @@ export const signupVal = joi.object({
     gender: joi.string().valid(...Object.values(genderTypes)),
     university: joi.string().min(3).max(30).required(),
     faculty: joi.string().min(3).max(30).required(),
-    Specializations: joi.array()
-    .items(
-      joi.string().trim().min(1).required()
-    ).min(1).required(),
+    Specializations: joi.array().items(
+        joi.string().trim().min(1).required()
+    ),
     civilIdPic: joi.string().optional(),
 })
 

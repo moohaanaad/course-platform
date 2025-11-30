@@ -50,11 +50,34 @@
 	},
 	"notAuthorized": "You are not authorized to do this.",
 	"internalServicerError": "please try again later",
-	"course created successfully": "course created successfully",
+	"course": {
+		"videoRequired": "every section must have video",
+		"UserNotEnrolled": "User is not enrolled in this course or any section",
+		"freeVideoRequired": "free video is required",
+		"createdSuccessfully": "course created successfully",
+		"getAll": "get all courses successfully",
+		"getSpecific": "get specific course successfully",
+		"sections": {
+			"getAll": "get all sections successfully",
+			"getSpecific": "get specific section successfully"
+		}
+	},
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",
 	"all courses": "all courses",
 	"get specific course": "get specific course",
+	"section notfound": "section notfound",
 	"sections": "sections",
-	"User is not enrolled in this course or any section": "User is not enrolled in this course or any section"
+	"updated": "updated",
+	"user should be an instracter": "user should be an instracter",
+	"course created successfully": "course created successfully",
+	"course not found": "course not found",
+	"updated Successfully": "updated Successfully",
+	"course not fond": "course not fond",
+	"join successfully": "join successfully",
+	" student already joined in this course": " student already joined in this course",
+	"section not found": "section not found",
+	"student already joined in this course": "student already joined in this course",
+	"joined successfully": "joined successfully",
+	"student already joined in this section": "student already joined in this section"
 }

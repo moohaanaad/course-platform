@@ -2,7 +2,6 @@
 
 export function attachFiles(req) {
     if (!req.files) return;
-    console.log(req.files);
     
     req.files.forEach(file => {
         const path = file.fieldname

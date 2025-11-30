@@ -11,8 +11,6 @@ export function parseJsonFields(req, res, next) {
       if (value.startsWith("{") || value.startsWith("[")) {
         try {
           req.body[key] = JSON.parse(value);
-        
-          next();
         } catch (err) {
           return res.status(400).json({ 
             message: `Invalid JSON format in field "${key}"` 
@@ -21,5 +19,6 @@ export function parseJsonFields(req, res, next) {
       }
     }
   }
-
+  
+  next()
 }
