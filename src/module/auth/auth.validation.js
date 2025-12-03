@@ -3,8 +3,18 @@ import { genderTypes } from "../../common/constant/index.js";
 
 
 export const signupVal = joi.object({
-    firstname: joi.string().min(3).max(30).required(),
-    lastname: joi.string().min(3).max(30).required(),
+    firstname: joi.object({
+        ar: joi.string().min(3).max(30).pattern(/^[\u0600-\u06FF\s]+$/).messages({
+            "string.pattern.base": "Arabic firstname must contain only Arabic letters"
+        }).required(),
+        en: joi.string().min(3).max(30).required(),
+    }),
+    lastname: joi.object({
+        ar: joi.string().min(3).pattern(/^[\u0600-\u06FF\s]+$/).max(30).messages({
+            "string.pattern.base": "Arabic lastname must contain only Arabic letters"
+        }).required(),
+        en: joi.string().min(3).max(30).required(),
+    }),
     email: joi.string().email().required(),
     phone: joi.string().pattern(/^\+?[1-9]\d{1,14}$/).required(),
     password: joi.string().min(8).max(32).pattern(

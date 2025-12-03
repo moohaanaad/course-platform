@@ -7,7 +7,7 @@ import { generateToken } from "../../utils/token/generate.js"
 import { comparePassword } from "../../utils/bcrypt/index.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
 import { verifyToken } from "../../utils/token/verify.js"
-
+import randomstring from 'randomstring'
 export const sendOtpToEmail = async (email) => {
     //check Existence 
     const userOTP = await Otp.findOne({ email })
@@ -30,7 +30,8 @@ export const signup = async (req, res, next) => {
 
     //check exictence
     const userExict = await User.findOne({ $or: [{ email }, { phone }] })
-    if (userExict) errorResponse({ res, message: messages.user.alreadyExist, statusCode: 400 })
+    if (userExict?.email == req.body.email) errorResponse({ res, message: messages.user.email, statusCode: 400 })
+    if (userExict?.phone == req.body.phone) errorResponse({ res, message: messages.user.phone, statusCode: 400 })
 
     //prepare data  
     if (req.body.gender == genderTypes.MALE) {
@@ -40,7 +41,7 @@ export const signup = async (req, res, next) => {
     }
 
     // prepare data 
-    req.body.civilIdPic = req.file.path
+    req.body.civilIdPic = req?.file?.path
 
     //save acc
     const createdUser = await User.create(req.body)

@@ -12,21 +12,26 @@ export const createCourse = async (req, res, next) => {
   //cehck existence 
   const instracterExist = await User.findById(req.body.instracter)
   if (!instracterExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
-  if (instracterExist.role !== roleTypes.INSTRACTER) errorResponse({ res, message: "user should be an instracter", statusCode: 401 })
+  if (instracterExist.role !== roleTypes.INSTRACTER) errorResponse({ res, message: messages.course.shouldBeInstructor, statusCode: 401 })
   //prepare data
   attachFiles(req)
   for (let section of req.body.sections) {
-    if (section.videos.length == 0) return errorResponse(
-      { res, message: "every section must have video", statusCode: 400 }
+    if (section.videos.length == 0) errorResponse(
+      { res, message: messages.course.section.videoRequired, statusCode: 400 }
     )
     for (let video of section.videos) {
-      if (video.name && !video.video) return errorResponse(
-        { res, message: `Video "${video.name}" has name but no file uploaded`, statusCode: 400 }
-      )
+      if (video.name && !video.video) {
+        if (req.header['accept-language'] == "en") errorResponse(
+          { res, message: `Video "${video.name.en}" has name but no file uploaded`, statusCode: 422 }
+        )
+        errorResponse(
+          { res, message: ` الفيديو  ${video.name.ar} يحتوي على اسم ولكن لم يتم رفع أي ملف له `, statusCode: 422 }
+        )
+      }
     }
   }
   const freeVideo = files.find(file => file.fieldname == "freeVideo")
-  if (!freeVideo) return errorResponse({ res, message: 'free video is required', statusCode: 400 })
+  if (!freeVideo) errorResponse({ res, message: messages.course.freeVideoRequired, statusCode: 422 })
   req.body.createdBy = user._id
   req.body.freeVideo = freeVideo.path
   if (req.body.startAt == Date.now() || req.body.startAt <= Date.now()) req.body.isActive = true
@@ -37,12 +42,11 @@ export const createCourse = async (req, res, next) => {
   return successResponse({
     res,
     statusCode: 201,
-    message: "course created successfully",
+    message: messages.course.createdSuccessfully,
     data: createdCourse
   })
 }
 
-//                                  -------get-------
 //get all courses 
 export const allCourses = async (req, res, next) => {
 
@@ -52,7 +56,7 @@ export const allCourses = async (req, res, next) => {
 
   return successResponse({
     res,
-    message: 'all courses',
+    message: messages.course.getAll,
     statusCode: 200,
     data: courses
   })
@@ -67,11 +71,11 @@ export const specificCourse = async (req, res, nxt) => {
     .populate('instracter', 'firstname lastname code profilePic')
     .select('-sections.videos.video -sections.videos.materials')
 
-  if (!courseExist) errorResponse({ res, message: "course not found", statusCode: 404 })
+  if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 
   return successResponse({
     res,
-    message: "get specific course",
+    message: messages.course.getSpecific,
     statusCode: 200,
     data: courseExist
   })
@@ -108,14 +112,16 @@ export const allPayedCourses = async (req, res) => {
 
   //if no access at all
   if (fullCourses.length === 0 && sectionAccess.length === 0) {
-    return res.status(404).json({
-      access: "none",
-      message: "User is not enrolled in any courses or sections"
+    return successResponse({
+      res,
+      success: false,
+      message: messages.course.userNotEnrolled,
+      statusCode:404
     });
   }
 
-  return res.status(200).json({
-    access: "found",
+  return successResponse({
+    res,
     fullCoursesCount: fullCourses.length,
     sectionAccessCount: sectionAccess.length,
     fullCourses,
@@ -130,7 +136,7 @@ export const payedCourse = async (req, res, next) => {
 
   const course = await Course.findOne({ _id: id, isActive: true }).populate('instracter', 'username code profilePic');
 
-  if (!course) return errorResponse({ res, message: "course not found", statusCode: 404 })
+  if (!course) return errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 
   //check if user enrolled in full course
   const inCourse = course.students.some(
@@ -139,7 +145,7 @@ export const payedCourse = async (req, res, next) => {
   if (inCourse) {
     return successResponse({
       res,
-      message: "full",
+      message: messages.course.getSpecific,
       statusCode: 200,
       data: course
     })
@@ -155,7 +161,7 @@ export const payedCourse = async (req, res, next) => {
     course.sections = sections
     return successResponse({
       res,
-      message: "sections",
+      message: messages.course.section.getAll,
       statusCode: 200,
       data: course
     })
@@ -164,40 +170,9 @@ export const payedCourse = async (req, res, next) => {
   //not enrolled anywhere
   return successResponse({
     res,
-    message: "User is not enrolled in this course or any section",
+    message: messages.course.userNotEnrolled,
     statusCode: 403,
     success: false
-  })
-}
-
-//                                  -------update-------
-//update section 
-export const updateSection = async (req, res, next) => {
-  const { sectionId } = req.params
-
-  //check existence
-  const sectionExist = await Course.findOne({ "sections._id": sectionId })
-  if (!sectionExist) errorResponse({ res, message: 'section notfound', statusCode: 404 })
-
-  //prepare data
-  attachFiles(req)
-  if (req.body.sections[0]?.videos?.length) {
-    for (let i = 0; i < req.body.sections[0].videos.length; i++) {
-      sectionExist.sections[0].videos.push(req.body.sections[0].videos[i])
-    }
-  }
-  if (req.body.sections[0]?.name) sectionExist.sections[0].name = req.body.sections[0]?.name
-  if (req.body.sections[0]?.price) sectionExist.sections[0].price = req.body.sections[0]?.price
-
-  //save data
-  const updatedCourse = await sectionExist.save()
-
-  //response
-  return successResponse({
-    res,
-    message: 'updated',
-    statusCode: 200,
-    data: updatedCourse
   })
 }
 
@@ -207,7 +182,7 @@ export const updateCourse = async (req, res, next) => {
 
   //check existence 
   const courseExist = await Course.findById(id)
-  if (!courseExist) errorResponse({ res, message: "course not fond", statusCode: 404 })
+  if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 
   //prepare data
   attachFiles(req)
@@ -228,13 +203,12 @@ export const updateCourse = async (req, res, next) => {
   //response 
   return successResponse({
     res,
-    message: 'updated Successfully',
+    message: messages.course.updatedSuccessfully,
     statusCode: 201,
     data: updatedCourse
   })
 }
 
-//                                  -------join-------
 //join course
 export const joinCourse = async (req, res, next) => {
   const { id } = req.params
@@ -242,9 +216,9 @@ export const joinCourse = async (req, res, next) => {
 
   //cehck exitence 
   const courseExist = await Course.findOne({ _id: id, isActive: true })
-  if (!courseExist) errorResponse({ res, message: 'course no found', statusCode: 404 })
+  if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
   const studentExist = courseExist.students.find(stu => stu.toString() == user._id.toString())
-  if (studentExist) errorResponse({ res, message: "student already joined in this course", statusCode: 401 })
+  if (studentExist) errorResponse({ res, message: messages.course.studentAlreadyJoined, statusCode: 401 })
 
   //prepare data
   courseExist.students.push(user._id)
@@ -255,44 +229,8 @@ export const joinCourse = async (req, res, next) => {
   //response 
   return successResponse({
     res,
-    message: 'join successfully',
+    message: messages.course.joinCourseSuccessfully,
     statusCode: 200,
     data: courseExist.students
   })
-}
-
-// join section 
-export const joinSection = async (req, res, next) => {
-  const { sectionId } = req.params
-  const { user } = req
-
-  //check existence 
-  const courseExist = await Course.findOne(
-    { "sections._id": sectionId, isActive: true },
-    { "sections.$": 1, name: 1, students: 1 }
-  )
-  if (!courseExist) errorResponse({ res, message: 'section not found', statusCode: 404 })
-
-  let studentExist = courseExist.students.find(stu => stu.toString() == user._id.toString())
-  if (studentExist) errorResponse({ res, message: 'student already joined in this course', statusCode: 401 })
-  studentExist = courseExist.sections[0].students.find(stu => stu.toString() == user._id.toString())
-  if (studentExist) errorResponse({ res, message: 'student already joined in this section', statusCode: 401 })
-  
-  //save
-  const joinedStudent = await Course.findOneAndUpdate(
-    { "sections._id": sectionId },
-    { $push: { "sections.$.students": user._id } },
-    { new: true }
-  ).select('sections')
-  const section = joinedStudent.sections.find(
-  (sec) => sec._id.toString() === sectionId
-);
-  //responase
-  return successResponse({
-    res,
-    message: "joined successfully",
-    statusCode: 200,
-    data: section
-  })
-  // const studentExist  
 }

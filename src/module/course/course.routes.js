@@ -6,9 +6,12 @@ import { parseJsonFields } from "../../middleware/parseJsonFields.js";
 import { isAuthenticate } from "../../middleware/authentication.js";
 import { isValid } from "../../middleware/validation.js";
 import * as val from "./course.validation.js";
+import sectionRouter from "./section/section.routes.js";
 
 
 const courseRouter = Router()
+
+courseRouter.use('/sec', sectionRouter)
 
 //all routes are protect 
 courseRouter.use(isAuthenticate())
@@ -53,24 +56,9 @@ courseRouter.get('/payed/:id',
     asyncHandler(courseConttroller.payedCourse)
 )
 
-//add videos in section
-courseRouter.put('/sec/:sectionId',
-    fileupload(
-        { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationType.course }
-    ).any(),
-    parseJsonFields,
-    isValid(val.updateSectionVal),
-    asyncHandler(courseConttroller.updateSection)
-)
-
 //join course 
 courseRouter.put('/join/:id',
     asyncHandler(courseConttroller.joinCourse)
-)
-
-//join section 
-courseRouter.put('/sec/join/:sectionId',
-    asyncHandler(courseConttroller.joinSection)
 )
 
 export default courseRouter

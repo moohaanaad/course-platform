@@ -3,8 +3,14 @@ import { sectionSchema } from "./course.section.js";
 import randomstring from 'randomstring'
 
 const courseSchema = new Schema({
-    name: { type: String, trim: true, required: true },
-    description: { type: String, trim: true, required: true },
+    name: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
+    description: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
     price: { type: Number, trim: true, required: true },
     freeVideo: { type: String, trim: true, required: true },
     instracter: { type: Types.ObjectId, ref: 'User', required: true },
@@ -22,8 +28,8 @@ const courseSchema = new Schema({
     endAt: { type: Date },
     isActive: { type: Boolean, default: false },
 
-    createdBy: { type: Types.ObjectId, ref:'User'},
-    updatedBy: { type: Types.ObjectId, ref:'User'},
+    createdBy: { type: Types.ObjectId, ref: 'User' },
+    updatedBy: { type: Types.ObjectId, ref: 'User' },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },
@@ -32,7 +38,7 @@ const courseSchema = new Schema({
 
 // --- hocks ---
 courseSchema.pre('save', function (next) {
-    if(!this.code) this.code = randomstring.generate(4)
+    if (!this.code) this.code = randomstring.generate(4)
 
     return next()
 })

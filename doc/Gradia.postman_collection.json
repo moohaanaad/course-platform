@@ -1,0 +1,1579 @@
+{
+	"info": {
+		"_postman_id": "f199b506-81db-4892-9254-ea5a20d39a08",
+		"name": "Gradia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31480997"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstname",
+									"value": "{\"ar\": \"مهند\",\"en\":\"mohanad\" }",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "{ \"ar\": \"احمد\",\"en\":\"ahmed\" }",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mohana2dqws1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Moahcka@312",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "+201212009822",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "university",
+									"value": "AUW",
+									"type": "text"
+								},
+								{
+									"key": "faculty",
+									"value": "computer sience",
+									"type": "text"
+								},
+								{
+									"key": "Specializations",
+									"value": "[\"AI\"]",
+									"type": "text"
+								},
+								{
+									"key": "civilIdPic",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/digital-art-landscape-sunset-sky-wallpaper-thumb.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json()\r",
+									"pm.environment.set(\"access_token\", response.access_token)\r",
+									"pm.environment.set(\"refresh_token\", response.refresh_token)"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"password\":\"mohanadahmedd\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.environment.set(\"access_token\", response.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n    \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTE4Nzc2N2Y1NzQ1NDFiMTg4ZGZkYmQiLCJpYXQiOjE3NjQ3NzQ2NzEsImV4cCI6MTc2NTM3OTQ3MX0.K5oQljXPAZT-dnQV1mWSuv5ciA48C4Hc8A2SERzvY-Y\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/refresh-token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\" : \"43991\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/verify-account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"verify-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/resend",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"resend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/forget-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"forget-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"00743\",\r\n    \"password\": \"mohanadahmedd\",\r\n    \"repassword\": \"mohanadahmedd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/change-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "banner",
+			"item": [
+				{
+					"name": "banner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/pxfuel.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/banner",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"banner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "banner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/banner",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"banner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific banner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"banner",
+								"69189b600660df74faa4cc69"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update banner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/heavy-bike-harley-davidson.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"banner",
+								"69189b600660df74faa4cc69"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "banner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"banner",
+								"69189b600660df74faa4cc69"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"mohanad\",\r\n    \"lastname\": \"ahmed\",\r\n    \"phone\": \"201211009822\",\r\n    \"university\": \"AUW\",\r\n    \"faculty\": \"computer sience\",\r\n    \"Specializations\": [\r\n        \"backend\",\r\n        \"ai\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change profile pic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profilePic",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/faculty.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/profile-pic",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile-pic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change civil Id pic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "civilIdPic",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/digital-art-landscape-sunset-sky-wallpaper-thumb.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/civilid-pic",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"civilid-pic"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "course",
+			"item": [
+				{
+					"name": "sections",
+					"item": [
+						{
+							"name": "update section",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "sections",
+											"value": "[{\"name\":{\"ar\": \"سكشن\",\"en\":\"sectoin\" }, \"price\":200,\n\"videos\":[{\"name\":{\"ar\": \"فيديو \",\"en\":\"video1\" }},{\"name\":{\"ar\": \"فيديو \",\"en\":\"video6\" }}]\n}]",
+											"type": "text"
+										},
+										{
+											"key": "sections[0].videos[0].video",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+										},
+										{
+											"key": "sections[0].videos[1].video",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+										},
+										{
+											"key": "sections[0].videos[0].materials",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
+										},
+										{
+											"key": "sections[0].videos[1].materials",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/course/sec/6930579f50250605b24f9151",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"sec",
+										"6930579f50250605b24f9151"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific section",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "sections",
+											"value": "[{\"name\":\"section11\", \"price\":200,\n\"videos\":[\n{\"name\":\"Video 7\"},{\"name\":\"Video 5\"}\n]\n}]",
+											"type": "text"
+										},
+										{
+											"key": "sections[0].videos[0].video",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+										},
+										{
+											"key": "sections[0].videos[1].video",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+										},
+										{
+											"key": "sections[0].videos[0].materials",
+											"type": "file",
+											"src": [
+												"/C:/Users/ASUS/Desktop/CV/CV.pdf",
+												"/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+											]
+										},
+										{
+											"key": "sections[0].videos[1].materials",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/course/sec/6930579f50250605b24f9151",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"sec",
+										"6930579f50250605b24f9151"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "join section",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/course/sec/join/6930579f50250605b24f9151",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"sec",
+										"join",
+										"6930579f50250605b24f9151"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "join",
+					"item": [
+						{
+							"name": "join course",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/course/join/69231fc5b143cd7684eda345",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"join",
+										"69231fc5b143cd7684eda345"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{\"ar\": \" كورس \",\"en\":\"course1\" }",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "{\"ar\": \"جصثج\",\"en\":\"ggwb\" }",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "freeVideo",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections",
+									"value": "[{\"name\":{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\"videos\":[\n{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}, \n{\"name\":{\"ar\": \"فيديو اتنين \",\"en\":\"video1\" }}\n]}\n,{\"name\":{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\"videos\":[{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}]}]",
+									"type": "text"
+								},
+								{
+									"key": "sections[0].videos[0].video",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections[0].videos[1].video",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections[1].videos[0].video",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections[0].videos[0].materials",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/CV/Islam's Resume.pdf"
+								},
+								{
+									"key": "sections[0].videos[1].materials",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
+								},
+								{
+									"key": "startAt",
+									"value": "2025-12-30T13:04:40",
+									"type": "text"
+								},
+								{
+									"key": "endAt",
+									"value": "2026-01-30T16:59:40",
+									"type": "text"
+								},
+								{
+									"key": "instracter",
+									"value": "69259c5d66c019836942e353",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/course",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "porgramming",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "will learn fullstack",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "sections",
+									"value": "[{\"name\":\"Section 3\",\"price\":50,\"videos\":[{\"name\":\"Video 1\"},{\"name\":\"Video 2\"}]},\n{\"name\":\"Section 2\",\"price\":30,\"videos\":[{\"name\":\"Video A\"}]}]",
+									"type": "text"
+								},
+								{
+									"key": "sections[0].videos[0].video",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections[0].videos[1].video",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections[1].videos[0].video",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+								},
+								{
+									"key": "sections[0].videos[0].materials",
+									"type": "file",
+									"src": [
+										"/C:/Users/ASUS/Desktop/CV/CV.pdf",
+										"/C:/Users/ASUS/Desktop/CV/Islam's Resume.pdf"
+									]
+								},
+								{
+									"key": "sections[0].videos[1].materials",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+								},
+								{
+									"key": "startAt",
+									"value": "2025-12-10T13:04:40",
+									"type": "text"
+								},
+								{
+									"key": "endAt",
+									"value": "2025-12-30T16:59:40",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/course/692327675486241162588ea6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"692327675486241162588ea6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all courses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/69231fc5b143cd7684eda345",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"69231fc5b143cd7684eda345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific payed course or section",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/payed/69231fc5b143cd7684eda345",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"payed",
+								"69231fc5b143cd7684eda345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all payed course or section",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/payed/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"payed",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\":\"mohanad\",\r\n\"lastname\":\"mohamed\",\r\n\"email\":\"mohanadahmed2266@gmail.com\",\r\n\"password\":\"Moahcka@312\",\r\n\"phone\":\"+201211009821\",\r\n\"gender\":\"male\",\r\n\"role\": \"instracter\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

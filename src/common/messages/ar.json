@@ -45,9 +45,43 @@
 		"alreadyExist": "البانر موجود بالفعل",
 		"requiredBanner": "البانر مطلوب",
 		"createdSuccessfully": "تم إنشاء البانر بنجاح",
-    "updatedSuccessfully": "تم تحديث البانر بنجاح",
+		"updatedSuccessfully": "تم تحديث البانر بنجاح",
 		"deletedSuccessfully": "تم حذف البانر بنجاح"
 	},
 	"notAuthorized": "غير مصرح لك بالقيام بهذا",
-	"internalServicerError": "يرجى المحاولة مرة أخرى لاحقاً"
+	"internalServicerError": "يرجى المحاولة مرة أخرى لاحقاً",
+	"course": {
+		"notFound": "الكورس غير موجود",
+		"alreadyExist": "الكورس موجود بالفعل",
+		"failToCreate": "فشل في إنشاء الكورس",
+		"failToUpdate": "فشل في تحديث الكورس",
+		"createdSuccessfully": "تم إنشاء الكورس بنجاح",
+		"updatedSuccessfully": "تم تحديث الكورس بنجاح",
+		"getAll": "تم جلب جميع الكورسات بنجاح",
+		"getSpecific": "تم جلب الكورس بنجاح",
+		"changedPasswordSuccessfully": "تم تغيير كلمة المرور بنجاح",
+		"changedEmailSuccessfully": "تم تغيير البريد الإلكتروني بنجاح",
+		"deletedSuccessfully": "تم حذف الكورس بنجاح",
+		"invalid": "بيانات الكورس غير صحيحة",
+		"joinCourseSuccessfully": "تم الانضمام إلى الكورس بنجاح",
+		"shouldBeInstructor": "يجب أن يكون المستخدم مُدرّسًا",
+		"studentAlreadyJoined": "الطالب منضم بالفعل لهذا الكورس",
+		"userNotEnrolled": "المستخدم غير مشترك في هذا الكورس أو أي سيكشن بداخله",
+		"freeVideoRequired": "مطلوب وجود فيديو مجاني",
+		"section": {
+			"notFound": "السيكشن غير موجود",
+			"updatedSuccessfully": "تم تحديث السيكشن بنجاح",
+			"joinSectionSuccessfully": "تم الانضمام إلى السيكشن بنجاح",
+			"getAll": "تم جلب جميع السيكشنات بنجاح",
+			"getSpecific": "تم جلب السيكشن بنجاح",
+			"studentAlreadyJoined": "الطالب منضم بالفعل لهذا السيكشن",
+			"videoRequired": "يجب أن يحتوي كل سيكشن على فيديو",
+			"section notFound": "course.section.section notFound"
+		}
+	},
+	"الفيديو[object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له": "الفيديو[object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له",
+	"الفيديوفيديو يحتوي على اسم ولكن لم يتم رفع أي ملف له": "الفيديوفيديو يحتوي على اسم ولكن لم يتم رفع أي ملف له",
+	" الفيديو  [object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له ": " الفيديو  [object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له ",
+	" الفيديو  فيديو يحتوي على اسم ولكن لم يتم رفع أي ملف له ": " الفيديو  فيديو يحتوي على اسم ولكن لم يتم رفع أي ملف له ",
+	" الفيديو  فيديو اتنين  يحتوي على اسم ولكن لم يتم رفع أي ملف له ": " الفيديو  فيديو اتنين  يحتوي على اسم ولكن لم يتم رفع أي ملف له "
 }

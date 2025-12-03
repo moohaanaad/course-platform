@@ -4,8 +4,14 @@ import { hashPassword } from "../../utils/bcrypt/index.js";
 import randomstring from 'randomstring'
 
 const userSchema = new Schema({
-    firstname: { type: String, minlength: 3, trim: true, required: true },
-    lastname: { type: String, minlength: 3, trim: true, required: true },
+    firstname: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
+    lastname: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
 
     phone: { type: String, trim: true, unique: true, required: true },
     email: { type: String, trim: true, unique: true, required: true },
@@ -59,7 +65,10 @@ userSchema.pre("save", function (next) {
 // --- virtuals ---
 //merge firstname and lastname
 userSchema.virtual('username').get(function () {
-    return this.firstname + ' ' + this.lastname
+    return {
+        en: this.firstname.en + ' ' + this.lastname.en,
+        ar: this.firstname.ar + ' ' + this.lastname.ar
+    }
 })
 
 export const User = model('User', userSchema)

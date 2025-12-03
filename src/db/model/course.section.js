@@ -2,9 +2,15 @@ import { Schema, Types } from "mongoose";
 
 export const sectionSchema = new Schema({
 
-    name: { type: String, trim: true, required: true },
+    name: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
     videos: [{
-        name: { type: String, trim: true, required: true },
+        name: {
+            ar: { type: String, minlength: 3, trim: true, required: true },
+            en: { type: String, minlength: 3, trim: true, required: true }
+        },
         video: { type: String, trim: true, required: true },
         materials: [{ type: String, trim: true, }]
     }],

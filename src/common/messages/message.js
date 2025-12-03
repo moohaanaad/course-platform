@@ -46,6 +46,24 @@ export const messages = {
         ...generateMessageKeys("banner"),
         requiredBanner: "banner.requiredBanner"
     },
+    course: {
+        ...generateMessageKeys('course'),
+        joinCourseSuccessfully: "course.joinSuccessfully",
+        shouldBeInstructor: "course.shouldBeInstructor",
+        studentAlreadyJoined: "course.studentAlreadyJoined",
+
+        userNotEnrolled: "course.userNotEnrolled",
+        freeVideoRequired: "course.freeVideoRequired",
+        section: {
+            videoRequired: "course.section.videoRequired",
+            studentAlreadyJoined: "course.section.studentAlreadyJoined",
+            updatedSuccessfully: "course.section.updatedSuccessfully",
+            joinSectionSuccessfully: "course.section.joinSuccessfully",
+            notFound: "course.section.section notFound", 
+			getAll: "course.section.getAll",
+			getSpecific: "course.section.getSpecific",
+        },
+    },
     notAuthorized: "general.notAuthorized",
     internalServicerError: "general.internalServicerError"
 };
