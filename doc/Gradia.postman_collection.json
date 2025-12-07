@@ -841,13 +841,13 @@
 									]
 								},
 								"url": {
-									"raw": "{{baseUrl}}/course/sec/6930579f50250605b24f9151",
+									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
-										"sec",
+										"section",
 										"6930579f50250605b24f9151"
 									]
 								}
@@ -931,13 +931,13 @@
 									]
 								},
 								"url": {
-									"raw": "{{baseUrl}}/course/sec/6930579f50250605b24f9151",
+									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
-										"sec",
+										"section",
 										"6930579f50250605b24f9151"
 									]
 								}
@@ -985,15 +985,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/sec/join/6930579f50250605b24f9151",
+									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151/join",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
-										"sec",
-										"join",
-										"6930579f50250605b24f9151"
+										"section",
+										"6930579f50250605b24f9151",
+										"join"
 									]
 								}
 							},
@@ -1040,14 +1040,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/join/69231fc5b143cd7684eda345",
+									"raw": "{{baseUrl}}/course/6930579f50250605b24f9150/join",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
-										"join",
-										"69231fc5b143cd7684eda345"
+										"6930579f50250605b24f9150",
+										"join"
 									]
 								}
 							},
@@ -1371,13 +1371,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/69231fc5b143cd7684eda345",
+							"raw": "{{baseUrl}}/course/6930579f50250605b24f9150",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"69231fc5b143cd7684eda345"
+								"6930579f50250605b24f9150"
 							]
 						}
 					},
@@ -1419,14 +1419,63 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/payed/69231fc5b143cd7684eda345",
+							"raw": "{{baseUrl}}/course/69231fc5b143cd7684eda345/payed",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"payed",
-								"69231fc5b143cd7684eda345"
+								"69231fc5b143cd7684eda345",
+								"payed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get free video",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/692c2501c6046d0996b98723/free-video",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"692c2501c6046d0996b98723",
+								"free-video"
 							]
 						}
 					},
@@ -1464,6 +1513,11 @@
 							{
 								"key": "token",
 								"value": "beaerer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
 								"type": "text"
 							}
 						],
@@ -1543,6 +1597,55 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "get free video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "beaerer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/course/692c2501c6046d0996b98723/free-video",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"course",
+						"692c2501c6046d0996b98723",
+						"free-video"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
