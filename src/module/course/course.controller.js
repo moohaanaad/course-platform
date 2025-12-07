@@ -1,10 +1,12 @@
+import fs from "fs";
+import path from "path";
 import { roleTypes } from "../../common/constant/user.js";
 import { messages } from "../../common/messages/message.js";
-import { Course } from "../../db/model/course.js"
+import { Course } from "../../db/model/course.js";
 import { User } from "../../db/model/user.js";
 import { attachFiles } from "../../utils/multer/attachFiles.js";
-import { errorResponse, successResponse } from "../../utils/res/index.js"
-
+import { errorResponse, successResponse } from "../../utils/res/index.js";
+import { log } from "console";
 //create course
 export const createCourse = async (req, res, next) => {
   const { user, files } = req
@@ -116,17 +118,22 @@ export const allPayedCourses = async (req, res) => {
       res,
       success: false,
       message: messages.course.userNotEnrolled,
-      statusCode:404
+      statusCode: 404
     });
   }
 
   return successResponse({
     res,
-    fullCoursesCount: fullCourses.length,
-    sectionAccessCount: sectionAccess.length,
-    fullCourses,
-    sectionAccess
+    message: messages.course.getAllPayed,
+    statusCode: 200,
+    data: {
+      fullCoursesCount: fullCourses.length,
+      sectionAccessCount: sectionAccess.length,
+      fullCourses,
+      sectionAccess
+    }
   });
+
 };
 
 //get specific payed course or sections 
@@ -233,4 +240,121 @@ export const joinCourse = async (req, res, next) => {
     statusCode: 200,
     data: courseExist.students
   })
+}
+
+//stream video
+export const streamVideo = async (req, res) => {
+
+  const { id, sectionId, videoId } = req.params;
+  const userId = req.user._id;
+
+  //cehck existence 
+  const course = await Course.findOne({
+    _id: id,
+    sections: { $elemMatch: { _id: sectionId, "videos._id": videoId } }
+  }, { "sections.$": 1, students: 1 });
+
+  if (!course) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
+
+  //cehck if user is student
+  const userIdStr = userId.toString();
+
+  const isStudent = course.students.some((id) => id.toString() === userIdStr) || course.sections[0].students.some((id) => id.toString() === userIdStr);
+  if (!isStudent) errorResponse({ res, message: messages.course.userNotEnrolled, statusCode: 403 })
+
+  // Streaming part
+  const videoPath = course?.sections[0]?.videos[0]?.video;
+
+  if (!fs.existsSync(videoPath)) errorResponse({ res, message: messages.course.videoNotFound, statusCode: 404 })
+
+  if (!course.sections[0].videos[0].isWatched) {
+    await Course.updateOne({
+      _id: id,
+      "sections._id": sectionId,
+      "sections.videos._id": videoId
+    }, {
+      $set: {
+        "sections.$[sec].videos.$[vid].isWatched": true
+      }
+    },
+      {
+        arrayFilters: [
+          { "sec._id": sectionId },
+          { "vid._id": videoId }
+        ]
+      });
+  }
+
+  const stat = fs.statSync(videoPath);
+  const fileSize = stat.size;
+  const range = req.headers.range;
+
+  //if no range header, send the entire video
+  if (!range) {
+    res.writeHead(200, {
+      "Content-Type": "video/mp4",
+      "Content-Length": fileSize,
+    });
+    fs.createReadStream(videoPath).pipe(res);
+    return;
+  }
+
+  //Streaming chunks
+  const CHUNK_SIZE = 10 ** 6; // 1MB
+  const start = Number(range.replace(/\D/g, ""));
+  const end = Math.min(start + CHUNK_SIZE, fileSize - 1);
+
+  const contentLength = end - start + 1;
+
+  res.writeHead(206, {
+    "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+    "Accept-Ranges": "bytes",
+    "Content-Length": contentLength,
+    "Content-Type": "video/mp4",
+  });
+
+  fs.createReadStream(videoPath, { start, end }).pipe(res);
+};
+
+//stream free video
+export const streamFreeVideo = async (req, res) => {
+  const { id } = req.params;
+
+  //cehck existence
+  const course = await Course.findById(id);
+  if (!course) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
+
+
+  const videoPath = course.freeVideo;
+  const stat = fs.statSync(videoPath);
+  const fileSize = stat.size;
+  if (!fs.existsSync(videoPath)) errorResponse({ res, message: messages.course.freeVideoNotFound, statusCode: 404 })
+
+  const range = req.headers.range;
+  //if no range header, send the entire video
+  if (!range) {
+    res.writeHead(200, {
+      "Content-Type": "video/mp4",
+      "Content-Length": fileSize,
+    });
+    fs.createReadStream(videoPath).pipe(res);
+    return;
+  }
+
+  const videoSize = fs.statSync(videoPath).size;
+  const CHUNK = 10 ** 6; // 1MB
+  const start = Number(range.replace(/\D/g, ""));
+  const end = Math.min(start + CHUNK, videoSize - 1);
+
+  const contentLength = end - start + 1;
+
+  res.writeHead(206, {
+    "Content-Type": "video/mp4",
+    "Content-Length": contentLength,
+    "Accept-Ranges": "bytes",
+    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+  });
+
+  const videoStream = fs.createReadStream(videoPath, { start, end });
+  videoStream.pipe(res);
 }

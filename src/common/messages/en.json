@@ -68,6 +68,9 @@
 		"studentAlreadyJoined": "Student already joined this course",
 		"userNotEnrolled": "User is not enrolled in this course or any of its sections",
 		"freeVideoRequired": "A free video is required",
+		"getAllPayed": "All payed courses retrieved successfully",
+		"videoNotFound": "Video not found in this section",
+		"freeVideoNotFound": "Free video not found",
 		"section": {
 			"videoRequired": "Every section must contain a video",
 			"studentAlreadyJoined": "Student already joined this section",
@@ -78,7 +81,8 @@
 			"getSpecific": "section retrieved successfully",
 			"section notFound": "course.section.section notFound",
 			"joinSuccessfully": "course.section.joinSuccessfully"
-		}
+		},
+		"joinSuccessfully": "course.joinSuccessfully"
 	},
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",

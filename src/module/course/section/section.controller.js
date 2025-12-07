@@ -46,8 +46,6 @@ export const specifiSection = async (req, res, nxt) => {
         { "sections._id": id, isActive: true },
         { "sections.$": 1, name: 1, students: 1, instracter: 1 }
     ).populate('instracter', 'firstname lastname code profilePic')
-        .select('-sections.videos.video -sections.videos.materials')
-
     if (!courseExist) errorResponse({ res, message: messages.course.section.notFound, statusCode: 404 })
 
     if (courseExist) {

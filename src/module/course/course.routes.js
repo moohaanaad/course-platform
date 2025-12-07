@@ -11,7 +11,7 @@ import sectionRouter from "./section/section.routes.js";
 
 const courseRouter = Router()
 
-courseRouter.use('/sec', sectionRouter)
+courseRouter.use('/section', sectionRouter)
 
 //all routes are protect 
 courseRouter.use(isAuthenticate())
@@ -52,13 +52,19 @@ courseRouter.get('/payed/all',
 )
 
 //get specific payed course or sections  
-courseRouter.get('/payed/:id',
+courseRouter.get('/:id/payed',
     asyncHandler(courseConttroller.payedCourse)
 )
 
 //join course 
-courseRouter.put('/join/:id',
+courseRouter.put('/:id/join',
     asyncHandler(courseConttroller.joinCourse)
 )
 
+courseRouter.get('/:id/video/:sectionId/:videoId',
+  asyncHandler(courseConttroller.streamVideo)
+);
+
+courseRouter.get('/:id/free-video', 
+    asyncHandler(courseConttroller.streamFreeVideo));
 export default courseRouter

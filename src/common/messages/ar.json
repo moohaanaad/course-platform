@@ -68,6 +68,9 @@
 		"studentAlreadyJoined": "الطالب منضم بالفعل لهذا الكورس",
 		"userNotEnrolled": "المستخدم غير مشترك في هذا الكورس أو أي سيكشن بداخله",
 		"freeVideoRequired": "مطلوب وجود فيديو مجاني",
+		"getAllPayed": "تم جلب جميع الكورسات المدفوعة بنجاح",
+		"videoNotFound": "الفيديو غير موجود في هذا السيكشن",
+		"freeVideoNotFound": "الفيديو المجاني غير موجود",
 		"section": {
 			"notFound": "السيكشن غير موجود",
 			"updatedSuccessfully": "تم تحديث السيكشن بنجاح",

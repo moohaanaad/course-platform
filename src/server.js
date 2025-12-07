@@ -7,7 +7,7 @@ import courseRouter from "./module/course/course.routes.js"
 import userRouter from "./module/user/user.route.js"
 import { globalErrorHandling } from "./utils/error/global-errorhandling.js"
 import i18n from "./utils/i18n.js"
-import  './utils/jobs/activeStatus.job.js'
+import './utils/jobs/activeStatus.job.js'
 const server = async (app, express) => {
 
     //parse req
@@ -17,7 +17,7 @@ const server = async (app, express) => {
 
     //connect to db
     await connectDb()
-
+    app.use('/uploads', express.static('uploads'));
     //routes
     app.use('/auth', authRouter)
     app.use('/user', userRouter)

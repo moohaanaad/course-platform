@@ -27,7 +27,7 @@ sectionRouter.get('/:id',
 )
 
 //join section 
-sectionRouter.put('/join/:id',
+sectionRouter.put('/:id/join',
     asyncHandler(sectionController.joinSection)
 )
 

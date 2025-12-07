@@ -48,12 +48,15 @@ export const messages = {
     },
     course: {
         ...generateMessageKeys('course'),
+        getAllPayed:"course.getAllPayed",
         joinCourseSuccessfully: "course.joinSuccessfully",
         shouldBeInstructor: "course.shouldBeInstructor",
         studentAlreadyJoined: "course.studentAlreadyJoined",
 
         userNotEnrolled: "course.userNotEnrolled",
         freeVideoRequired: "course.freeVideoRequired",
+        videoNotFound: "course.videoNotFound",
+        freeVideoNotFound: "course.freeVideoNotFound",
         section: {
             videoRequired: "course.section.videoRequired",
             studentAlreadyJoined: "course.section.studentAlreadyJoined",
