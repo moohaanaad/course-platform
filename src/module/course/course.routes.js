@@ -7,11 +7,13 @@ import { isAuthenticate } from "../../middleware/authentication.js";
 import { isValid } from "../../middleware/validation.js";
 import * as val from "./course.validation.js";
 import sectionRouter from "./section/section.routes.js";
+import sertificateRouter from "./sertificate/sertificate.routes.js";
 
 
 const courseRouter = Router()
 
 courseRouter.use('/section', sectionRouter)
+courseRouter.use('/sertificate', sertificateRouter)
 
 //all routes are protect 
 courseRouter.use(isAuthenticate())
@@ -61,10 +63,19 @@ courseRouter.put('/:id/join',
     asyncHandler(courseConttroller.joinCourse)
 )
 
+//stream video
 courseRouter.get('/:id/video/:sectionId/:videoId',
   asyncHandler(courseConttroller.streamVideo)
 );
 
+//stream free video
 courseRouter.get('/:id/free-video', 
-    asyncHandler(courseConttroller.streamFreeVideo));
+    asyncHandler(courseConttroller.streamFreeVideo)
+);
+
+//delete course
+courseRouter.delete('/:id',
+    asyncHandler(courseConttroller.deleteCourse)
+)
+
 export default courseRouter

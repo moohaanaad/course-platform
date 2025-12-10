@@ -57,6 +57,8 @@ export const messages = {
         freeVideoRequired: "course.freeVideoRequired",
         videoNotFound: "course.videoNotFound",
         freeVideoNotFound: "course.freeVideoNotFound",
+        cannotDeleteActiveCourse: "course.cannotDeleteActiveCourse",
+        joinSuccessfully: "course.joinSuccessfully",
         section: {
             videoRequired: "course.section.videoRequired",
             studentAlreadyJoined: "course.section.studentAlreadyJoined",
@@ -66,6 +68,10 @@ export const messages = {
 			getAll: "course.section.getAll",
 			getSpecific: "course.section.getSpecific",
         },
+        sertificate:{
+            ...generateMessageKeys('sertificate'),
+            fileRequired: "course.sertificate.fileRequired"
+        }
     },
     notAuthorized: "general.notAuthorized",
     internalServicerError: "general.internalServicerError"

@@ -6,7 +6,9 @@ import { Course } from "../../db/model/course.js";
 import { User } from "../../db/model/user.js";
 import { attachFiles } from "../../utils/multer/attachFiles.js";
 import { errorResponse, successResponse } from "../../utils/res/index.js";
-import { log } from "console";
+import { deleteFile } from "../../utils/multer/deletefille.js";
+import { Sertificate } from "../../db/model/sertificate.js";
+
 //create course
 export const createCourse = async (req, res, next) => {
   const { user, files } = req
@@ -198,9 +200,23 @@ export const updateCourse = async (req, res, next) => {
       courseExist.sections.push(req.body.sections[i])
     }
   }
-  if (req.body.name) courseExist.name = req.body.name
+  if (req.body.name) {
+    const sertificateExist = await Sertificate.findOne({ courseId: courseExist._id })
+    if (sertificateExist) {
+      sertificateExist.courseName = req.body.name
+      await sertificateExist.save()
+    }
+    courseExist.name = req.body.name
+  }
+  if (req.body.description) {
+    const sertificateExist = await Sertificate.findOne({ courseId: courseExist._id })
+    if (sertificateExist) {
+      sertificateExist.courseDescription = req.body.description
+      await sertificateExist.save()
+    }
+    courseExist.description = req.body.description
+  }
   if (req.body.price) courseExist.price = req.body.price
-  if (req.body.description) courseExist.description = req.body.description
   if (req.body.startAt) courseExist.startAt = req.body.startAt
   if (req.body.endAt) courseExist.endAt = req.body.endAt
 
@@ -357,4 +373,38 @@ export const streamFreeVideo = async (req, res) => {
 
   const videoStream = fs.createReadStream(videoPath, { start, end });
   videoStream.pipe(res);
+}
+
+//delete course
+export const deleteCourse = async (req, res) => {
+  const { id } = req.params;
+
+  //check existence
+  const courseExist = await Course.findById(id);
+  if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
+  if(courseExist.isActive == true) errorResponse({ res, message: messages.course.cannotDeleteActiveCourse, statusCode: 400 })
+   
+  const videoPaths = [];
+  //collect video paths from sections
+  courseExist.sections.forEach(section => {
+    section.videos.forEach(video => {
+      if (video.video) {
+        videoPaths.push(video.video);
+      }
+    });
+  });
+  //delete videos from storage
+  videoPaths.forEach(videoPath => deleteFile(videoPath));
+
+  //delete free video
+  deleteFile(courseExist.freeVideo);
+
+  //delete course from db
+  await Course.findByIdAndDelete(id);
+
+  return successResponse({
+    res,
+    message: messages.course.deletedSuccessfully,
+    statusCode: 200
+  })
 }
