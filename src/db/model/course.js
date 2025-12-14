@@ -13,9 +13,9 @@ const courseSchema = new Schema({
     },
     price: { type: Number, trim: true, required: true },
     freeVideo: { type: String, trim: true, required: true },
-    instracter: { type: Types.ObjectId, ref: 'User', required: true },
+    instructor: { type: Types.ObjectId, ref: 'User', required: true },
     code: { type: String, trim: true },
-    students: [{ type: Types.ObjectId, ref: 'Usaer' }],
+    students: [{ type: Types.ObjectId, ref: 'User' }],
     sections: [sectionSchema],
     ratings: [{
         user: { type: Types.ObjectId, ref: 'User' },
@@ -60,6 +60,16 @@ courseSchema.virtual('ratingAverage').get(function () {
 //price after discount
 courseSchema.virtual('finalPrice').get(function () {
     return this.price - (this.price * ((this.discount || 0) / 100))
+})
+
+//course student count
+courseSchema.virtual('courseStudentCount').get(function () {
+    return this.students?.length || 0;
+})
+
+//section student count
+courseSchema.virtual('sectionStudentCount').get(function () {
+    return this.sections.students?.length || 0;
 })
 
 export const Course = model('Course', courseSchema)

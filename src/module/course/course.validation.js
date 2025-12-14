@@ -38,7 +38,7 @@ export const createCourseVal = joi.object({
     ).min(1),
     startAt: joi.date().greater('now').required(),
     endAt: joi.date().greater(joi.ref('startAt')).required(),
-    instracter: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+    instructor: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
 
 })
 

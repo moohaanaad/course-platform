@@ -18,7 +18,8 @@ export const sectionSchema = new Schema({
     price: { type: Number, trim: true, required: true },
     students: [{ type: Types.ObjectId, ref: 'User' }],
     questions: [{
-        user: { type: Types.ObjectId, ref: "User" },
+        userId: { type: Types.ObjectId, ref: "User" },
+        userEmail: { type: String, trim: true },
         question: { type: String, trim: true }
     }],
 })

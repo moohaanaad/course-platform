@@ -48,27 +48,30 @@ export const messages = {
     },
     course: {
         ...generateMessageKeys('course'),
-        getAllPayed:"course.getAllPayed",
+        getAllPayed: "course.getAllPayed",
         joinCourseSuccessfully: "course.joinSuccessfully",
         shouldBeInstructor: "course.shouldBeInstructor",
         studentAlreadyJoined: "course.studentAlreadyJoined",
-
         userNotEnrolled: "course.userNotEnrolled",
         freeVideoRequired: "course.freeVideoRequired",
         videoNotFound: "course.videoNotFound",
         freeVideoNotFound: "course.freeVideoNotFound",
         cannotDeleteActiveCourse: "course.cannotDeleteActiveCourse",
         joinSuccessfully: "course.joinSuccessfully",
+        notWatchedAllVideos: "course.notWatchedAllVideos",
+        notPaied: "course.notPaied",
         section: {
             videoRequired: "course.section.videoRequired",
             studentAlreadyJoined: "course.section.studentAlreadyJoined",
             updatedSuccessfully: "course.section.updatedSuccessfully",
             joinSectionSuccessfully: "course.section.joinSuccessfully",
-            notFound: "course.section.section notFound", 
-			getAll: "course.section.getAll",
-			getSpecific: "course.section.getSpecific",
+            notFound: "course.section.notFound",
+            getAll: "course.section.getAll",
+            getSpecific: "course.section.getSpecific",
+            notPaied: "course.section.notPaied",
+            questionAddedSuccessfully: "course.section.questionAddedSuccessfully"
         },
-        sertificate:{
+        sertificate: {
             ...generateMessageKeys('sertificate'),
             fileRequired: "course.sertificate.fileRequired"
         }

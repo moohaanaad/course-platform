@@ -24,3 +24,8 @@ export const updateSectionVal = joi.object({
         })
     ).min(1)
 })
+
+export const addQuestionVal = joi.object({
+    id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+    question: joi.string().min(3).max(300).required()
+})

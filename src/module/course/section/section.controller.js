@@ -18,7 +18,7 @@ export const updateSection = async (req, res, next) => {
     if (req.body.sections[0]?.videos?.length) {
         for (let i = 0; i < req.body.sections[0].videos.length; i++) {
             console.log(sectionExist.sections[0].videos);
-            
+
             sectionExist.sections[0].videos.push(req.body.sections[0].videos[i])
         }
     }
@@ -44,8 +44,8 @@ export const specifiSection = async (req, res, nxt) => {
     //check existence 
     const courseExist = await Course.findOne(
         { "sections._id": id, isActive: true },
-        { "sections.$": 1, name: 1, students: 1, instracter: 1 }
-    ).populate('instracter', 'firstname lastname code profilePic')
+        { "sections.$": 1, name: 1, students: 1, instructor: 1 }
+    ).populate('instructor', 'firstname lastname code profilePic')
     if (!courseExist) errorResponse({ res, message: messages.course.section.notFound, statusCode: 404 })
 
     if (courseExist) {
@@ -62,7 +62,7 @@ export const specifiSection = async (req, res, nxt) => {
     })
 }
 
-// join section 
+//join section 
 export const joinSection = async (req, res, next) => {
     const { id } = req.params
     const { user } = req
@@ -93,6 +93,44 @@ export const joinSection = async (req, res, next) => {
     return successResponse({
         res,
         message: messages.course.section.joinSectionSuccessfully,
+        statusCode: 200,
+        data: section
+    })
+}
+
+//add question to section 
+export const addQuestion = async (req, res, next) => {
+    const { id } = req.params
+    const { user } = req
+    const { question } = req.body
+
+    //check existence
+    const courseExist = await Course.findOne(
+        { "sections._id": id, isActive: true },
+        { "sections.$": 1, name: 1, students: 1 }
+    )
+    if (!courseExist) errorResponse({ res, message: messages.course.section.notFound, statusCode: 404 })
+
+    //check if user enrolled in sections only
+    const sections = courseExist.sections.filter(sec => sec.students.some(
+        studentId => studentId.toString() === user._id.toString()
+    ));
+    if (sections.length == 0) {
+        errorResponse({ res, message: messages.course.section.notPaied, statusCode: 401, })
+    }
+
+    //save
+    const updatedSection = await Course.findOneAndUpdate(
+        { "sections._id": id },
+        { $push: { "sections.$.questions": { userId: user._id, userEmail: user.email, question } } },
+        { new: true }
+    ).select('sections')
+    const section = updatedSection.sections.find((sec) => sec._id.toString() === id);
+
+    //response
+    return successResponse({
+        res,
+        message: messages.course.section.questionAddedSuccessfully,
         statusCode: 200,
         data: section
     })

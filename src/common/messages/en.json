@@ -73,6 +73,8 @@
 		"freeVideoNotFound": "Free video not found",
 		"cannotDeleteActiveCourse": "Cannot delete active course",
 		"joinSuccessfully": "join successfully",
+		"notWatchedAllVideos": "You must watch all videos in the course to obtain the certificate",
+		"notPaied": "you not paied for this course",
 		"section": {
 			"videoRequired": "Every section must contain a video",
 			"studentAlreadyJoined": "Student already joined this section",
@@ -81,12 +83,16 @@
 			"notFound": "section not found",
 			"getAll": "All sections retrieved successfully",
 			"getSpecific": "section retrieved successfully",
-			"section notFound": "course.section.section notFound",
-			"joinSuccessfully": "course.section.joinSuccessfully"
+			"sectionNotFound": "section not found",
+			"joinSuccessfully": "join in this section successfully",
+			"notPaied":"you not paied for this section",
+			"questionAddedSuccessfully":"question added successfully"
 		},
 		"sertificate": {
 			"createdSuccessfully": "sertificate created successfully",
 			"updatedSuccessfully": "sertificate updated successfully",
+			"notFound": "sertificate not found",
+			"getSpecific": "sertificate retrieved successfully",
 			"fileRequired": "sertificate is required"
 		}
 	},
@@ -94,6 +100,8 @@
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",
 	"updated": "updated",
 	"sertificate": {
-		"createdSuccessfully": "sertificate.createdSuccessfully"
+		"createdSuccessfully": "sertificate.createdSuccessfully",
+		"getSpecific": "sertificate.getSpecific",
+		"getAll": "sertificate.getAll"
 	}
 }

@@ -14,9 +14,9 @@ export const createCourse = async (req, res, next) => {
   const { user, files } = req
 
   //cehck existence 
-  const instracterExist = await User.findById(req.body.instracter)
-  if (!instracterExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
-  if (instracterExist.role !== roleTypes.INSTRACTER) errorResponse({ res, message: messages.course.shouldBeInstructor, statusCode: 401 })
+  const instructorExist = await User.findById(req.body.instructor)
+  if (!instructorExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+  if (instructorExist.role !== roleTypes.INSTRUCTOR) errorResponse({ res, message: messages.course.shouldBeInstructor, statusCode: 401 })
   //prepare data
   attachFiles(req)
   for (let section of req.body.sections) {
@@ -55,7 +55,7 @@ export const createCourse = async (req, res, next) => {
 export const allCourses = async (req, res, next) => {
 
   const courses = await Course.find({ isActive: true })
-    .populate('instracter', 'firstname lastname code profilePic')
+    .populate('instructor', 'firstname lastname code profilePic')
     .select('-sections.videos.video -sections.videos.materials')
 
   return successResponse({
@@ -72,7 +72,7 @@ export const specificCourse = async (req, res, nxt) => {
 
   //check existence 
   const courseExist = await Course.findOne({ _id: id, isActive: true })
-    .populate('instracter', 'firstname lastname code profilePic')
+    .populate('instructor', 'firstname lastname code profilePic')
     .select('-sections.videos.video -sections.videos.materials')
 
   if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
@@ -91,7 +91,7 @@ export const allPayedCourses = async (req, res) => {
 
   //get all courses
   const courses = await Course.find({ isActive: true })
-    .populate('instracter', 'firstname lastname code profilePic')
+    .populate('instructor', 'firstname lastname code profilePic')
 
   const fullCourses = [];
   const sectionAccess = [];
@@ -143,7 +143,7 @@ export const payedCourse = async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id; // from auth middleware
 
-  const course = await Course.findOne({ _id: id, isActive: true }).populate('instracter', 'username code profilePic');
+  const course = await Course.findOne({ _id: id, isActive: true }).populate('instructor', 'username code profilePic');
 
   if (!course) return errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 

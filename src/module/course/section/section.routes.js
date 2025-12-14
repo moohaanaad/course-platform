@@ -31,4 +31,10 @@ sectionRouter.put('/:id/join',
     asyncHandler(sectionController.joinSection)
 )
 
+//add question to section
+sectionRouter.put('/:id/question',
+    isValid(val.addQuestionVal),
+    asyncHandler(sectionController.addQuestion)
+)
+
 export default sectionRouter

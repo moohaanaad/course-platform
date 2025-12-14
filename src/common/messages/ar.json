@@ -73,6 +73,8 @@
 		"freeVideoNotFound": "الفيديو المجاني غير موجود",
 		"cannotDeleteActiveCourse": "لا يمكن حذف كورس نشط",
 		"joinSuccessfully": "تم الانضمام بنجاح",
+		"notWatchedAllVideos": "يجب مشاهدة جميع الفيديوهات في الكورس للحصول على الشهادة",
+		"notPaied": "لم تقم بالدفع لهذا الكورس",
 		"section": {
 			"notFound": "السيكشن غير موجود",
 			"updatedSuccessfully": "تم تحديث السيكشن بنجاح",
@@ -81,11 +83,17 @@
 			"getSpecific": "تم جلب السيكشن بنجاح",
 			"studentAlreadyJoined": "الطالب منضم بالفعل لهذا السيكشن",
 			"videoRequired": "يجب أن يحتوي كل سيكشن على فيديو",
+			"notPaied": "لم تقم بالدفع لهذا السيكشن",
+			"sectionNotFound": "السيكشن غير موجود",
+			"joinSuccessfully": "تم الانضمام إلى السيكشن بنجاح",
+			"questionAddedSuccessfully": "تم إضافة السؤال بنجاح",
 			"section notFound": "course.section.section notFound"
 		},
 		"sertificate": {
 			"createdSuccessfully": "تم إنشاء الشهادة بنجاح",
-		"updatedSuccessfully": "تم تحديث الشهادة بنجاح",
+			"updatedSuccessfully": "تم تحديث الشهادة بنجاح",
+			"notFound": "الشهادة غير موجودة",
+			"getSpecific": "تم جلب الشهادة بنجاح",
 			"fileRequired": "الشهادة مطلوبة"
 		}
 	},
