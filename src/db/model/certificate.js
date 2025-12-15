@@ -2,8 +2,8 @@ import { model, Schema } from "mongoose"
 
 
 
-const sertificateSceham = new Schema({
-    sertificate: { type: String, required: true },
+const certificateSceham = new Schema({
+    certificate: { type: String, required: true },
     
     instructorId: { type: Schema.Types.ObjectId, ref: "User", required: true },
 
@@ -18,4 +18,4 @@ const sertificateSceham = new Schema({
     toObject: { virtuals: true }
 })
 
-export const Sertificate = model('Sertificate', sertificateSceham)
+export const Certificate = model('certificate', certificateSceham)

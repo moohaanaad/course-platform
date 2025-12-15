@@ -5,7 +5,7 @@ import server from './src/server.js'
 const app = express()
 const port = 3000
 
-dotenv.config({ path: './config/.env', quiet: true })
+dotenv.config({ path: './.env', quiet: true })
 
 app.use(cors({
   origin: "*",

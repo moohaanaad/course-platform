@@ -855,7 +855,7 @@
 							"response": []
 						},
 						{
-							"name": "get specific section",
+							"name": "add question",
 							"event": [
 								{
 									"listen": "test",
@@ -880,11 +880,8 @@
 									}
 								}
 							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "token",
@@ -898,47 +895,24 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "sections",
-											"value": "[{\"name\":\"section11\", \"price\":200,\n\"videos\":[\n{\"name\":\"Video 7\"},{\"name\":\"Video 5\"}\n]\n}]",
-											"type": "text"
-										},
-										{
-											"key": "sections[0].videos[0].video",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-										},
-										{
-											"key": "sections[0].videos[1].video",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-										},
-										{
-											"key": "sections[0].videos[0].materials",
-											"type": "file",
-											"src": [
-												"/C:/Users/ASUS/Desktop/CV/CV.pdf",
-												"/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-											]
-										},
-										{
-											"key": "sections[0].videos[1].materials",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+									"mode": "raw",
+									"raw": "{\r\n    \"question\": \"dvsvbwevid\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
+									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151/question",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
 										"section",
-										"6930579f50250605b24f9151"
+										"6930579f50250605b24f9151",
+										"question"
 									]
 								}
 							},
@@ -998,14 +972,127 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "get specific section",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"section",
+										"6930579f50250605b24f9151"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
-					"name": "join",
+					"name": "certificate",
 					"item": [
 						{
-							"name": "join course",
+							"name": "create certificate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "sertificate",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/course/certificate/693057d050250605b24f9159",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"certificate",
+										"693057d050250605b24f9159"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "take certificate",
 							"event": [
 								{
 									"listen": "test",
@@ -1037,17 +1124,251 @@
 										"key": "token",
 										"value": "beaerer {{access_token}}",
 										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "en",
+										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/6930579f50250605b24f9150/join",
+									"raw": "{{baseUrl}}/course/certificate/693057d050250605b24f9159",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
-										"6930579f50250605b24f9150",
-										"join"
+										"certificate",
+										"693057d050250605b24f9159"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update certificate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "certificate",
+											"type": "file",
+											"src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/course/certificate/6939ac0dd62667c2e7f3ab81",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"certificate",
+										"6939ac0dd62667c2e7f3ab81"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get certificate of course",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/course/certificate/692327675486241162588ea6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"certificate",
+										"692327675486241162588ea6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "specific certificate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/course/certificate/specific/6939abf92ab0f380cb841332",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"certificate",
+										"specific",
+										"6939abf92ab0f380cb841332"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all certificates",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "beaerer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/course/certificate",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"course",
+										"certificate"
 									]
 								}
 							},
@@ -1289,6 +1610,55 @@
 					"response": []
 				},
 				{
+					"name": "join course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/693057d050250605b24f9159/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"693057d050250605b24f9159",
+								"join"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "all courses",
 					"event": [
 						{
@@ -1433,6 +1803,60 @@
 					"response": []
 				},
 				{
+					"name": "all payed course or section",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/payed/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"payed",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get free video",
 					"event": [
 						{
@@ -1482,7 +1906,7 @@
 					"response": []
 				},
 				{
-					"name": "all payed course or section",
+					"name": "get video",
 					"event": [
 						{
 							"listen": "test",
@@ -1514,22 +1938,67 @@
 								"key": "token",
 								"value": "beaerer {{access_token}}",
 								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "en",
-								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/payed/all",
+							"raw": "{{baseUrl}}/course/6930579f50250605b24f9150/video/6930579f50250605b24f9154/6930579f50250605b24f9155",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"payed",
-								"all"
+								"6930579f50250605b24f9150",
+								"video",
+								"6930579f50250605b24f9154",
+								"6930579f50250605b24f9155"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/692327675486241162588ea6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"692327675486241162588ea6"
 							]
 						}
 					},
@@ -1599,53 +2068,56 @@
 			]
 		},
 		{
-			"name": "get free video",
-			"event": [
+			"name": "instructor",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "token",
-						"value": "beaerer {{access_token}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/course/692c2501c6046d0996b98723/free-video",
-					"host": [
-						"{{baseUrl}}"
+					"name": "all course of instructor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
 					],
-					"path": [
-						"course",
-						"692c2501c6046d0996b98723",
-						"free-video"
-					]
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/instructor",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"instructor"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"event": [

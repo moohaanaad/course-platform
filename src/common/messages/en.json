@@ -85,15 +85,17 @@
 			"getSpecific": "section retrieved successfully",
 			"sectionNotFound": "section not found",
 			"joinSuccessfully": "join in this section successfully",
-			"notPaied":"you not paied for this section",
-			"questionAddedSuccessfully":"question added successfully"
+			"notPaied": "you not paied for this section",
+			"questionAddedSuccessfully": "question added successfully"
 		},
-		"sertificate": {
-			"createdSuccessfully": "sertificate created successfully",
-			"updatedSuccessfully": "sertificate updated successfully",
-			"notFound": "sertificate not found",
-			"getSpecific": "sertificate retrieved successfully",
-			"fileRequired": "sertificate is required"
+		"certificate": {
+			"createdSuccessfully": "certificate created successfully",
+			"updatedSuccessfully": "certificate updated successfully",
+			"notFound": "certificate not found",
+			"getSpecific": "certificate retrieved successfully",
+			"fileRequired": "certificate is required",
+			"cannotUpdateAfterStudentsJoined": "cannot update certificate after students joined",
+			"getAll": "course.certificate.getAll"
 		}
 	},
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
@@ -103,5 +105,8 @@
 		"createdSuccessfully": "sertificate.createdSuccessfully",
 		"getSpecific": "sertificate.getSpecific",
 		"getAll": "sertificate.getAll"
+	},
+	"certificate": {
+		"notFound": "certificate.notFound"
 	}
 }

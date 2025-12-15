@@ -1,13 +1,12 @@
 import fs from "fs";
-import path from "path";
 import { roleTypes } from "../../common/constant/user.js";
 import { messages } from "../../common/messages/message.js";
+import { Certificate } from "../../db/model/certificate.js";
 import { Course } from "../../db/model/course.js";
 import { User } from "../../db/model/user.js";
 import { attachFiles } from "../../utils/multer/attachFiles.js";
-import { errorResponse, successResponse } from "../../utils/res/index.js";
 import { deleteFile } from "../../utils/multer/deletefille.js";
-import { Sertificate } from "../../db/model/sertificate.js";
+import { errorResponse, successResponse } from "../../utils/res/index.js";
 
 //create course
 export const createCourse = async (req, res, next) => {
@@ -201,18 +200,18 @@ export const updateCourse = async (req, res, next) => {
     }
   }
   if (req.body.name) {
-    const sertificateExist = await Sertificate.findOne({ courseId: courseExist._id })
-    if (sertificateExist) {
-      sertificateExist.courseName = req.body.name
-      await sertificateExist.save()
+    const certificateExist = await Certificate.findOne({ courseId: courseExist._id })
+    if (certificateExist) {
+      certificateExist.courseName = req.body.name
+      await certificateExist.save()
     }
     courseExist.name = req.body.name
   }
   if (req.body.description) {
-    const sertificateExist = await Sertificate.findOne({ courseId: courseExist._id })
-    if (sertificateExist) {
-      sertificateExist.courseDescription = req.body.description
-      await sertificateExist.save()
+    const certificateExist = await Certificate.findOne({ courseId: courseExist._id })
+    if (certificateExist) {
+      certificateExist.courseDescription = req.body.description
+      await certificateExist.save()
     }
     courseExist.description = req.body.description
   }

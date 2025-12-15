@@ -7,13 +7,13 @@ import { isAuthenticate } from "../../middleware/authentication.js";
 import { isValid } from "../../middleware/validation.js";
 import * as val from "./course.validation.js";
 import sectionRouter from "./section/section.routes.js";
-import sertificateRouter from "./sertificate/sertificate.routes.js";
+import certificateRouter from "./certificate/certificate.routes.js";
 
 
 const courseRouter = Router()
 
 courseRouter.use('/section', sectionRouter)
-courseRouter.use('/sertificate', sertificateRouter)
+courseRouter.use('/certificate', certificateRouter)
 
 //all routes are protect 
 courseRouter.use(isAuthenticate())

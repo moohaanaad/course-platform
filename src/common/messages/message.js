@@ -71,9 +71,10 @@ export const messages = {
             notPaied: "course.section.notPaied",
             questionAddedSuccessfully: "course.section.questionAddedSuccessfully"
         },
-        sertificate: {
-            ...generateMessageKeys('sertificate'),
-            fileRequired: "course.sertificate.fileRequired"
+        certificate: {
+            ...generateMessageKeys('course.certificate'),
+            fileRequired: "course.certificate.fileRequired",
+            cannotUpdateAfterStudentsJoined: "course.certificate.cannotUpdateAfterStudentsJoined"
         }
     },
     notAuthorized: "general.notAuthorized",

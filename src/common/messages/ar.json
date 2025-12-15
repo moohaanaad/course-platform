@@ -87,14 +87,15 @@
 			"sectionNotFound": "السيكشن غير موجود",
 			"joinSuccessfully": "تم الانضمام إلى السيكشن بنجاح",
 			"questionAddedSuccessfully": "تم إضافة السؤال بنجاح",
-			"section notFound": "course.section.section notFound"
+			"cannotUpdateAfterStudentsJoined": "لا يمكن تحديث السيكشن بعد انضمام الطلاب"
 		},
-		"sertificate": {
+		"certificate": {
 			"createdSuccessfully": "تم إنشاء الشهادة بنجاح",
 			"updatedSuccessfully": "تم تحديث الشهادة بنجاح",
 			"notFound": "الشهادة غير موجودة",
 			"getSpecific": "تم جلب الشهادة بنجاح",
-			"fileRequired": "الشهادة مطلوبة"
+			"fileRequired": "الشهادة مطلوبة",
+			"cannotUpdateAfterStudentsJoined": "لا يمكن تحديث الشهادة بعد انضمام الطلاب"
 		}
 	},
 	"الفيديو[object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له": "الفيديو[object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له",
