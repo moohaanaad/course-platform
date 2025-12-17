@@ -95,7 +95,9 @@
 			"getSpecific": "certificate retrieved successfully",
 			"fileRequired": "certificate is required",
 			"cannotUpdateAfterStudentsJoined": "cannot update certificate after students joined",
-			"getAll": "course.certificate.getAll"
+			"getAll": "all certificates retrieved successfully",
+			"userNotHaveCertificates": "user does not have any certificates",
+			"userNotHaveCertificate": "user does not have this certificate"
 		}
 	},
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",

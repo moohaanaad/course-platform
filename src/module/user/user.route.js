@@ -30,6 +30,16 @@ userRouter.put('/civilid-pic',
     asyncHandler(userController.changecivilIdPic)
 )
 
+//get all certificates of logged in user
+userRouter.get('/my-certificates',
+    asyncHandler(userController.getAllcertificatesOfUser)
+)
+
+//get specific certificate of logged in user
+userRouter.get('/my-certificates/:certificateId',
+    asyncHandler(userController.getSpecificcertificateOfUser)
+)
+
 
 
 

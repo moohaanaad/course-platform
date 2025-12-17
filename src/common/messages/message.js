@@ -74,7 +74,9 @@ export const messages = {
         certificate: {
             ...generateMessageKeys('course.certificate'),
             fileRequired: "course.certificate.fileRequired",
-            cannotUpdateAfterStudentsJoined: "course.certificate.cannotUpdateAfterStudentsJoined"
+            cannotUpdateAfterStudentsJoined: "course.certificate.cannotUpdateAfterStudentsJoined",
+            userNotHaveCertificates: "course.certificate.userNotHaveCertificates",
+            userNotHaveCertificate: "course.certificate.userNotHaveCertificate"
         }
     },
     notAuthorized: "general.notAuthorized",

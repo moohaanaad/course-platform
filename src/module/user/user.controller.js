@@ -1,4 +1,5 @@
 import { messages } from "../../common/messages/message.js"
+import { Certificate } from "../../db/model/certificate.js"
 import { User } from "../../db/model/user.js"
 import { deleteFile } from "../../utils/multer/deletefille.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
@@ -94,4 +95,39 @@ export const changecivilIdPic = async (req, res, next) => {
         statusCode: 200,
         data: user
     })
+}
+
+//get all certificates of logged in user
+export const getAllcertificatesOfUser = async (req, res, next) => {
+    const userId = req.user._id;
+
+    //cehck if user have certificates
+    const certificates = await Certificate.find({ students: userId });
+    if(certificates.length === 0) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificates, statusCode: 404 });
+
+    //response
+    return successResponse({
+        res,
+        message: messages.course.certificate.getAll,
+        statusCode: 200,
+        data: certificates
+    });
+}
+
+//get specific certificate of logged in user
+export const getSpecificcertificateOfUser = async (req, res, next) => {
+    const { certificateId } = req.params;
+    const userId = req.user._id;
+
+    //cehck if user have this certificate
+    const certificate = await Certificate.findOne({ _id: certificateId, students: userId });
+    if (!certificate) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificate, statusCode: 404 });
+
+    //response
+    return successResponse({
+        res,
+        message: messages.course.certificate.getSpecific,
+        statusCode: 200,
+        data: certificate
+    });
 }

@@ -1,4 +1,5 @@
 import { messages } from "../../common/messages/message.js";
+import { Certificate } from "../../db/model/certificate.js";
 import { Course } from "../../db/model/course.js";
 import { errorResponse } from "../../utils/res/res.error.js";
 import { successResponse } from "../../utils/res/res.success.js";
@@ -22,4 +23,21 @@ export const AllCourseOFInstructor = async (req, res, next) => {
         statusCode: 200,
         data: courses
     })
+}
+
+//get all certificates of logged in instructor
+export const AllCertificatesOfInstructor = async (req, res, next) => {
+    const { user } = req;
+
+    //get all certificates of instructor
+    const certificates = await Certificate.find({ instructorId: user._id });
+    if (certificates.length === 0) errorResponse({ res, message: messages.course.certificate.notFound, statusCode: 404 });
+
+    //response
+    return successResponse({
+        res,
+        message: messages.course.certificate.getAll,
+        statusCode: 200,
+        data: certificates
+    });
 }
