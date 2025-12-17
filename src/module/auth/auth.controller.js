@@ -8,7 +8,7 @@ import { comparePassword } from "../../utils/bcrypt/index.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
 import { verifyToken } from "../../utils/token/verify.js"
 import randomstring from 'randomstring'
-export const sendOtpToEmail = async (email) => {
+export const sendOtpToEmail = async (email, res) => {
     //check Existence 
     const userOTP = await Otp.findOne({ email })
     if (userOTP) errorResponse({ res, message: messages.OTP.haveOTP, statusCode: 400 })
@@ -47,7 +47,7 @@ export const signup = async (req, res, next) => {
     const createdUser = await User.create(req.body)
 
     //send email
-    await sendOtpToEmail(email)
+    await sendOtpToEmail(email, res)
 
     return successResponse({
         res,
@@ -62,7 +62,7 @@ export const resendOTP = async (req, res, next) => {
 
     const { email } = req.body
 
-    await sendOtpToEmail(email)
+    await sendOtpToEmail(email, res)
 
     return successResponse({
         res,
@@ -76,11 +76,11 @@ export const verify = async (req, res, next) => {
     const { email, otp } = req.body
 
     // check otp existence
-    const user = await Otp.findOne({ email })
-    if (!user) {
+    const otpExist = await Otp.findOne({ email })
+    if (!otpExist) {
         errorResponse({ res, message: messages.OTP.expiredOTP, statusCode: 400 })
     }
-    if (otp !== user.otp) errorResponse({ res, message: messages.OTP.invalidOTP, statusCode: 401 })
+    if (otp !== otpExist.otp) errorResponse({ res, message: messages.OTP.invalidOTP, statusCode: 401 })
 
     //check user existence
     const updatedUser = await User.findOne({ email })
@@ -89,7 +89,8 @@ export const verify = async (req, res, next) => {
 
     //preapre data
     updatedUser.isConfirmed = true
-
+    otpExist.distroyedAt = new Date();
+    await otpExist.save();
     //update user
     await updatedUser.save()
     return successResponse({
@@ -164,8 +165,10 @@ export const forgetPassword = async (req, res, next) => {
     if (userExist.isConfirmed == false) errorResponse({ res, message: messages.user.notConfirmed, statusCode: 403 })
 
     //send otp email
-    await sendOtpToEmail(email)
-
+    await sendOtpToEmail(email, res)
+    userExist.isActive = false
+    userExist.isConfirmed = false
+    await userExist.save()
     return successResponse({
         res,
         statusCode: 200,
@@ -193,7 +196,6 @@ export const changePassword = async (req, res, next) => {
     //save data 
     await userExist.save()
 
-    console.log(userExist.password);
     await Otp.deleteOne({ email, otp })
 
     return res.status(200).json({

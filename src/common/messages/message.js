@@ -33,10 +33,10 @@ export const messages = {
         notFoundImage: "image.notFoundImage"
     },
     OTP: {
-        haveOTP: "otp.haveOTP",
-        expiredOTP: "otp.expiredOTP",
-        OTPSent: "otp.OTPSent",
-        invalidOTP: "otp.invalidOTP"
+        haveOTP: "OTP.haveOTP",
+        expiredOTP: "OTP.expiredOTP",
+        OTPSent: "OTP.OTPSent",
+        invalidOTP: "OTP.invalidOTP"
     },
     token: {
         invalid: "token.invalid",

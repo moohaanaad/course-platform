@@ -108,5 +108,9 @@
 	},
 	"certificate": {
 		"notFound": "certificate.notFound"
+	},
+	"otp": {
+		"OTPSent": "otp.OTPSent",
+		"haveOTP": "otp.haveOTP"
 	}
 }
