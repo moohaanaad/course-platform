@@ -190,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\" : \"43991\"\r\n}",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\" : \"88980\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,7 +271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"00743\",\r\n    \"password\": \"mohanadahmedd\",\r\n    \"repassword\": \"mohanadahmedd\"\r\n}",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"88980\",\r\n    \"password\": \"mohanadahmedd\",\r\n    \"repassword\": \"mohanadahmedd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -547,54 +547,6 @@
 			"name": "user",
 			"item": [
 				{
-					"name": "user profile",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "beaerer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/user/profile",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "update user",
 					"event": [
 						{
@@ -762,6 +714,163 @@
 							"path": [
 								"user",
 								"civilid-pic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all certificates of user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/my-certificates",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"my-certificates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific certificate of user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/my-certificates/6939ac0dd62667c2e7f3ab81",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"my-certificates",
+								"6939ac0dd62667c2e7f3ab81"
 							]
 						}
 					},
@@ -959,14 +1068,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151/join",
+									"raw": "{{baseUrl}}/course/section/6942dd6a885010a72b3e1dbd/join",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
 										"section",
-										"6930579f50250605b24f9151",
+										"6942dd6a885010a72b3e1dbd",
 										"join"
 									]
 								}
@@ -1265,7 +1374,7 @@
 							"response": []
 						},
 						{
-							"name": "specific certificate",
+							"name": "open certificate",
 							"event": [
 								{
 									"listen": "test",
@@ -1412,7 +1521,7 @@
 							},
 							{
 								"key": "Accept-Language",
-								"value": "ar",
+								"value": "en",
 								"type": "text"
 							}
 						],
@@ -1437,7 +1546,7 @@
 								{
 									"key": "freeVideo",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								},
 								{
 									"key": "sections",
@@ -1447,22 +1556,22 @@
 								{
 									"key": "sections[0].videos[0].video",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								},
 								{
 									"key": "sections[0].videos[1].video",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								},
 								{
 									"key": "sections[1].videos[0].video",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								},
 								{
 									"key": "sections[0].videos[0].materials",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/Islam's Resume.pdf"
+									"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
 								},
 								{
 									"key": "sections[0].videos[1].materials",
@@ -1480,8 +1589,13 @@
 									"type": "text"
 								},
 								{
-									"key": "instracter",
+									"key": "instructor",
 									"value": "69259c5d66c019836942e353",
+									"type": "text"
+								},
+								{
+									"key": "instructorRatio",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -1645,13 +1759,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/693057d050250605b24f9159/join",
+							"raw": "{{baseUrl}}/course/6942dd6a885010a72b3e1db9/join",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"693057d050250605b24f9159",
+								"6942dd6a885010a72b3e1db9",
 								"join"
 							]
 						}
@@ -2112,6 +2226,54 @@
 							],
 							"path": [
 								"instructor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all certificates of instructor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "beaerer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/instructor/certificates",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"instructor",
+								"certificates"
 							]
 						}
 					},

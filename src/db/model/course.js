@@ -12,20 +12,25 @@ const courseSchema = new Schema({
         en: { type: String, minlength: 3, trim: true, required: true }
     },
     price: { type: Number, trim: true, required: true },
-    freeVideo: { type: String, trim: true, required: true },
+    
     instructor: { type: Types.ObjectId, ref: 'User', required: true },
-    code: { type: String, trim: true },
-    students: [{ type: Types.ObjectId, ref: 'User' }],
+    instructorRatio: { type: Number, min: 0, max: 100 },
+    
+    freeVideo: { type: String, trim: true, required: true },
     sections: [sectionSchema],
+    
+    students: [{ type: Types.ObjectId, ref: 'User' }],
     ratings: [{
         user: { type: Types.ObjectId, ref: 'User' },
         value: { type: Number, min: 1, max: 5 }
     }],
-
+    
     discount: { type: Number, min: 0 },
-
+    
     startAt: { type: Date },
     endAt: { type: Date },
+    
+    code: { type: String, trim: true },
     isActive: { type: Boolean, default: false },
 
     createdBy: { type: Types.ObjectId, ref: 'User' },

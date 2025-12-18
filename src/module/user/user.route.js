@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { asyncHandler, isAuthenticate } from "../../middleware/index.js";
+import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
 import * as userController from "./user.controller.js";
 import { fileupload } from "../../utils/multer/fileuploads.js";
+import { idVal } from "../../common/common.validation.js";
 
 
 const userRouter = Router()
@@ -20,13 +21,13 @@ userRouter.put('/profile',
 
 //cahnge user profile pic
 userRouter.put('/profile-pic',
-    fileupload({mainFolder:'user', partFolder: 'profilePic'}).single('profilePic'),
+    fileupload({ mainFolder: 'user', partFolder: 'profilePic' }).single('profilePic'),
     asyncHandler(userController.changeProfilePic)
 )
 
 //cahnge user civil id pic
 userRouter.put('/civilid-pic',
-    fileupload({mainFolder:'user', partFolder: 'civilIdPic'}).single('civilIdPic'),
+    fileupload({ mainFolder: 'user', partFolder: 'civilIdPic' }).single('civilIdPic'),
     asyncHandler(userController.changecivilIdPic)
 )
 
@@ -37,6 +38,7 @@ userRouter.get('/my-certificates',
 
 //get specific certificate of logged in user
 userRouter.get('/my-certificates/:certificateId',
+    isValid(idVal('certificateId')),
     asyncHandler(userController.getSpecificcertificateOfUser)
 )
 

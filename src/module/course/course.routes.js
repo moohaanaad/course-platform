@@ -8,6 +8,7 @@ import { isValid } from "../../middleware/validation.js";
 import * as val from "./course.validation.js";
 import sectionRouter from "./section/section.routes.js";
 import certificateRouter from "./certificate/certificate.routes.js";
+import { idVal } from "../../common/common.validation.js";
 
 
 const courseRouter = Router()
@@ -35,6 +36,7 @@ courseRouter.get('/',
 
 //get specific course 
 courseRouter.get('/:id',
+    isValid(idVal('id')),
     asyncHandler(courseConttroller.specificCourse)
 )
 
@@ -55,16 +57,19 @@ courseRouter.get('/payed/all',
 
 //get specific payed course or sections  
 courseRouter.get('/:id/payed',
+        isValid(idVal('id')),
     asyncHandler(courseConttroller.payedCourse)
 )
 
 //join course 
 courseRouter.put('/:id/join',
+        isValid(idVal('id')),
     asyncHandler(courseConttroller.joinCourse)
 )
 
 //stream video
 courseRouter.get('/:id/video/:sectionId/:videoId',
+    isValid(val.streamVideoVal),
   asyncHandler(courseConttroller.streamVideo)
 );
 

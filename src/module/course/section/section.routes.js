@@ -4,6 +4,7 @@ import { parseJsonFields } from "../../../middleware/parseJsonFields.js"
 import { asyncHandler, isAuthenticate, isValid } from "../../../middleware/index.js"
 import * as sectionController from "./section.controller.js"
 import * as val from "./section.validation.js"
+import { idVal } from "../../../common/common.validation.js"
 
 
 
@@ -23,11 +24,13 @@ sectionRouter.put('/:id',
 
 //get specific section
 sectionRouter.get('/:id',
+    isValid(idVal('id')),
     asyncHandler(sectionController.specifiSection)
 )
 
 //join section 
 sectionRouter.put('/:id/join',
+    isValid(idVal('id')),
     asyncHandler(sectionController.joinSection)
 )
 

@@ -100,6 +100,12 @@
 			"userNotHaveCertificate": "user does not have this certificate"
 		}
 	},
+	"instructor": {
+        "haveNotSalaryAccount": "you do not have a salary account",
+        "getSalary": "salary retrieved successfully",
+		"getAllInstructors": "all instructors retrieved successfully",
+		"salaryCannotBeNegative": "salary cannot be negative"
+    },
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",
 	"updated": "updated",

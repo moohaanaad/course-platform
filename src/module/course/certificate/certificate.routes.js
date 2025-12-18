@@ -3,6 +3,7 @@ import { asyncHandler, isAuthenticate, isValid } from "../../../middleware/index
 import { fileupload, fileValidationType } from "../../../utils/multer/fileuploads.js";
 import * as certificateController from "./certificate.controller.js";
 import { createCertificateVal } from "./certificate.validation.js";
+import { idVal } from "../../../common/common.validation.js";
 
 
 
@@ -23,20 +24,23 @@ certificateRouter.post('/:courseId',
 //get all certificates 
 certificateRouter.get('/',
     asyncHandler(certificateController.getAllcertificates)
-) 
+)
 
 //get certificate of specific course 
 certificateRouter.get('/:courseId',
+    isValid(idVal('courseId')),
     asyncHandler(certificateController.getcertificateOfCourse)
-) 
+)
 
 //get specific certificate 
 certificateRouter.get('/specific/:id',
-    asyncHandler(certificateController.getSpecificcertificate)
-) 
+        isValid(idVal('id')),
+    asyncHandler(certificateController.getSpecificCertificate)
+)
 
 //take certificate
 certificateRouter.put('/:courseId',
+        isValid(idVal('courseId')),
     asyncHandler(certificateController.takecertificate)
 )
 
@@ -45,6 +49,7 @@ certificateRouter.patch('/:id',
     fileupload(
         { mainFolder: 'course', partFolder: 'certificate', allowTypes: fileValidationType.file }
     ).single('certificate'),
+        isValid(idVal('id')),
     asyncHandler(certificateController.updatecertificate)
 )
 

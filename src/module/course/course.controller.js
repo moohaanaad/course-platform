@@ -7,6 +7,7 @@ import { User } from "../../db/model/user.js";
 import { attachFiles } from "../../utils/multer/attachFiles.js";
 import { deleteFile } from "../../utils/multer/deletefille.js";
 import { errorResponse, successResponse } from "../../utils/res/index.js";
+import { instructorSalary } from "../../db/model/instructor.salary.js";
 
 //create course
 export const createCourse = async (req, res, next) => {
@@ -55,7 +56,7 @@ export const allCourses = async (req, res, next) => {
 
   const courses = await Course.find({ isActive: true })
     .populate('instructor', 'firstname lastname code profilePic')
-    .select('-sections.videos.video -sections.videos.materials')
+    .select('-sections.videos.video -sections.videos.materials -instructorRatio')
 
   return successResponse({
     res,
@@ -72,7 +73,7 @@ export const specificCourse = async (req, res, nxt) => {
   //check existence 
   const courseExist = await Course.findOne({ _id: id, isActive: true })
     .populate('instructor', 'firstname lastname code profilePic')
-    .select('-sections.videos.video -sections.videos.materials')
+    .select('-sections.videos.video -sections.videos.materials -instructorRatio')
 
   if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 
@@ -91,6 +92,7 @@ export const allPayedCourses = async (req, res) => {
   //get all courses
   const courses = await Course.find({ isActive: true })
     .populate('instructor', 'firstname lastname code profilePic')
+    .select('-instructorRatio')
 
   const fullCourses = [];
   const sectionAccess = [];
@@ -142,7 +144,9 @@ export const payedCourse = async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id; // from auth middleware
 
-  const course = await Course.findOne({ _id: id, isActive: true }).populate('instructor', 'username code profilePic');
+  const course = await Course.findOne({ _id: id, isActive: true })
+    .populate('instructor', 'username code profilePic')
+    .select('-instructorRatio')
 
   if (!course) return errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 
@@ -244,6 +248,25 @@ export const joinCourse = async (req, res, next) => {
 
   //prepare data
   courseExist.students.push(user._id)
+
+  //instructor salary update
+  if (courseExist.instructorRatio) {
+    const instructorSalaryAmount = (courseExist.price * courseExist.instructorRatio) / 100;
+    const instructorSalaryExist = await instructorSalary.findOne({ instructor: courseExist.instructor });
+
+    //update if exists else create
+    if (instructorSalaryExist) {
+      instructorSalaryExist.amount += instructorSalaryAmount;
+      await instructorSalaryExist.save();
+      
+    } else {
+
+      await instructorSalary.create({
+        instructor: courseExist.instructor,
+        amount: instructorSalaryAmount
+      })
+    }
+  }
 
   //save
   await courseExist.save()
@@ -381,8 +404,8 @@ export const deleteCourse = async (req, res) => {
   //check existence
   const courseExist = await Course.findById(id);
   if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
-  if(courseExist.isActive == true) errorResponse({ res, message: messages.course.cannotDeleteActiveCourse, statusCode: 400 })
-   
+  if (courseExist.isActive == true) errorResponse({ res, message: messages.course.cannotDeleteActiveCourse, statusCode: 400 })
+
   const videoPaths = [];
   //collect video paths from sections
   courseExist.sections.forEach(section => {

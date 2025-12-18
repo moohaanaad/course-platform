@@ -1,5 +1,6 @@
 import { messages } from "../../../common/messages/message.js"
 import { Course } from "../../../db/model/course.js"
+import { instructorSalary } from "../../../db/model/instructor.salary.js"
 import { attachFiles } from "../../../utils/multer/attachFiles.js"
 import { errorResponse, successResponse } from "../../../utils/res/index.js"
 
@@ -66,12 +67,11 @@ export const specifiSection = async (req, res, nxt) => {
 export const joinSection = async (req, res, next) => {
     const { id } = req.params
     const { user } = req
-    console.log(user);
 
     //check existence 
     const courseExist = await Course.findOne(
         { "sections._id": id, isActive: true },
-        { "sections.$": 1, name: 1, students: 1 }
+        { "sections.$": 1, name: 1, students: 1, instructorRatio: 1, instructor: 1 }
     )
     if (!courseExist) errorResponse({ res, message: messages.course.section.notFound, statusCode: 404 })
 
@@ -79,6 +79,23 @@ export const joinSection = async (req, res, next) => {
     if (studentExist) errorResponse({ res, message: messages.course.studentAlreadyJoined, statusCode: 401 })
     studentExist = courseExist.sections[0].students.find(stu => stu.toString() == user._id.toString())
     if (studentExist) errorResponse({ res, message: messages.course.section.studentAlreadyJoined, statusCode: 401 })
+
+    //instructor salary update
+    if (courseExist.instructorRatio) {
+        const instructorSalaryAmount = (courseExist.sections[0].price * courseExist.instructorRatio) / 100;
+        const instructorSalaryExist = await instructorSalary.findOne({ instructor: courseExist.instructor });
+
+        //update if exists else create
+        if (instructorSalaryExist) {
+            instructorSalaryExist.amount += instructorSalaryAmount;
+            await instructorSalaryExist.save();
+        } else {
+            await instructorSalary.create({
+                instructor: courseExist.instructor,
+                amount: instructorSalaryAmount
+            })
+        }
+    }
 
     //save
     const joinedStudent = await Course.findOneAndUpdate(

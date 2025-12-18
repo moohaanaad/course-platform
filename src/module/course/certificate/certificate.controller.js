@@ -1,3 +1,4 @@
+import path from "path";
 import { messages } from "../../../common/messages/message.js";
 import { Certificate } from "../../../db/model/certificate.js";
 import { Course } from "../../../db/model/course.js";
@@ -45,16 +46,17 @@ export const getAllcertificates = async (req, res, next) => {
 }
 
 //get specific certificate
-export const getSpecificcertificate = async (req, res, next) => {
+export const getSpecificCertificate = async (req, res, next) => {
     const { id } = req.params;
-    const certificate = await Certificate.findById(id).populate("instructorId", "firstName lastName email code");
+
+    const certificate = await Certificate.findById(id);
     if (!certificate) errorResponse({ res, message: messages.course.certificate.notFound, statusCode: 404 });
-    return successResponse({
-        res,
-        message: messages.course.certificate.getSpecific,
-        statusCode: 200,
-        data: certificate
-    })
+    
+    const filePath = path.resolve(certificate.certificate);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline');
+    res.sendFile(filePath)
+    
 }
 
 //get certificate of specific course 
@@ -116,17 +118,17 @@ export const updatecertificate = async (req, res, next) => {
     const { id } = req.params;
 
     //check existence
-    if(!file.path) errorResponse({ res, message: messages.course.certificate.fileRequired, statusCode: 400 });
+    if (!file.path) errorResponse({ res, message: messages.course.certificate.fileRequired, statusCode: 400 });
     const certificateExist = await Certificate.findById(id);
     if (!certificateExist) errorResponse({ res, message: messages.course.certificate.notFound, statusCode: 404 });
-    if(certificateExist.students.length > 0) errorResponse({ res, message: messages.course.certificate.cannotUpdateAfterStudentsJoined, statusCode: 403 });
-    
+    if (certificateExist.students.length > 0) errorResponse({ res, message: messages.course.certificate.cannotUpdateAfterStudentsJoined, statusCode: 403 });
+
     //prepare data and save
     certificateExist.certificate = file.path;
     await certificateExist.save();
 
     //response 
-    return successResponse({ 
+    return successResponse({
         res,
         message: messages.course.certificate.updatedSuccessfully,
         statusCode: 200,

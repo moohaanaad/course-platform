@@ -38,8 +38,8 @@ export const createCourseVal = joi.object({
     ).min(1),
     startAt: joi.date().greater('now').required(),
     endAt: joi.date().greater(joi.ref('startAt')).required(),
-    instructor: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
-
+    instructor: joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+    instructorRatio: joi.number().min(0).max(100).optional(),
 })
 
 export const updatedCourseVal = joi.object({
@@ -58,5 +58,19 @@ export const updatedCourseVal = joi.object({
     ).optional(),
     startAt: joi.date().greater('now').optional(),
     endAt: joi.date().greater(joi.ref('startAt')).optional(),
+    instructorRatio: joi.number().min(0).max(100)
 
 })
+
+export const streamVideoVal = joi.object({
+    id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+        'string.pattern.base': 'Invalid course ID format'
+    }),
+    sectionId: joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+        'string.pattern.base': 'Invalid section ID format'
+    }),
+    videoId: joi.string().regex(/^[0-9a-fA-F]{24}$/).required().messages({
+        'string.pattern.base': 'Invalid video ID format'
+    })
+})
+

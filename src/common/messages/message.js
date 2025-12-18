@@ -1,3 +1,5 @@
+import { get } from "http";
+
 const generateMessageKeys = (entity) => ({
     notFound: `${entity}.notFound`,
     alreadyExist: `${entity}.alreadyExist`,
@@ -78,6 +80,12 @@ export const messages = {
             userNotHaveCertificates: "course.certificate.userNotHaveCertificates",
             userNotHaveCertificate: "course.certificate.userNotHaveCertificate"
         }
+    },
+    instructor: {
+        haveNotSalaryAccount: "instructor.haveNotSalaryAccount",
+        getSalary: "instructor.getSalary",
+        getAllInstructors: "instructor.getAllInstructors",
+        salaryCannotBeNegative: "instructor.salaryCannotBeNegative"
     },
     notAuthorized: "general.notAuthorized",
     internalServicerError: "general.internalServicerError"

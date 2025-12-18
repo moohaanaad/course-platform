@@ -1,3 +1,4 @@
+import path from "path"
 import { messages } from "../../common/messages/message.js"
 import { Certificate } from "../../db/model/certificate.js"
 import { User } from "../../db/model/user.js"
@@ -102,7 +103,9 @@ export const getAllcertificatesOfUser = async (req, res, next) => {
     const userId = req.user._id;
 
     //cehck if user have certificates
-    const certificates = await Certificate.find({ students: userId });
+    const certificates = await Certificate.find({ students: userId })
+    .populate('instructorId', 'firstname lastname code')
+    .select('-students');
     if(certificates.length === 0) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificates, statusCode: 404 });
 
     //response
@@ -120,14 +123,14 @@ export const getSpecificcertificateOfUser = async (req, res, next) => {
     const userId = req.user._id;
 
     //cehck if user have this certificate
-    const certificate = await Certificate.findOne({ _id: certificateId, students: userId });
-    if (!certificate) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificate, statusCode: 404 });
+    const certificateExist = await Certificate.findOne({ _id: certificateId, students: userId });
+    if (!certificateExist) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificate, statusCode: 404 });
+    
+    //prepare file path
+    const filePath = path.resolve(certificateExist.certificate);
 
     //response
-    return successResponse({
-        res,
-        message: messages.course.certificate.getSpecific,
-        statusCode: 200,
-        data: certificate
-    });
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline');
+    res.sendFile(filePath)
 }
