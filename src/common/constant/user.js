@@ -8,5 +8,5 @@ export const genderTypes = {
 export const roleTypes = {
     STUDENT: 'student',
     INSTRUCTOR: 'instructor',
-    ADMIN: 'admmin'
+    ADMIN: 'admin'
 }

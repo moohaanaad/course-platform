@@ -23,6 +23,7 @@ export const messages = {
         notConfirmed: "user.notConfirmed",
         alreadyVerified: "user.alreadyVerified",
         verifiedSuccessfully: "user.verifiedSuccessfully",
+        invaledLogin: "user.invaledLogin",
         login: "user.login",
         signupSuccess: "user.signupSuccess",
         setPasswordSuccessfully: "user.setPasswordSuccessfully",

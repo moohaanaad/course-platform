@@ -17,11 +17,12 @@
 		"notConfirmed": "please confirm your email first",
 		"alreadyVerified": "account is already verified",
 		"verifiedSuccessfully": "account verified successfully",
+		"invaledLogin": "email or password is incorrect",
 		"login": "login successfully",
 		"signupSuccess": "signup successfully.",
 		"setPasswordSuccessfully": "Password entered successfully, Please login.",
 		"invalidcrendential": "invalid credential",
-		"verfiedSuccessfully": "verified successfully please login"
+		"verfiedSuccessfully": "verified successfully"
 	},
 	"image": {
 		"coverUploaded": "cover images uploaded successfully",
@@ -108,17 +109,5 @@
     },
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",
-	"updated": "updated",
-	"sertificate": {
-		"createdSuccessfully": "sertificate.createdSuccessfully",
-		"getSpecific": "sertificate.getSpecific",
-		"getAll": "sertificate.getAll"
-	},
-	"certificate": {
-		"notFound": "certificate.notFound"
-	},
-	"otp": {
-		"OTPSent": "otp.OTPSent",
-		"haveOTP": "otp.haveOTP"
-	}
+	"updated": "updated"
 }

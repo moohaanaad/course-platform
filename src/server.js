@@ -18,8 +18,8 @@ const server = async (app, express) => {
 
     //connect to db
     await connectDb()
-    app.use('/uploads/image', express.static('uploads/image'));
-    app.use('/uploads/User', express.static('uploads/User'));
+    app.use('/uploads//image', express.static('uploads/image'));
+    app.use('/uploads//User', express.static('uploads/User'));
     //routes
     app.use('/auth', authRouter)
     app.use('/user', userRouter)

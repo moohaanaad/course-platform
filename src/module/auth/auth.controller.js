@@ -96,8 +96,7 @@ export const verify = async (req, res, next) => {
     return successResponse({
         res,
         message: messages.user.verfiedSuccessfully,
-        statusCode: 200,
-        data: updatedUser
+        statusCode: 200
     })
 
 }
@@ -107,11 +106,11 @@ export const login = async (req, res, next) => {
     const { email, password } = req.body
 
     const userExist = await User.findOne({ email })
-    if (!userExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+    if (!userExist) errorResponse({ res, message: messages.user.invaledLogin, statusCode: 404 })
     if (userExist?.isConfirmed == false) errorResponse({ res, message: messages.user.notConfirmed, statusCode: 403 })
 
     const comparedPassword = await comparePassword(password, userExist.password)
-    if (!comparedPassword) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+    if (!comparedPassword) errorResponse({ res, message: messages.user.invaledLogin, statusCode: 404 })
 
 
     //prepare data 
@@ -128,7 +127,7 @@ export const login = async (req, res, next) => {
     await userExist.save()
 
     return res.status(200).json({
-        message: 'login successfully',
+        message: messages.user.login,
         access_token,
         refresh_token
     })
@@ -200,8 +199,7 @@ export const changePassword = async (req, res, next) => {
 
     return res.status(200).json({
         success: true,
-        message: messages.user.updatedSuccessfully,
-        data: userExist
+        message: messages.user.changedPasswordSuccessfully,
     })
 
 }
