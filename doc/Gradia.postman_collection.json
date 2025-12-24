@@ -36,7 +36,7 @@
 								},
 								{
 									"key": "email",
-									"value": "mohana2dqws1@gmail.com",
+									"value": "betore6q66174@fftube.com",
 									"type": "text"
 								},
 								{
@@ -46,7 +46,7 @@
 								},
 								{
 									"key": "phone",
-									"value": "+201212009822",
+									"value": "+201242009802",
 									"type": "text"
 								},
 								{
@@ -72,7 +72,7 @@
 								{
 									"key": "civilIdPic",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/digital-art-landscape-sunset-sky-wallpaper-thumb.jpg"
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/wp2618282.png"
 								}
 							]
 						},
@@ -122,7 +122,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"password\":\"mohanadahmedd\" \r\n}",
+							"raw": "{\r\n \r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"password\":\"mohanadahmeddd\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,7 +163,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \r\n    \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTE4Nzc2N2Y1NzQ1NDFiMTg4ZGZkYmQiLCJpYXQiOjE3NjQ3NzQ2NzEsImV4cCI6MTc2NTM3OTQ3MX0.K5oQljXPAZT-dnQV1mWSuv5ciA48C4Hc8A2SERzvY-Y\" \r\n}",
+							"raw": "{\r\n \r\n    \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTE4Nzc2N2Y1NzQ1NDFiMTg4ZGZkYmQiLCJpYXQiOjE3NjY1MDY2NjgsImV4cCI6MTc2NzExMTQ2OH0.DNYPU2aF_oaWFsQ2ZOpFqpbUNLTW0_KiADrqkH6IAeA\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\" : \"88980\"\r\n}",
+							"raw": "{\r\n    \"email\":\"betore6674@fftube.com\",\r\n    \"otp\" : \"18903\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,7 +271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"88980\",\r\n    \"password\": \"mohanadahmedd\",\r\n    \"repassword\": \"mohanadahmedd\"\r\n}",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"10139\",\r\n    \"password\": \"mohanadahmeddd\",\r\n    \"repassword\": \"mohanadahmeddd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,13 +303,14 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "bearer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							},
 							{
 								"key": "Accept-Language",
 								"value": "ar",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -318,8 +319,7 @@
 								{
 									"key": "banner",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/pxfuel.jpg",
-									"disabled": true
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/super-mario-pixel-art-super-mario-kart-computer-mushroom-hd-wallpaper-preview.jpg"
 								}
 							]
 						},
@@ -366,7 +366,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							},
 							{
@@ -418,7 +418,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -466,7 +466,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -476,18 +476,18 @@
 								{
 									"key": "banner",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/heavy-bike-harley-davidson.jpg"
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/wp2618282.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
+							"raw": "{{baseUrl}}/banner/694a94b8d7b4ba01858a48a3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"banner",
-								"69189b600660df74faa4cc69"
+								"694a94b8d7b4ba01858a48a3"
 							]
 						}
 					},
@@ -524,18 +524,18 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
+							"raw": "{{baseUrl}}/banner/694a94b8d7b4ba01858a48a3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"banner",
-								"69189b600660df74faa4cc69"
+								"694a94b8d7b4ba01858a48a3"
 							]
 						}
 					},
@@ -577,7 +577,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -634,7 +634,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -644,7 +644,7 @@
 								{
 									"key": "profilePic",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/faculty.png"
+									"src": "/C:/Users/ASUS/Desktop/wallpapers/heavy-bike-harley-davidson.jpg"
 								}
 							]
 						},
@@ -692,7 +692,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -750,7 +750,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -798,7 +798,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							},
 							{
@@ -852,7 +852,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							},
 							{
@@ -915,7 +915,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									}
 								],
@@ -940,7 +940,7 @@
 										{
 											"key": "sections[0].videos[0].materials",
 											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
+											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
 										},
 										{
 											"key": "sections[0].videos[1].materials",
@@ -950,14 +950,14 @@
 									]
 								},
 								"url": {
-									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
+									"raw": "{{baseUrl}}/course/section/694af53070cb35c5ed63eaed",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
 										"section",
-										"6930579f50250605b24f9151"
+										"694af53070cb35c5ed63eaed"
 									]
 								}
 							},
@@ -994,7 +994,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
@@ -1058,24 +1058,25 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
 										"key": "Accept-Language",
 										"value": "ar",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/section/6942dd6a885010a72b3e1dbd/join",
+									"raw": "{{baseUrl}}/course/section/694af53070cb35c5ed63eaed/join",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
 										"section",
-										"6942dd6a885010a72b3e1dbd",
+										"694af53070cb35c5ed63eaed",
 										"join"
 									]
 								}
@@ -1113,7 +1114,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
@@ -1172,7 +1173,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									}
 								],
@@ -1180,7 +1181,7 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "sertificate",
+											"key": "certificate",
 											"type": "file",
 											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
 										}
@@ -1231,7 +1232,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
@@ -1285,7 +1286,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
@@ -1305,14 +1306,14 @@
 									]
 								},
 								"url": {
-									"raw": "{{baseUrl}}/course/certificate/6939ac0dd62667c2e7f3ab81",
+									"raw": "{{baseUrl}}/course/certificate/694acad231987fb6eb9ad21b",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
 										"certificate",
-										"6939ac0dd62667c2e7f3ab81"
+										"694acad231987fb6eb9ad21b"
 									]
 								}
 							},
@@ -1349,7 +1350,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
@@ -1360,14 +1361,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/certificate/692327675486241162588ea6",
+									"raw": "{{baseUrl}}/course/certificate/6939ac0dd62667c2e7f3ab81",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"course",
 										"certificate",
-										"692327675486241162588ea6"
+										"6939ac0dd62667c2e7f3ab81"
 									]
 								}
 							},
@@ -1404,7 +1405,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
@@ -1415,7 +1416,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/course/certificate/specific/6939abf92ab0f380cb841332",
+									"raw": "{{baseUrl}}/course/certificate/specific/694acad231987fb6eb9ad21b",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1423,7 +1424,7 @@
 										"course",
 										"certificate",
 										"specific",
-										"6939abf92ab0f380cb841332"
+										"694acad231987fb6eb9ad21b"
 									]
 								}
 							},
@@ -1516,7 +1517,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							},
 							{
@@ -1576,7 +1577,7 @@
 								{
 									"key": "sections[0].videos[1].materials",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
+									"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
 								},
 								{
 									"key": "startAt",
@@ -1643,7 +1644,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -1652,12 +1653,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "porgramming",
+									"value": "{\"en\":\"porgramming\", \"ar\":\"برمجة\"}",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "will learn fullstack",
+									"value": "{\"en\":\"will learn fullstack\", \"ar\":\"سأتعلم تطوير تطبيقات الويب المتكاملة\"}",
 									"type": "text"
 								},
 								{
@@ -1667,29 +1668,24 @@
 								},
 								{
 									"key": "sections",
-									"value": "[{\"name\":\"Section 3\",\"price\":50,\"videos\":[{\"name\":\"Video 1\"},{\"name\":\"Video 2\"}]},\n{\"name\":\"Section 2\",\"price\":30,\"videos\":[{\"name\":\"Video A\"}]}]",
+									"value": "[{\n\"name\":\n{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\n\"videos\":[\n{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}, \n{\"name\":{\"ar\": \"فيديو اتنين \",\"en\":\"video1\" }}\n]\n}]",
 									"type": "text"
 								},
 								{
 									"key": "sections[0].videos[0].video",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								},
 								{
 									"key": "sections[0].videos[1].video",
 									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections[1].videos[0].video",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								},
 								{
 									"key": "sections[0].videos[0].materials",
 									"type": "file",
 									"src": [
-										"/C:/Users/ASUS/Desktop/CV/CV.pdf",
+										"/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf",
 										"/C:/Users/ASUS/Desktop/CV/Islam's Resume.pdf"
 									]
 								},
@@ -1700,24 +1696,29 @@
 								},
 								{
 									"key": "startAt",
-									"value": "2025-12-10T13:04:40",
+									"value": "2025-12-29T13:04:40",
 									"type": "text"
 								},
 								{
 									"key": "endAt",
 									"value": "2025-12-30T16:59:40",
 									"type": "text"
+								},
+								{
+									"key": "freeVideo",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/course/692327675486241162588ea6",
+							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"692327675486241162588ea6"
+								"694af53070cb35c5ed63eaec"
 							]
 						}
 					},
@@ -1754,18 +1755,18 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/6942dd6a885010a72b3e1db9/join",
+							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/join",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"6942dd6a885010a72b3e1db9",
+								"694af53070cb35c5ed63eaec",
 								"join"
 							]
 						}
@@ -1803,7 +1804,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -1850,7 +1851,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -1898,7 +1899,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -1947,7 +1948,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							},
 							{
@@ -2001,18 +2002,18 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/692c2501c6046d0996b98723/free-video",
+							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/free-video",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"692c2501c6046d0996b98723",
+								"694af53070cb35c5ed63eaec",
 								"free-video"
 							]
 						}
@@ -2050,21 +2051,73 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/course/6930579f50250605b24f9150/video/6930579f50250605b24f9154/6930579f50250605b24f9155",
+							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/video/694af53070cb35c5ed63eaed/694af53070cb35c5ed63eaef",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"course",
-								"6930579f50250605b24f9150",
+								"694af53070cb35c5ed63eaec",
 								"video",
-								"6930579f50250605b24f9154",
-								"6930579f50250605b24f9155"
+								"694af53070cb35c5ed63eaed",
+								"694af53070cb35c5ed63eaef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get video materials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/video/694af53070cb35c5ed63eaed/694af53070cb35c5ed63eaef/material",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"course",
+								"694af53070cb35c5ed63eaec",
+								"video",
+								"694af53070cb35c5ed63eaed",
+								"694af53070cb35c5ed63eaef",
+								"material"
 							]
 						}
 					},
@@ -2101,7 +2154,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -2154,13 +2207,13 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstname\":\"mohanad\",\r\n\"lastname\":\"mohamed\",\r\n\"email\":\"mohanadahmed2266@gmail.com\",\r\n\"password\":\"Moahcka@312\",\r\n\"phone\":\"+201211009821\",\r\n\"gender\":\"male\",\r\n\"role\": \"instracter\"\r\n}",
+							"raw": "{\r\n    \"firstname\": {\r\n        \"en\": \"mohanad\",\r\n        \"ar\": \"معتل\"\r\n    },\r\n    \"lastname\": {\r\n        \"en\": \"saleh\",\r\n        \"ar\": \"معتل\"\r\n    },\r\n    \"email\": \"gradia_admin@test.com\",\r\n    \"password\": \"Gradia_123\",\r\n    \"phone\": \"+201211009828\",\r\n    \"gender\": \"male\",\r\n    \"role\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2174,6 +2227,163 @@
 							],
 							"path": [
 								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salary deduction of instructor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": -5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/instructors/69259c5d66c019836942e353/salary",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"instructors",
+								"69259c5d66c019836942e353",
+								"salary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all instructors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/instructors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"instructors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instructor salary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/instructors/69259c5d66c019836942e353/salary",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"instructors",
+								"69259c5d66c019836942e353",
+								"salary"
 							]
 						}
 					},
@@ -2215,7 +2425,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer  {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -2262,7 +2472,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "beaerer {{access_token}}",
+								"value": "Bearer {{access_token}}",
 								"type": "text"
 							}
 						],
@@ -2274,6 +2484,103 @@
 							"path": [
 								"instructor",
 								"certificates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific certificate of instructor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/instructor/certificates/6939abf92ab0f380cb841332",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"instructor",
+								"certificates",
+								"6939abf92ab0f380cb841332"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/instructor/salary",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"instructor",
+								"salary"
 							]
 						}
 					},
