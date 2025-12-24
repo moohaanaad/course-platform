@@ -36,14 +36,20 @@ const userSchema = new Schema({
         }
     }],
 
+    deviceId: {
+        type: String, trim: true, required: function () {
+            return this.role == roleTypes.STUDENT ? true : false
+        }
+    },
+
     code: { type: String, trim: true },
 
     civilIdPic: { type: String, trim: true },
 
-    profilePic: { 
+    profilePic: {
         key: { type: String, trim: true },
         url: { type: String, trim: true }
-     },
+    },
 
     isConfirmed: {
         type: Boolean, default: function () {
@@ -61,6 +67,7 @@ const userSchema = new Schema({
 userSchema.pre("save", function (next) {
     //isModified => check if password was changed
     if (this.isModified("password")) this.password = hashPassword(this.password)
+    if (this.isModified("deviceId")) this.deviceId = hashPassword(this.deviceId)
     if (!this.code) this.code = randomstring.generate(7)
 
     return next()

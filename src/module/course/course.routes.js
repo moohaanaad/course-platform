@@ -9,6 +9,8 @@ import certificateRouter from "./certificate/certificate.routes.js";
 import * as courseConttroller from "./course.controller.js";
 import * as val from "./course.validation.js";
 import sectionRouter from "./section/section.routes.js";
+import { isAuthorized } from "../../middleware/authorization.js";
+import { roleTypes } from "../../common/constant/user.js";
 
 
 const courseRouter = Router()
@@ -21,6 +23,7 @@ courseRouter.use(isAuthenticate())
 
 //create course
 courseRouter.post('/',
+    isAuthorized([roleTypes.ADMIN]),
     fileuploadPrivate(
         { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationTypes.course }
     ).any(),
@@ -42,6 +45,7 @@ courseRouter.get('/:id',
 
 //update course 
 courseRouter.put('/:id',
+    isAuthorized([roleTypes.ADMIN]),
     fileuploadPrivate(
         { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationTypes.course }
     ).any(),
@@ -86,6 +90,7 @@ courseRouter.get('/:id/free-video',
 
 //delete course
 courseRouter.delete('/:id',
+    isAuthorized([roleTypes.ADMIN]),
     asyncHandler(courseConttroller.deleteCourse)
 )
 

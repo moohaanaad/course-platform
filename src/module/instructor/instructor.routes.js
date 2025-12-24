@@ -1,14 +1,15 @@
 import { Router } from "express";
-import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
+import { asyncHandler, isAuthenticate, isAuthorized, isValid } from "../../middleware/index.js";
 import * as instructorController from "./instructor.controller.js";
 import { idVal } from "../../common/common.validation.js";
+import { roleTypes } from "../../common/constant/user.js";
 
 
 
 const instructorRoutour = Router()
 
 //all routes are protect 
-instructorRoutour.use(isAuthenticate())
+instructorRoutour.use(isAuthenticate(), isAuthorized([roleTypes.INSTRUCTOR]))
 
 //get all courses of logged in instructor
 instructorRoutour.get('/',
@@ -20,7 +21,7 @@ instructorRoutour.get('/certificates',
     asyncHandler(instructorController.AllCertificatesOfInstructor)
 )
 
-//get specific certificate of logged in instructor
+//get specific certificate of logged in instructor //todo
 instructorRoutour.get('/certificates/:certificateId',
     isValid(idVal('certificateId')),
     asyncHandler(instructorController.SpecificCertificateOfInstructor)

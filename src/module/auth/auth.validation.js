@@ -26,18 +26,20 @@ export const signupVal = joi.object({
     Specializations: joi.array().items(
         joi.string().trim().min(1).required()
     ),
-    civilIdPic: joi.string().optional(),
+    deviceId: joi.string().required(),
 })
 
 //login
 export const signinVal = joi.object({
     email: joi.string().email().required(),
     password: joi.string().required(),
+    deviceId: joi.string().required()
 })
 
 // refresh token
 export const refreshToken = joi.object({
-    refresh_token: joi.string().required()
+    refresh_token: joi.string().required(),
+    deviceId: joi.string().required()
 })
 
 export const vrefiy = joi.object({

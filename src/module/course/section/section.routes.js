@@ -1,10 +1,11 @@
 import { Router } from "express"
 import { idVal } from "../../../common/common.validation.js"
-import { asyncHandler, isAuthenticate, isValid } from "../../../middleware/index.js"
+import { asyncHandler, isAuthenticate, isAuthorized, isValid } from "../../../middleware/index.js"
 import { parseJsonFields } from "../../../middleware/parseJsonFields.js"
 import { fileuploadPrivate, fileValidationTypes } from "../../../utils/multer/fileuploadCloud.js"
 import * as sectionController from "./section.controller.js"
 import * as val from "./section.validation.js"
+import { roleTypes } from "../../../common/constant/user.js"
 
 
 
@@ -14,6 +15,7 @@ sectionRouter.use(isAuthenticate())
 
 //add videos in section and update section 
 sectionRouter.put('/:id',
+    isAuthorized([roleTypes.ADMIN]),
     fileuploadPrivate(
         { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationTypes.course }
     ).any(),

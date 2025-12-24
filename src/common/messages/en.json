@@ -18,6 +18,7 @@
 		"alreadyVerified": "account is already verified",
 		"verifiedSuccessfully": "account verified successfully",
 		"invaledLogin": "email or password is incorrect",
+		"invaledDeviceId": "you cannot open your account in different device",
 		"login": "login successfully",
 		"signupSuccess": "signup successfully.",
 		"setPasswordSuccessfully": "Password entered successfully, Please login.",
@@ -39,7 +40,8 @@
 	},
 	"token": {
 		"invalid": "invalid bearer token",
-		"unauthenticate": "unauthenticated"
+		"unauthenticate": "unauthenticated",
+		"unauthorized": "unauthorized"
 	},
 	"banner": {
 		"notFound": "banner not found",

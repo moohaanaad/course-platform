@@ -1,4 +1,4 @@
-import { genderTypes } from "../../common/constant/index.js"
+import { genderTypes, roleTypes } from "../../common/constant/index.js"
 import { messages } from "../../common/messages/message.js"
 import { Otp } from "../../db/model/otp.js"
 import { User } from "../../db/model/user.js"
@@ -103,7 +103,7 @@ export const verify = async (req, res, next) => {
 
 //login
 export const login = async (req, res, next) => {
-    const { email, password } = req.body
+    const { email, password, deviceId } = req.body
 
     const userExist = await User.findOne({ email })
     if (!userExist) errorResponse({ res, message: messages.user.invaledLogin, statusCode: 404 })
@@ -111,6 +111,11 @@ export const login = async (req, res, next) => {
 
     const comparedPassword = await comparePassword(password, userExist.password)
     if (!comparedPassword) errorResponse({ res, message: messages.user.invaledLogin, statusCode: 404 })
+
+    if (userExist.role == roleTypes.STUDENT) {
+        const comparedDeviceId = await comparePassword(deviceId, userExist.deviceId)
+        if (!comparedDeviceId) errorResponse({ res, message: messages.user.invaledDeviceId, statusCode: 404 })
+    }
 
 
     //prepare data 
@@ -138,14 +143,18 @@ export const login = async (req, res, next) => {
 export const refreshToken = async (req, res, next) => {
 
 
-    const { refresh_token } = req.body
+    const { refresh_token, deviceId } = req.body
 
     //verify token 
     const result = verifyToken({ token: refresh_token })
     if (result?.error) return next(result.error)
 
+    const userExist = await User.findById(result._id).lean()
+    if (userExist.role == roleTypes.STUDENT) {
+        const comparedDeviceId = await comparePassword(deviceId, userExist.deviceId)
+        if (!comparedDeviceId) errorResponse({ res, message: messages.user.invaledDeviceId, statusCode: 404 })
+    }    
     //generate token 
-
     const accessToken = generateToken({
         payload: { _id: result._id },
         opption: { expiresIn: '1h' }

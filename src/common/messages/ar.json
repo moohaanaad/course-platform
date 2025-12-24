@@ -16,6 +16,8 @@
 		"email": "البريد الإلكتروني موجود بالفعل",
 		"notConfirmed": "يرجى تأكيد بريدك الإلكتروني أولاً",
 		"alreadyVerified": "الحساب مفعل بالفعل",
+		"invaledLogin": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+		"invaledDeviceId": "لا يمكنك فتح حسابك على جهاز مختلف",
 		"verifiedSuccessfully": "تم تفعيل الحساب بنجاح",
 		"login": "تم تسجيل الدخول بنجاح",
 		"signupSuccess": "تم التسجيل بنجاح",
@@ -37,7 +39,8 @@
 	},
 	"token": {
 		"invalid": "توكن غير صالح",
-		"unauthenticate": "غير مصرح"
+		"unauthenticate": "غير مصرح",
+		"unauthorized": "غير مصرح به"
 	},
 	"banner": {
 		"notFound": "البانر غير موجود",
@@ -71,7 +74,7 @@
 		"freeVideoRequired": "مطلوب وجود فيديو مجاني",
 		"getAllPayed": "تم جلب جميع الكورسات المدفوعة بنجاح",
 		"videoNotFound": "الفيديو غير موجود في هذا السيكشن",
-		"materialNotFound":"لم يتم العثور على المواد في هذا القسم",
+		"materialNotFound": "لم يتم العثور على المواد في هذا القسم",
 		"freeVideoNotFound": "الفيديو المجاني غير موجود",
 		"cannotDeleteActiveCourse": "لا يمكن حذف كورس نشط",
 		"joinSuccessfully": "تم الانضمام بنجاح",

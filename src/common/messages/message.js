@@ -24,6 +24,7 @@ export const messages = {
         alreadyVerified: "user.alreadyVerified",
         verifiedSuccessfully: "user.verifiedSuccessfully",
         invaledLogin: "user.invaledLogin",
+        invaledDeviceId: "user.invaledDeviceId",
         login: "user.login",
         signupSuccess: "user.signupSuccess",
         setPasswordSuccessfully: "user.setPasswordSuccessfully",
@@ -44,7 +45,8 @@ export const messages = {
     },
     token: {
         invalid: "token.invalid",
-        unauthenticate: "token.unauthenticate"
+        unauthenticate: "token.unauthenticate",
+        unauthorized: "token.unauthorized"
     },
     banner: {
         ...generateMessageKeys("banner"),
