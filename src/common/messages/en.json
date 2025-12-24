@@ -41,7 +41,8 @@
 	"token": {
 		"invalid": "invalid bearer token",
 		"unauthenticate": "unauthenticated",
-		"unauthorized": "unauthorized"
+		"unauthorized": "unauthorized",
+		"refreshToken": "refreshToken"
 	},
 	"banner": {
 		"notFound": "banner not found",
@@ -75,7 +76,7 @@
 		"freeVideoRequired": "A free video is required",
 		"getAllPayed": "All payed courses retrieved successfully",
 		"videoNotFound": "Video not found in this section",
-		"materialNotFound":"material not found in this section",
+		"materialNotFound": "material not found in this section",
 		"freeVideoNotFound": "Free video not found",
 		"cannotDeleteActiveCourse": "Cannot delete active course",
 		"joinSuccessfully": "join successfully",

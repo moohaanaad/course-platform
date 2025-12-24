@@ -4,7 +4,7 @@ import { Otp } from "../../db/model/otp.js"
 import { User } from "../../db/model/user.js"
 import { sendEmail } from "../../utils/sendEmail.js"
 import { generateToken } from "../../utils/token/generate.js"
-import { comparePassword } from "../../utils/bcrypt/index.js"
+import { comparePassword, hashPassword } from "../../utils/bcrypt/index.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
 import { verifyToken } from "../../utils/token/verify.js"
 import randomstring from 'randomstring'
@@ -42,7 +42,7 @@ export const signup = async (req, res, next) => {
 
     // prepare data 
     req.body.civilIdPic = req.file.key
-
+    req.body.deviceId =  hashPassword(deviceId)
     //save acc
     const createdUser = await User.create(req.body)
 
@@ -103,7 +103,7 @@ export const verify = async (req, res, next) => {
 
 //login
 export const login = async (req, res, next) => {
-    const { email, password, deviceId } = req.body
+    let { email, password, deviceId } = req.body
 
     const userExist = await User.findOne({ email })
     if (!userExist) errorResponse({ res, message: messages.user.invaledLogin, statusCode: 404 })
@@ -113,10 +113,14 @@ export const login = async (req, res, next) => {
     if (!comparedPassword) errorResponse({ res, message: messages.user.invaledLogin, statusCode: 404 })
 
     if (userExist.role == roleTypes.STUDENT) {
-        const comparedDeviceId = await comparePassword(deviceId, userExist.deviceId)
-        if (!comparedDeviceId) errorResponse({ res, message: messages.user.invaledDeviceId, statusCode: 404 })
+        if (userExist.deviceId) {
+            const comparedDeviceId = await comparePassword(deviceId, userExist.deviceId)
+            if (!comparedDeviceId) errorResponse({ res, message: messages.user.invaledDeviceId, statusCode: 404 })
+        } else {
+           deviceId =  hashPassword(deviceId)
+            await User.updateOne({ email }, { deviceId: deviceId })
+        }
     }
-
 
     //prepare data 
     const access_token = generateToken({
@@ -131,12 +135,16 @@ export const login = async (req, res, next) => {
     userExist.isActive = true
     await userExist.save()
 
-    return res.status(200).json({
+    return successResponse({
+        res,
         message: messages.user.login,
-        access_token,
-        refresh_token
+        data: {
+            access_token,
+            refresh_token
+        },
+        statusCode: 200,
+        success: true
     })
-
 }
 
 //refresh token
@@ -153,14 +161,22 @@ export const refreshToken = async (req, res, next) => {
     if (userExist.role == roleTypes.STUDENT) {
         const comparedDeviceId = await comparePassword(deviceId, userExist.deviceId)
         if (!comparedDeviceId) errorResponse({ res, message: messages.user.invaledDeviceId, statusCode: 404 })
-    }    
+    }
     //generate token 
     const accessToken = generateToken({
         payload: { _id: result._id },
         opption: { expiresIn: '1h' }
     })
 
-    return res.json({ success: true, access_token: accessToken })
+    return successResponse({
+        res,
+        message: messages.token.refreshToken,
+        data: {
+            access_token: accessToken
+        },
+        statusCode: 200,
+        success: true
+    })
 }
 
 // forget password

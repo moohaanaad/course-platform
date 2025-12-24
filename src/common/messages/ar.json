@@ -40,7 +40,8 @@
 	"token": {
 		"invalid": "توكن غير صالح",
 		"unauthenticate": "غير مصرح",
-		"unauthorized": "غير مصرح به"
+		"unauthorized": "غير مصرح به",
+		"refreshToken":"رمز التحديث"
 	},
 	"banner": {
 		"notFound": "البانر غير موجود",

@@ -36,11 +36,7 @@ const userSchema = new Schema({
         }
     }],
 
-    deviceId: {
-        type: String, trim: true, required: function () {
-            return this.role == roleTypes.STUDENT ? true : false
-        }
-    },
+    deviceId: { type: String, trim: true },
 
     code: { type: String, trim: true },
 
@@ -67,7 +63,6 @@ const userSchema = new Schema({
 userSchema.pre("save", function (next) {
     //isModified => check if password was changed
     if (this.isModified("password")) this.password = hashPassword(this.password)
-    if (this.isModified("deviceId")) this.deviceId = hashPassword(this.deviceId)
     if (!this.code) this.code = randomstring.generate(7)
 
     return next()

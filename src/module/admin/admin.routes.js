@@ -16,6 +16,11 @@ adminRouter.post('/',
     asyncHandler(adminController.createUser)
 )
 
+adminRouter.put('/:userId',
+    isValid(idVal('userId')),
+    asyncHandler(adminController.DeleteDeviceId)
+)
+
 adminRouter.get('/instructors',
     asyncHandler(adminController.getInstructors)
 )

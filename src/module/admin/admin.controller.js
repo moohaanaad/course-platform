@@ -24,6 +24,21 @@ export const createUser = async (req, res, next) => {
     })
 }
 
+export const DeleteDeviceId = async (req, res, next) => {
+    const { userId } = req.params
+
+    const userExist = await User.findByIdAndUpdate(userId, { $unset: { deviceId: "" } }, { new: true })
+    if (!userExist) errorResponse({ res, message: messages.user.notFound, statusCode: 404 })
+
+    return successResponse({
+        res,
+        message: messages.user.updatedSuccessfully,
+        data: userExist,
+        statusCode: 200,
+        success: true
+    })
+}
+
 export const getInstructors = async (req, res, next) => {
 
     const instructors = await User.find({ role: roleTypes.INSTRUCTOR })
@@ -49,7 +64,7 @@ export const getInstructorSalary = async (req, res, next) => {
         data: instructorSalaryExist
     })
 
-    
+
 }
 
 export const updateInstructorSalary = async (req, res, next) => {
@@ -59,10 +74,10 @@ export const updateInstructorSalary = async (req, res, next) => {
     //check existence
     const instructorSalaryExist = await instructorSalary.findOne({ instructor: instructorId })
     if (!instructorSalaryExist) errorResponse({ res, message: messages.instructor.haveNotSalaryAccount, statusCode: 404 })
-    
-        //prepare data
+
+    //prepare data
     instructorSalaryExist.amount -= amount
-    if(instructorSalaryExist.amount < 0) errorResponse({ res, message: messages.instructor.salaryCannotBeNegative, statusCode: 400 })
+    if (instructorSalaryExist.amount < 0) errorResponse({ res, message: messages.instructor.salaryCannotBeNegative, statusCode: 400 })
 
     //save
     await instructorSalaryExist.save()
@@ -75,5 +90,5 @@ export const updateInstructorSalary = async (req, res, next) => {
         data: instructorSalaryExist
     })
 
-    
+
 }

@@ -102,8 +102,8 @@
 							"script": {
 								"exec": [
 									"let response = pm.response.json()\r",
-									"pm.environment.set(\"access_token\", response.access_token)\r",
-									"pm.environment.set(\"refresh_token\", response.refresh_token)"
+									"pm.environment.set(\"access_token\", response.data.access_token)\r",
+									"pm.environment.set(\"refresh_token\", response.data.refresh_token)"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -127,7 +127,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"bwetore6q66174@fftube.com\",\r\n    \"password\":\"Moahcka@312\",\r\n    \"deviceId\": \"honda\" \r\n}",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"password\":\"mohanadahmeddd\",\r\n    \"deviceId\": \"honda\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2232,6 +2232,54 @@
 							],
 							"path": [
 								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove device id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/694c3e3c81f7403cf427b158",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"694c3e3c81f7403cf427b158"
 							]
 						}
 					},

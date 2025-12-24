@@ -46,7 +46,8 @@ export const messages = {
     token: {
         invalid: "token.invalid",
         unauthenticate: "token.unauthenticate",
-        unauthorized: "token.unauthorized"
+        unauthorized: "token.unauthorized",
+        refreshToken: "token.refreshToken"
     },
     banner: {
         ...generateMessageKeys("banner"),

@@ -5,6 +5,9 @@ import { Course } from "../../db/model/course.js";
 import { errorResponse } from "../../utils/res/res.error.js";
 import { successResponse } from "../../utils/res/res.success.js";
 import { instructorSalary } from "../../db/model/instructor.salary.js";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import digitalOcean from "../../utils/multer/cloud.config.js";
 
 //get all courses of instructor
 export const AllCourseOFInstructor = async (req, res, next) => {
@@ -53,10 +56,14 @@ export const SpecificCertificateOfInstructor = async (req, res, next) => {
     const certificate = await Certificate.findOne({ _id: certificateId, instructorId });
     if (!certificate) errorResponse({ res, message: messages.course.certificate.notFound, statusCode: 404 });
 
-    const filePath = path.resolve(certificate.certificate);
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline');
-    res.sendFile(filePath)
+    const command = new GetObjectCommand({
+            Bucket: "my-uploads",
+            Key: certificate.certificate,
+            ResponseContentType: "application/pdf",
+            ResponseContentDisposition: "inline",
+        });
+        const signedUrl = await getSignedUrl(digitalOcean, command);
+        res.json({ url: signedUrl });
 }
 
 //get salary of logged in instructor
