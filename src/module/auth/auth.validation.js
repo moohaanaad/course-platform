@@ -10,7 +10,7 @@ export const signupVal = joi.object({
         en: joi.string().min(3).max(30).required(),
     }),
     lastname: joi.object({
-        ar: joi.string().min(3).pattern(/^[\u0600-\u06FF\s]+$/).max(30).messages({
+        ar: joi.string().min(3).max(30).pattern(/^[\u0600-\u06FF\s]+$/).messages({
             "string.pattern.base": "Arabic lastname must contain only Arabic letters"
         }).required(),
         en: joi.string().min(3).max(30).required(),

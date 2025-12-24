@@ -1,13 +1,15 @@
-import fs from "fs";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { roleTypes } from "../../common/constant/user.js";
 import { messages } from "../../common/messages/message.js";
 import { Certificate } from "../../db/model/certificate.js";
 import { Course } from "../../db/model/course.js";
+import { instructorSalary } from "../../db/model/instructor.salary.js";
 import { User } from "../../db/model/user.js";
 import { attachFiles } from "../../utils/multer/attachFiles.js";
+import digitalOcean from "../../utils/multer/cloud.config.js";
 import { deleteFile } from "../../utils/multer/deletefille.js";
 import { errorResponse, successResponse } from "../../utils/res/index.js";
-import { instructorSalary } from "../../db/model/instructor.salary.js";
 
 //create course
 export const createCourse = async (req, res, next) => {
@@ -37,7 +39,7 @@ export const createCourse = async (req, res, next) => {
   const freeVideo = files.find(file => file.fieldname == "freeVideo")
   if (!freeVideo) errorResponse({ res, message: messages.course.freeVideoRequired, statusCode: 422 })
   req.body.createdBy = user._id
-  req.body.freeVideo = freeVideo.path
+  req.body.freeVideo = freeVideo.key
   if (req.body.startAt == Date.now() || req.body.startAt <= Date.now()) req.body.isActive = true
 
 
@@ -200,6 +202,7 @@ export const updateCourse = async (req, res, next) => {
   attachFiles(req)
   if (req.body.sections?.length) {
     for (let i = 0; i < req.body.sections.length; i++) {
+
       courseExist.sections.push(req.body.sections[i])
     }
   }
@@ -222,6 +225,11 @@ export const updateCourse = async (req, res, next) => {
   if (req.body.price) courseExist.price = req.body.price
   if (req.body.startAt) courseExist.startAt = req.body.startAt
   if (req.body.endAt) courseExist.endAt = req.body.endAt
+  const freeVideo = req.files.find(file => file.fieldname == "freeVideo")
+  if (freeVideo) {
+    deleteFile(courseExist.freeVideo)
+    courseExist.freeVideo = freeVideo.key
+  }
 
   //save data
   const updatedCourse = await courseExist.save()
@@ -258,7 +266,7 @@ export const joinCourse = async (req, res, next) => {
     if (instructorSalaryExist) {
       instructorSalaryExist.amount += instructorSalaryAmount;
       await instructorSalaryExist.save();
-      
+
     } else {
 
       await instructorSalary.create({
@@ -277,6 +285,56 @@ export const joinCourse = async (req, res, next) => {
     message: messages.course.joinCourseSuccessfully,
     statusCode: 200,
     data: courseExist.students
+  })
+}
+
+//get video materials
+export const getMaterials = async (req, res, next) => {
+  const { id, sectionId, videoId } = req.params;
+  const userId = req.user._id;
+
+  //cehck existence 
+  const course = await Course.findOne({
+    _id: id,
+    sections: { $elemMatch: { _id: sectionId, "videos._id": videoId } }
+  }, { "sections.$": 1, students: 1 });
+
+  if (!course) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
+
+  //cehck if user is student
+  const userIdStr = userId.toString();
+  const isStudent = course.students.some((id) => id.toString() === userIdStr) || course.sections[0].students.some((id) => id.toString() === userIdStr);
+  if (!isStudent) errorResponse({ res, message: messages.course.userNotEnrolled, statusCode: 403 })
+
+  //materials path
+  const materialPaths = course?.sections[0]?.videos[0]?.materials;
+  if (!materialPaths) errorResponse({ res, message: messages.course.materialNotFound, statusCode: 404 })
+
+
+  const urls = await Promise.all(
+    materialPaths.map(async (key) => {
+      const command = new GetObjectCommand({
+        Bucket: "my-uploads",
+        Key: key,
+        ResponseContentType: "application/pdf",
+        ResponseContentDisposition: "inline",
+      });
+
+      return await getSignedUrl(digitalOcean, command, {
+        expiresIn: 60 * 5, // 5 minutes
+      });
+    })
+  );
+
+  successResponse({
+    res,
+    message: messages.course.getAll,
+    data: {
+      count: urls.length,
+      urls,
+    },
+    statusCode: 200,
+    success: true
   })
 }
 
@@ -303,7 +361,7 @@ export const streamVideo = async (req, res) => {
   // Streaming part
   const videoPath = course?.sections[0]?.videos[0]?.video;
 
-  if (!fs.existsSync(videoPath)) errorResponse({ res, message: messages.course.videoNotFound, statusCode: 404 })
+  if (!videoPath) errorResponse({ res, message: messages.course.videoNotFound, statusCode: 404 })
 
   if (!course.sections[0].videos[0].isWatched) {
     await Course.updateOne({
@@ -323,35 +381,18 @@ export const streamVideo = async (req, res) => {
       });
   }
 
-  const stat = fs.statSync(videoPath);
-  const fileSize = stat.size;
-  const range = req.headers.range;
-
-  //if no range header, send the entire video
-  if (!range) {
-    res.writeHead(200, {
-      "Content-Type": "video/mp4",
-      "Content-Length": fileSize,
-    });
-    fs.createReadStream(videoPath).pipe(res);
-    return;
-  }
-
-  //Streaming chunks
-  const CHUNK_SIZE = 10 ** 6; // 1MB
-  const start = Number(range.replace(/\D/g, ""));
-  const end = Math.min(start + CHUNK_SIZE, fileSize - 1);
-
-  const contentLength = end - start + 1;
-
-  res.writeHead(206, {
-    "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-    "Accept-Ranges": "bytes",
-    "Content-Length": contentLength,
-    "Content-Type": "video/mp4",
+  const command = new GetObjectCommand({
+    Bucket: "my-uploads",
+    Key: videoPath,
   });
 
-  fs.createReadStream(videoPath, { start, end }).pipe(res);
+  const signedUrl = await getSignedUrl(digitalOcean, command, {
+    expiresIn: 300, // 5 دقائق
+  });
+
+  res.json({
+    url: signedUrl,
+  });
 };
 
 //stream free video
@@ -363,39 +404,19 @@ export const streamFreeVideo = async (req, res) => {
   if (!course) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
 
 
-  const videoPath = course.freeVideo;
-  const stat = fs.statSync(videoPath);
-  const fileSize = stat.size;
-  if (!fs.existsSync(videoPath)) errorResponse({ res, message: messages.course.freeVideoNotFound, statusCode: 404 })
-
-  const range = req.headers.range;
-  //if no range header, send the entire video
-  if (!range) {
-    res.writeHead(200, {
-      "Content-Type": "video/mp4",
-      "Content-Length": fileSize,
-    });
-    fs.createReadStream(videoPath).pipe(res);
-    return;
-  }
-
-  const videoSize = fs.statSync(videoPath).size;
-  const CHUNK = 10 ** 6; // 1MB
-  const start = Number(range.replace(/\D/g, ""));
-  const end = Math.min(start + CHUNK, videoSize - 1);
-
-  const contentLength = end - start + 1;
-
-  res.writeHead(206, {
-    "Content-Type": "video/mp4",
-    "Content-Length": contentLength,
-    "Accept-Ranges": "bytes",
-    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+  const command = new GetObjectCommand({
+    Bucket: "my-uploads",
+    Key: course.freeVideo,
   });
 
-  const videoStream = fs.createReadStream(videoPath, { start, end });
-  videoStream.pipe(res);
-}
+  const signedUrl = await getSignedUrl(digitalOcean, command, {
+    expiresIn: 300, // 5 دقائق
+  });
+
+  res.json({
+    url: signedUrl,
+  });
+};
 
 //delete course
 export const deleteCourse = async (req, res) => {

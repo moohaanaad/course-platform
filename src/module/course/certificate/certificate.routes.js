@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { asyncHandler, isAuthenticate, isValid } from "../../../middleware/index.js";
-import { fileupload, fileValidationType } from "../../../utils/multer/fileuploads.js";
 import * as certificateController from "./certificate.controller.js";
 import { createCertificateVal } from "./certificate.validation.js";
 import { idVal } from "../../../common/common.validation.js";
+import { fileuploadPrivate, fileValidationTypes } from "../../../utils/multer/fileuploadCloud.js";
 
 
 
@@ -14,8 +14,8 @@ certificateRouter.use(isAuthenticate())
 
 //create certificate
 certificateRouter.post('/:courseId',
-    fileupload(
-        { mainFolder: 'course', partFolder: 'certificate', allowTypes: fileValidationType.file }
+    fileuploadPrivate( 
+        { mainFolder: 'course', partFolder: 'certificate', allowTypes: fileValidationTypes.file }
     ).single('certificate'),
     isValid(createCertificateVal),
     asyncHandler(certificateController.createcertificate)
@@ -34,22 +34,20 @@ certificateRouter.get('/:courseId',
 
 //get specific certificate 
 certificateRouter.get('/specific/:id',
-        isValid(idVal('id')),
+    isValid(idVal('id')),
     asyncHandler(certificateController.getSpecificCertificate)
 )
 
 //take certificate
 certificateRouter.put('/:courseId',
-        isValid(idVal('courseId')),
+    isValid(idVal('courseId')),
     asyncHandler(certificateController.takecertificate)
 )
 
 //update serificate 
 certificateRouter.patch('/:id',
-    fileupload(
-        { mainFolder: 'course', partFolder: 'certificate', allowTypes: fileValidationType.file }
-    ).single('certificate'),
-        isValid(idVal('id')),
+    fileuploadPrivate({ mainFolder: 'course', partFolder: 'certificate', allowTypes: fileValidationTypes.file }).single('certificate'),
+    isValid(idVal('id')),
     asyncHandler(certificateController.updatecertificate)
 )
 

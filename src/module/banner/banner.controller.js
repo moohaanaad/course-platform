@@ -10,7 +10,10 @@ export const createBanner = async (req, res, next) => {
 
     //prepare data
     const preparedData = {
-        image: req.file.path,
+        image: {
+            key: req.file.key,
+            url: req.file.location
+        },
         createdBy: req.user._id,
         updatedBy: req.user._id,
     }
@@ -19,7 +22,7 @@ export const createBanner = async (req, res, next) => {
     const createdBanner = await Banner.create(preparedData)
 
     //response 
-    successResponse({
+    return successResponse({
         res,
         statusCode: 201,
         message: messages.banner.createdSuccessfully,
@@ -31,7 +34,7 @@ export const createBanner = async (req, res, next) => {
 export const allBanner = async (req, res, next) => {
 
     const banners = await Banner.find()
-    if (!banners.length) errorResponse({ message: messages.banner.notFound, statusCode: 404 })
+    if (!banners.length) errorResponse({ res, message: messages.banner.notFound, statusCode: 404 })
 
     return successResponse({
         res,
@@ -47,10 +50,10 @@ export const specificBanner = async (req, res, next) => {
 
     //check existnece 
     const bannerExist = await Banner.findById(id)
-    if (!bannerExist) errorResponse({ message: messages.banner.notFound, statusCode: 404 })
+    if (!bannerExist) errorResponse({ res, message: messages.banner.notFound, statusCode: 404 })
 
     //res
-    successResponse({ res, message: messages.banner.getSpecific, data: bannerExistz })
+    return successResponse({ res, message: messages.banner.getSpecific, data: bannerExist, statusCode: 200 })
 }
 
 //update banner
@@ -59,20 +62,23 @@ export const updateBanner = async (req, res, next) => {
 
     //check existnece 
     const bannerExist = await Banner.findById(id)
-    if (!bannerExist) errorResponse({ message: messages.banner.notFound, statusCode: 404 })
+    if (!bannerExist) errorResponse({ res, message: messages.banner.notFound, statusCode: 404 })
 
-    if (!req.file) errorResponse({ message: messages.banner.requiredBanner, statusCode: 422 })
+    if (!req.file) errorResponse({ res, message: messages.banner.requiredBanner, statusCode: 422 })
 
     //prepare data
-    deleteFile(bannerExist.image)
-    bannerExist.image = req.file.path
+    await deleteFile(bannerExist.image.key)
+    bannerExist.image = {
+        key: req.file.key,
+        url: req.file.location
+    }
     bannerExist.updatedBy = req.user._id
 
     //save data
     bannerExist.save()
 
     //response 
-    successResponse({
+    return successResponse({
         res,
         message: messages.banner.updatedSuccessfully,
         data: bannerExist,
@@ -87,10 +93,13 @@ export const deleteBanner = async (req, res, next) => {
 
     //check existnece 
     const deletedBanner = await Banner.findByIdAndDelete(id)
-    if (!deletedBanner) errorResponse({ message: messages.banner.notFound, statusCode: 404 })
+    if (!deletedBanner) errorResponse({ res, message: messages.banner.notFound, statusCode: 404 })
+
+    //delete file from spaces
+    await deleteFile(deletedBanner.image.key)
 
     //response
-    successResponse({
+    return successResponse({
         res,
         message: messages.banner.deletedSuccessfully,
         statusCode: 200

@@ -3,9 +3,8 @@ import { model, Schema, Types } from "mongoose";
 
 const bannerSchema = new Schema({
     image: {
-        type: String,
-        trim: true,
-        required: true
+        key: { type: String, trim: true, required: true },
+        url: { type: String, trim: true, required: true },
     },
     createdBy: {
         type: Types.ObjectId,

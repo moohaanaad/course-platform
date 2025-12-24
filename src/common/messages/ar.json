@@ -21,7 +21,8 @@
 		"signupSuccess": "تم التسجيل بنجاح",
 		"setPasswordSuccessfully": "تم تعيين كلمة المرور بنجاح، يرجى تسجيل الدخول",
 		"invalidcrendential": "بيانات تسجيل الدخول غير صحيحة",
-		"verfiedSuccessfully": "تم التفعيل بنجاح، يرجى تسجيل الدخول"
+		"verfiedSuccessfully": "تم التفعيل بنجاح، يرجى تسجيل الدخول",
+		"profileFetchSuccessfully": "تم جلب ملف المستخدم بنجاح"
 	},
 	"image": {
 		"coverUploaded": "تم رفع صورة الغلاف بنجاح",
@@ -70,6 +71,7 @@
 		"freeVideoRequired": "مطلوب وجود فيديو مجاني",
 		"getAllPayed": "تم جلب جميع الكورسات المدفوعة بنجاح",
 		"videoNotFound": "الفيديو غير موجود في هذا السيكشن",
+		"materialNotFound":"لم يتم العثور على المواد في هذا القسم",
 		"freeVideoNotFound": "الفيديو المجاني غير موجود",
 		"cannotDeleteActiveCourse": "لا يمكن حذف كورس نشط",
 		"joinSuccessfully": "تم الانضمام بنجاح",

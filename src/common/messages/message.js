@@ -29,6 +29,7 @@ export const messages = {
         setPasswordSuccessfully: "user.setPasswordSuccessfully",
         invalidcrendential: "user.invalidcrendential",
         verfiedSuccessfully: "user.verfiedSuccessfully",
+        profileFetchSuccessfully: "user.profileFetchSuccessfully"
     },
     image: {
         uploaded: "image.uploaded",
@@ -58,6 +59,7 @@ export const messages = {
         userNotEnrolled: "course.userNotEnrolled",
         freeVideoRequired: "course.freeVideoRequired",
         videoNotFound: "course.videoNotFound",
+        materialNotFound: "course.materialNotFound",
         freeVideoNotFound: "course.freeVideoNotFound",
         cannotDeleteActiveCourse: "course.cannotDeleteActiveCourse",
         joinSuccessfully: "course.joinSuccessfully",

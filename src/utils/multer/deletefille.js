@@ -1,14 +1,18 @@
-import path from "path"
-import fs from "fs"
+import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import digitalOcean from "./cloud.config.js";
 
-export const deleteFile = (filePath) => {
+export const deleteFile = async(key) => {
     try {
-        const fullPath = path?.resolve(filePath)
-    const defaultProfile = ["uploads/User/default-male.jpg", "uploads/User/default-female.png"]
-    if (fs.existsSync(fullPath) && ![...defaultProfile].includes(filePath)) {
-        fs.unlinkSync(fullPath)
-    }
+  const command = new DeleteObjectCommand({
+    Bucket: process.env.SPACES_BUCKET,
+    Key: key,
+  });
+
+  await digitalOcean.send(command);
+    
     } catch (error) {
+      console.log(error.message);
+      
         return true
     }
 }

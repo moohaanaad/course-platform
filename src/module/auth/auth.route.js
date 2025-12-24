@@ -3,13 +3,13 @@ import { asyncHandler, isValid, parseJsonFields } from "../../middleware/index.j
 import { fileupload } from "../../utils/multer/fileuploads.js"
 import * as authController from "./auth.controller.js"
 import * as val from "./auth.validation.js"
-
+import { fileuploadPrivate } from "../../utils/multer/fileuploadCloud.js"
 
 const authRouter = Router()
 
 //create account
 authRouter.post('/signup',
-    fileupload({mainFolder:'user', partFolder: 'civilIdPic'}).single('civilIdPic'),
+    fileuploadPrivate({ mainFolder: 'user', partFolder: 'civilIdPic' }).single('civilIdPic'),
     parseJsonFields,
     isValid(val.signupVal),
     asyncHandler(authController.signup)

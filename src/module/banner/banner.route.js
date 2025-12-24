@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
-import { fileupload } from "../../utils/multer/fileuploads.js";
 import * as bannerController from "./banner.controller.js";
 import { idVal } from "../../common/common.validation.js";
+import { fileuploadPublic } from "../../utils/multer/fileuploadCloud.js";
 
 
 const bannerRouter = Router()
@@ -12,7 +12,7 @@ bannerRouter.use(isAuthenticate())
 
 //create banner
 bannerRouter.post('/',
-    fileupload({ mainFolder: 'image', partFolder: 'banner' }).single('banner'),
+    fileuploadPublic({ mainFolder: 'image', partFolder: 'banner' }).single('banner'),
     asyncHandler(bannerController.createBanner)
 )
 
@@ -29,7 +29,7 @@ bannerRouter.get('/:id',
 
 //update banner 
 bannerRouter.put('/:id',
-    fileupload({ mainFolder: 'image', partFolder: 'banner' }).single('banner'),
+    fileuploadPublic({ mainFolder: 'image', partFolder: 'banner' }).single('banner'),
     isValid(idVal('id')),
     asyncHandler(bannerController.updateBanner)
 )

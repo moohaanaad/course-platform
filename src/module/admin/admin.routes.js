@@ -2,13 +2,14 @@ import { Router } from "express";
 import { idVal } from "../../common/common.validation.js";
 import { asyncHandler, isValid } from "../../middleware/index.js";
 import * as adminController from "./admin.controller.js";
-import { updateInstructorSalaryVal } from "./admin.validation.js";
+import { createUserVal, updateInstructorSalaryVal } from "./admin.validation.js";
 
 
 
 const adminRouter = Router()
 
 adminRouter.post('/',
+    isValid(createUserVal),
     asyncHandler(adminController.createUser)
 )
 

@@ -41,7 +41,7 @@ export const signup = async (req, res, next) => {
     }
 
     // prepare data 
-    req.body.civilIdPic = req?.file?.path
+    req.body.civilIdPic = req.file.key
 
     //save acc
     const createdUser = await User.create(req.body)

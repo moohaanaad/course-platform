@@ -39,7 +39,11 @@ const userSchema = new Schema({
     code: { type: String, trim: true },
 
     civilIdPic: { type: String, trim: true },
-    profilePic: { type: String, trim: true },
+
+    profilePic: { 
+        key: { type: String, trim: true },
+        url: { type: String, trim: true }
+     },
 
     isConfirmed: {
         type: Boolean, default: function () {

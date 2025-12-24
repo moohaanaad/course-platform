@@ -3,17 +3,20 @@ import { messages } from "../../../common/messages/message.js";
 import { Certificate } from "../../../db/model/certificate.js";
 import { Course } from "../../../db/model/course.js";
 import { errorResponse, successResponse } from "../../../utils/res/index.js";
-
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import digitalOcean from "../../../utils/multer/cloud.config.js";
 
 //create certificate
 export const createcertificate = async (req, res, next) => {
     const { file } = req;
     const { courseId } = req.params;
+    console.log(file);
 
     //check eixstence 
     const courseExist = await Course.findById(courseId);
     if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 });
-    if (!file.path) errorResponse({ res, message: messages.course.certificate.fileRequired, statusCode: 400 });
+    if (!file) errorResponse({ res, message: messages.course.certificate.fileRequired, statusCode: 400 });
 
     //prepare data
     const certificateData = {
@@ -21,7 +24,8 @@ export const createcertificate = async (req, res, next) => {
         instructorId: courseExist.instructor,
         courseName: courseExist.name,
         courseDescription: courseExist.description,
-        certificate: file.path
+        certificate: file.key,
+
     };
     //create certificate
     const createdcertificate = await Certificate.create(certificateData);
@@ -51,12 +55,19 @@ export const getSpecificCertificate = async (req, res, next) => {
 
     const certificate = await Certificate.findById(id);
     if (!certificate) errorResponse({ res, message: messages.course.certificate.notFound, statusCode: 404 });
-    
-    const filePath = path.resolve(certificate.certificate);
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline');
-    res.sendFile(filePath)
-    
+
+    const command = new GetObjectCommand({
+        Bucket: "my-uploads",
+        Key: certificate.certificate,
+        ResponseContentType: "application/pdf",
+        ResponseContentDisposition: "inline",
+    });
+
+
+    const signedUrl = await getSignedUrl(digitalOcean, command);
+
+    res.json({ url: signedUrl });
+
 }
 
 //get certificate of specific course 
@@ -118,13 +129,13 @@ export const updatecertificate = async (req, res, next) => {
     const { id } = req.params;
 
     //check existence
-    if (!file.path) errorResponse({ res, message: messages.course.certificate.fileRequired, statusCode: 400 });
+    if (!file.key) errorResponse({ res, message: messages.course.certificate.fileRequired, statusCode: 400 });
     const certificateExist = await Certificate.findById(id);
     if (!certificateExist) errorResponse({ res, message: messages.course.certificate.notFound, statusCode: 404 });
     if (certificateExist.students.length > 0) errorResponse({ res, message: messages.course.certificate.cannotUpdateAfterStudentsJoined, statusCode: 403 });
 
     //prepare data and save
-    certificateExist.certificate = file.path;
+    certificateExist.certificate = file.key;
     await certificateExist.save();
 
     //response 

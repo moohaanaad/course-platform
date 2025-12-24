@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { fileupload, fileValidationType } from "../../utils/multer/fileuploads.js";
+import { idVal } from "../../common/common.validation.js";
 import { asyncHandler } from "../../middleware/async-handler.js";
-import * as courseConttroller from "./course.controller.js";
-import { parseJsonFields } from "../../middleware/parseJsonFields.js";
 import { isAuthenticate } from "../../middleware/authentication.js";
+import { parseJsonFields } from "../../middleware/parseJsonFields.js";
 import { isValid } from "../../middleware/validation.js";
+import { fileuploadPrivate, fileValidationTypes } from "../../utils/multer/fileuploadCloud.js";
+import certificateRouter from "./certificate/certificate.routes.js";
+import * as courseConttroller from "./course.controller.js";
 import * as val from "./course.validation.js";
 import sectionRouter from "./section/section.routes.js";
-import certificateRouter from "./certificate/certificate.routes.js";
-import { idVal } from "../../common/common.validation.js";
 
 
 const courseRouter = Router()
@@ -21,8 +21,8 @@ courseRouter.use(isAuthenticate())
 
 //create course
 courseRouter.post('/',
-    fileupload(
-        { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationType.course }
+    fileuploadPrivate(
+        { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationTypes.course }
     ).any(),
     parseJsonFields,
     isValid(val.createCourseVal),
@@ -42,8 +42,8 @@ courseRouter.get('/:id',
 
 //update course 
 courseRouter.put('/:id',
-    fileupload(
-        { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationType.course }
+    fileuploadPrivate(
+        { mainFolder: 'course', partFolder: 'video', allowTypes: fileValidationTypes.course }
     ).any(),
     parseJsonFields,
     isValid(val.updatedCourseVal),
@@ -65,6 +65,12 @@ courseRouter.get('/:id/payed',
 courseRouter.put('/:id/join',
         isValid(idVal('id')),
     asyncHandler(courseConttroller.joinCourse)
+)
+
+//get video materials 
+courseRouter.get('/:id/video/:sectionId/:videoId/material',
+    isValid(val.streamVideoVal),
+    asyncHandler(courseConttroller.getMaterials)
 )
 
 //stream video

@@ -4,16 +4,33 @@ import { Certificate } from "../../db/model/certificate.js"
 import { User } from "../../db/model/user.js"
 import { deleteFile } from "../../utils/multer/deletefille.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
+import { GetObjectCommand } from "@aws-sdk/client-s3"
+import digitalOcean from "../../utils/multer/cloud.config.js"
 
 
 //get user profile
 export const userProfile = async (req, res, next) => {
     const { user } = req
 
+    const command = new GetObjectCommand({
+        Bucket: "my-uploads",
+        Key: user.civilIdPic,
+        ResponseContentType: "image/jpeg",
+        ResponseContentDisposition: "inline",
+    });
+    const signedUrl = await getSignedUrl(digitalOcean, command);
+
+    const userObj = user.toObject();
+    userObj.signedUrl = signedUrl
+
+
     return successResponse({
         res,
+        message: messages.user.profileFetchSuccessfully,
         statusCode: 200,
-        data: user
+        data: userObj
+
     })
 }
 
@@ -25,7 +42,7 @@ export const updateUser = async (req, res, next) => {
     //check existence
     if (phone && phone !== user.phone) {
         const userExist = await User.findOne({ phone })
-        if (userExist) errorResponse({ message: messages.user.phone, statusCode: 400 })
+        if (userExist) errorResponse({ res, message: messages.user.phone, statusCode: 400 })
     }
     //prepare data
     const updateableFields = {
@@ -59,11 +76,14 @@ export const updateUser = async (req, res, next) => {
 export const changeProfilePic = async (req, res, next) => {
     const { user, file } = req
 
-    if (!file.path) errorResponse({ message: messages.image.invalidImage, statusCode: 409 })
+    if (!file.key) errorResponse({ res, message: messages.image.invalidImage, statusCode: 409 })
 
     //prepare data
-    deleteFile(user.profilePic)
-    user.profilePic = file.path
+    if (user.profilePic) await deleteFile(user.profilePic.key)
+    user.profilePic = {
+        key: file.key,
+        url: file.location
+    }
 
     //save 
     await user.save()
@@ -80,12 +100,12 @@ export const changeProfilePic = async (req, res, next) => {
 export const changecivilIdPic = async (req, res, next) => {
     const { user, file } = req
 
-    if (!file.path) errorResponse({ message: messages.image.invalidImage, statusCode: 409 })
+    if (!file.key) errorResponse({ res, message: messages.image.invalidImage, statusCode: 409 })
 
     //prepare data
-    if (user.civilIdPic) deleteFile(user.civilIdPic)
+    if (user.civilIdPic) await deleteFile(user.civilIdPic)
 
-    user.civilIdPic = file.path
+    user.civilIdPic = file.key
 
     //save 
     await user.save()
@@ -104,9 +124,9 @@ export const getAllcertificatesOfUser = async (req, res, next) => {
 
     //cehck if user have certificates
     const certificates = await Certificate.find({ students: userId })
-    .populate('instructorId', 'firstname lastname code')
-    .select('-students');
-    if(certificates.length === 0) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificates, statusCode: 404 });
+        .populate('instructorId', 'firstname lastname code')
+        .select('-students');
+    if (certificates.length === 0) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificates, statusCode: 404 });
 
     //response
     return successResponse({
@@ -125,12 +145,20 @@ export const getSpecificcertificateOfUser = async (req, res, next) => {
     //cehck if user have this certificate
     const certificateExist = await Certificate.findOne({ _id: certificateId, students: userId });
     if (!certificateExist) errorResponse({ res, message: messages.course.certificate.userNotHaveCertificate, statusCode: 404 });
-    
+
     //prepare file path
     const filePath = path.resolve(certificateExist.certificate);
 
     //response
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline');
-    res.sendFile(filePath)
+    const command = new GetObjectCommand({
+        Bucket: "my-uploads",
+        Key: certificateExist.certificate,
+        ResponseContentType: "application/pdf",
+        ResponseContentDisposition: "inline",
+    });
+
+
+    const signedUrl = await getSignedUrl(digitalOcean, command);
+
+    res.json({ url: signedUrl });
 }

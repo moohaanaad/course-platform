@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
-import * as userController from "./user.controller.js";
-import { fileupload } from "../../utils/multer/fileuploads.js";
 import { idVal } from "../../common/common.validation.js";
+import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
+import { fileuploadPrivate, fileuploadPublic } from "../../utils/multer/fileuploadCloud.js";
+import * as userController from "./user.controller.js";
 
 
 const userRouter = Router()
@@ -21,13 +21,13 @@ userRouter.put('/profile',
 
 //cahnge user profile pic
 userRouter.put('/profile-pic',
-    fileupload({ mainFolder: 'user', partFolder: 'profilePic' }).single('profilePic'),
+    fileuploadPublic({ mainFolder: 'user', partFolder: 'profilePic' }).single('profilePic'),
     asyncHandler(userController.changeProfilePic)
 )
 
 //cahnge user civil id pic
 userRouter.put('/civilid-pic',
-    fileupload({ mainFolder: 'user', partFolder: 'civilIdPic' }).single('civilIdPic'),
+    fileuploadPrivate({ mainFolder: 'user', partFolder: 'civilIdPic' }).single('civilIdPic'),
     asyncHandler(userController.changecivilIdPic)
 )
 

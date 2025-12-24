@@ -18,8 +18,6 @@ export const updateSection = async (req, res, next) => {
     attachFiles(req)
     if (req.body.sections[0]?.videos?.length) {
         for (let i = 0; i < req.body.sections[0].videos.length; i++) {
-            console.log(sectionExist.sections[0].videos);
-
             sectionExist.sections[0].videos.push(req.body.sections[0].videos[i])
         }
     }

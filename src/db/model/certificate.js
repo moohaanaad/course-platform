@@ -8,8 +8,14 @@ const certificateSceham = new Schema({
     instructorId: { type: Schema.Types.ObjectId, ref: "User", required: true },
 
     courseId: { type: Schema.Types.ObjectId, ref: "Course", required: true },
-    courseName: { type: String, required: true },
-    courseDescription: { type: String, required: true },
+    courseName: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
+    courseDescription: {
+        ar: { type: String, minlength: 3, trim: true, required: true },
+        en: { type: String, minlength: 3, trim: true, required: true }
+    },
 
     students: [{ type: Schema.Types.ObjectId, ref: "User" }],
 }, {
