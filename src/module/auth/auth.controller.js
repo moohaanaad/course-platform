@@ -26,7 +26,7 @@ export const sendOtpToEmail = async (email, res) => {
 //signup
 export const signup = async (req, res, next) => {
 
-    const { email, phone } = req.body
+    const { email, phone, deviceId } = req.body
 
     //check exictence
     const userExict = await User.findOne({ $or: [{ email }, { phone }] })
@@ -41,7 +41,7 @@ export const signup = async (req, res, next) => {
     }
 
     // prepare data 
-    req.body.civilIdPic = req.file.key
+    req.body.civilIdPic = req?.file?.key
     req.body.deviceId =  hashPassword(deviceId)
     //save acc
     const createdUser = await User.create(req.body)
