@@ -3,6 +3,7 @@ import { idVal } from "../../common/common.validation.js";
 import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
 import { fileuploadPrivate, fileuploadPublic } from "../../utils/multer/fileuploadCloud.js";
 import * as userController from "./user.controller.js";
+import { updateUserVal } from "./user.validation.js";
 
 
 const userRouter = Router()
@@ -16,6 +17,7 @@ userRouter.get('/profile',
 
 //update user data
 userRouter.put('/profile',
+    isValid(updateUserVal),
     asyncHandler(userController.updateUser)
 )
 

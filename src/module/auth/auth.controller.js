@@ -35,14 +35,20 @@ export const signup = async (req, res, next) => {
 
     //prepare data  
     if (req.body.gender == genderTypes.MALE) {
-        req.body.profilePic = "uploads/User/default-male.jpg"
+        req.body.profilePic = {
+            url: "uploads/User/default-male.jpg",
+            key: "www"
+        }
     } else {
-        req.body.profilePic = "uploads/User/default-female.png"
+        req.body.profilePic = {
+            url: "uploads/User/default-female.jpg",
+            key: "www"
+        }
     }
 
     // prepare data 
     req.body.civilIdPic = req?.file?.key
-    req.body.deviceId =  hashPassword(deviceId)
+    req.body.deviceId = hashPassword(deviceId)
     //save acc
     const createdUser = await User.create(req.body)
 
@@ -117,7 +123,7 @@ export const login = async (req, res, next) => {
             const comparedDeviceId = await comparePassword(deviceId, userExist.deviceId)
             if (!comparedDeviceId) errorResponse({ res, message: messages.user.invaledDeviceId, statusCode: 404 })
         } else {
-           deviceId =  hashPassword(deviceId)
+            deviceId = hashPassword(deviceId)
             await User.updateOne({ email }, { deviceId: deviceId })
         }
     }
@@ -222,9 +228,11 @@ export const changePassword = async (req, res, next) => {
 
     await Otp.deleteOne({ email, otp })
 
-    return res.status(200).json({
-        success: true,
+    return successResponse({
+        res,
         message: messages.user.changedPasswordSuccessfully,
+        statusCode: 200,
+        success: true
     })
 
 }
