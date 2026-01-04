@@ -55,6 +55,7 @@ export const messages = {
     },
     course: {
         ...generateMessageKeys('course'),
+        searchNameRequired: "course.searchNameRequired",
         getAllPayed: "course.getAllPayed",
         joinCourseSuccessfully: "course.joinSuccessfully",
         shouldBeInstructor: "course.shouldBeInstructor",

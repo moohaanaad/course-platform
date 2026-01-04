@@ -32,6 +32,11 @@ courseRouter.post('/',
     asyncHandler(courseConttroller.createCourse)
 )
 
+//get course from search
+courseRouter.get('/search',
+asyncHandler(courseConttroller.searchCourse)
+)
+
 //get all course 
 courseRouter.get('/',
     asyncHandler(courseConttroller.allCourses)
@@ -61,13 +66,13 @@ courseRouter.get('/payed/all',
 
 //get specific payed course or sections  
 courseRouter.get('/:id/payed',
-        isValid(idVal('id')),
+    isValid(idVal('id')),
     asyncHandler(courseConttroller.payedCourse)
 )
 
 //join course 
 courseRouter.put('/:id/join',
-        isValid(idVal('id')),
+    isValid(idVal('id')),
     asyncHandler(courseConttroller.joinCourse)
 )
 
@@ -80,11 +85,11 @@ courseRouter.get('/:id/video/:sectionId/:videoId/material',
 //stream video
 courseRouter.get('/:id/video/:sectionId/:videoId',
     isValid(val.streamVideoVal),
-  asyncHandler(courseConttroller.streamVideo)
+    asyncHandler(courseConttroller.streamVideo)
 );
 
 //stream free video
-courseRouter.get('/:id/free-video', 
+courseRouter.get('/:id/free-video',
     asyncHandler(courseConttroller.streamFreeVideo)
 );
 

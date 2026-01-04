@@ -36,7 +36,7 @@
 								},
 								{
 									"key": "email",
-									"value": "bwetore6q66174@fftube.com",
+									"value": "rapohi7474@cameltok.com",
 									"type": "text"
 								},
 								{
@@ -46,7 +46,7 @@
 								},
 								{
 									"key": "phone",
-									"value": "+2012420098021",
+									"value": "+201242100980232",
 									"type": "text"
 								},
 								{
@@ -195,7 +195,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"betore6674@fftube.com\",\r\n    \"otp\" : \"18903\"\r\n}",
+							"raw": "{\r\n    \"email\":\"rapohi7474@cameltok.com\",\r\n    \"otp\" : \"09706\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -276,7 +276,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"10139\",\r\n    \"password\": \"mohanadahmeddd\",\r\n    \"repassword\": \"mohanadahmeddd\"\r\n}",
+							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"05995\",\r\n    \"password\": \"mohanadahmeddd\",\r\n    \"repassword\": \"mohanadahmeddd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -588,7 +588,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": \"mohanad\",\r\n    \"lastname\": \"ahmed\",\r\n    \"phone\": \"201211009822\",\r\n    \"university\": \"AUW\",\r\n    \"faculty\": \"computer sience\",\r\n    \"Specializations\": [\r\n        \"backend\",\r\n        \"ai\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"firstname\": {\"ar\": \"مهند\",\"en\":\"mohanad\" },\r\n    \"lastname\": {\"ar\": \"احمد\",\"en\":\"ahmed\" },\r\n    \"phone\": \"201211009822\",\r\n    \"university\": \"AUW\",\r\n    \"faculty\": \"computer sience\",\r\n    \"Specializations\": [\r\n        \"backend\",\r\n        \"ai\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1466,7 +1466,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "beaerer {{access_token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{

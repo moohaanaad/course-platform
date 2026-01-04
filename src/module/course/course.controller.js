@@ -53,6 +53,32 @@ export const createCourse = async (req, res, next) => {
   })
 }
 
+//get course from search
+export const searchCourse = async (req, res, next) => {
+  const { name } = req.query
+
+  if (!name) errorResponse({ res, message: messages.course.searchNameRequired, statusCode: 404 })
+
+  const courses = await Course.find({
+    $or: [
+      { 'name.ar': { $regex: name, $options: 'i' } },
+      { 'name.en': { $regex: name, $options: 'i' } }
+    ], isActive: true
+  })
+    .populate('instructor', 'firstname lastname code profilePic')
+    .select('-sections.videos.video -sections.videos.materials -instructorRatio')
+
+  if (!courses.length) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
+    
+  return successResponse({
+    res,
+    message: messages.course.getAll,
+    statusCode: 200,
+    data: courses
+  })
+
+}
+
 //get all courses 
 export const allCourses = async (req, res, next) => {
 

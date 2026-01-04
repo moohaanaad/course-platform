@@ -57,6 +57,7 @@
 	"notAuthorized": "You are not authorized to do this.",
 	"internalServicerError": "please try again later",
 	"course": {
+		"searchNameRequired":"Please write a term to search.",
 		"notFound": "Course not found",
 		"alreadyExist": "Course already exists",
 		"failToCreate": "Failed to create course",

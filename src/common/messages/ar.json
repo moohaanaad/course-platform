@@ -56,6 +56,7 @@
 	"notAuthorized": "غير مصرح لك بالقيام بهذا",
 	"internalServicerError": "يرجى المحاولة مرة أخرى لاحقاً",
 	"course": {
+		"searchNameRequired":"من فضلك اكتب كلمة للبحث",
 		"notFound": "الكورس غير موجود",
 		"alreadyExist": "الكورس موجود بالفعل",
 		"failToCreate": "فشل في إنشاء الكورس",
