@@ -408,12 +408,12 @@ export const streamVideo = async (req, res) => {
   }
 
   const command = new GetObjectCommand({
-    Bucket: "my-uploads",
+    Bucket: process.env.SPACES_NAME,
     Key: videoPath,
   });
 
   const signedUrl = await getSignedUrl(digitalOcean, command, {
-    expiresIn: 300, // 5 دقائق
+    expiresIn: 60 * 5, // 5 mins
   });
 
   res.json({
@@ -431,12 +431,12 @@ export const streamFreeVideo = async (req, res) => {
 
 
   const command = new GetObjectCommand({
-    Bucket: "my-uploads",
+    Bucket: process.env.SPACES_NAME,
     Key: course.freeVideo,
   });
 
   const signedUrl = await getSignedUrl(digitalOcean, command, {
-    expiresIn: 300, // 5 دقائق
+    expiresIn: 60 * 5, // 5 mins
   });
 
   res.json({

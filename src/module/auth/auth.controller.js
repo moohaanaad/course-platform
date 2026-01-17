@@ -36,13 +36,13 @@ export const signup = async (req, res, next) => {
     //prepare data  
     if (req.body.gender == genderTypes.MALE) {
         req.body.profilePic = {
-            url: "uploads/User/default-male.jpg",
-            key: "www"
+            url: "https://gradia.fra1.digitaloceanspaces.com/uploads/male.jpg",
+            key: "uploads/User/default-male.jpg"
         }
     } else {
         req.body.profilePic = {
-            url: "uploads/User/default-female.jpg",
-            key: "www"
+            url: "https://gradia.fra1.digitaloceanspaces.com/uploads/female.jpg",
+            key: "uploads/User/default-female.jpg"
         }
     }
 
