@@ -340,7 +340,7 @@ export const getMaterials = async (req, res, next) => {
   const urls = await Promise.all(
     materialPaths.map(async (key) => {
       const command = new GetObjectCommand({
-        Bucket: "my-uploads",
+        Bucket: process.env.SPACES_NAME,
         Key: key,
         ResponseContentType: "application/pdf",
         ResponseContentDisposition: "inline",
