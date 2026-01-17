@@ -14,7 +14,7 @@ export const userProfile = async (req, res, next) => {
     const { user } = req
 
     const command = new GetObjectCommand({
-        Bucket: "my-uploads",
+        Bucket: process.env.SPACES_NAME,
         Key: user.civilIdPic,
         ResponseContentType: "image/jpeg",
         ResponseContentDisposition: "inline",
