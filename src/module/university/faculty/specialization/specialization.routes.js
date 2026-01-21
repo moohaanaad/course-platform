@@ -1,16 +1,12 @@
 import { Router } from "express";
-import { asyncHandler, isAuthenticate, isValid } from "../../../../middleware/index.js";
+import { asyncHandler, isAuthenticate, isAuthorized, isValid } from "../../../../middleware/index.js";
 import * as Val from "./specialization.validation.js";
 import * as specializationController from "./specialization.controller.js";
+import { roleTypes } from "../../../../common/constant/user.js";
 
 
 const specializationRouter = Router({ mergeParams: true })
 specializationRouter.use(isAuthenticate())
-//create specialization 
-specializationRouter.post('/',
-    isValid(Val.createSpecializationVal),
-    asyncHandler(specializationController.createSpecialization)
-)
 
 //get all specialization 
 specializationRouter.get('/',
@@ -20,6 +16,15 @@ specializationRouter.get('/',
 //get specific specialization 
 specializationRouter.get('/:specializationId',
     asyncHandler(specializationController.getSpecificSpecialization)
+)
+
+specializationRouter.use(isAuthorized([roleTypes.ADMIN]))
+
+
+//create specialization 
+specializationRouter.post('/',
+    isValid(Val.createSpecializationVal),
+    asyncHandler(specializationController.createSpecialization)
 )
 
 //update specialization 

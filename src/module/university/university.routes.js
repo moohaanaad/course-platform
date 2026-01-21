@@ -1,19 +1,15 @@
 import { Router } from "express";
-import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
+import { asyncHandler, isAuthenticate, isAuthorized, isValid } from "../../middleware/index.js";
 import * as universityController from "./university.controller.js";
 import facultyRouter from "./faculty/faculty.routes.js";
 import * as Val from "./university.validation.js";
 import { idVal } from "../../common/common.validation.js";
+import { roleTypes } from "../../common/constant/user.js";
 
 
 const universityRouter = Router()
 universityRouter.use('/:universityId/faculty', facultyRouter)
 universityRouter.use(isAuthenticate())
-//create university
-universityRouter.post('/',
-    isValid(Val.createUniversityVal),
-    asyncHandler(universityController.createUniversity)
-)
 
 //get all university
 universityRouter.get('/',
@@ -24,6 +20,14 @@ universityRouter.get('/',
 universityRouter.get('/:universityId',
     isValid(idVal("universityId")),
     asyncHandler(universityController.getUniversityById)
+)
+
+universityRouter.use(isAuthorized([roleTypes.ADMIN]))
+
+//create university
+universityRouter.post('/',
+    isValid(Val.createUniversityVal),
+    asyncHandler(universityController.createUniversity)
 )
 
 //update university
