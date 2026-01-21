@@ -57,7 +57,7 @@
 	"notAuthorized": "You are not authorized to do this.",
 	"internalServicerError": "please try again later",
 	"course": {
-		"searchNameRequired":"Please write a term to search.",
+		"searchNameRequired": "Please write a term to search.",
 		"notFound": "Course not found",
 		"alreadyExist": "Course already exists",
 		"failToCreate": "Failed to create course",
@@ -113,6 +113,42 @@
 		"getSalary": "salary retrieved successfully",
 		"getAllInstructors": "all instructors retrieved successfully",
 		"salaryCannotBeNegative": "salary cannot be negative"
+	},
+	"university": {
+		"notFound": "university not found",
+		"alreadyExist": "university already exists",
+		"failToCreate": "failed to create university",
+		"failToUpdate": "failed to update university",
+		"createdSuccessfully": "university created successfully",
+		"updatedSuccessfully": "university updated successfully",
+		"deletedSuccessfully": "university deleted successfully",
+		"getAll": "all universities retrieved successfully",
+		"getSpecific": "university retrieved successfully",
+		"invalid": "invalid university data",
+		"faculty": {
+			"notFound": "faculty not found",
+			"alreadyExist": "faculty already exists",
+			"failToCreate": "failed to create faculty",
+			"failToUpdate": "failed to update faculty",
+			"createdSuccessfully": "faculty created successfully",
+			"updatedSuccessfully": "faculty updated successfully",
+			"deletedSuccessfully": "faculty deleted successfully",
+			"getAll": "all faculties retrieved successfully",
+			"getSpecific": "faculty retrieved successfully",
+			"invalid": "invalid faculty data",
+			"specialization": {
+				"notFound": "specialization not found",
+				"alreadyExist": "specialization already exists",
+				"failToCreate": "failed to create specialization",
+				"failToUpdate": "failed to update specialization",
+				"createdSuccessfully": "specialization created successfully",
+				"updatedSuccessfully": "specialization updated successfully",
+				"deletedSuccessfully": "specialization deleted successfully",
+				"getAll": "all specializations retrieved successfully",
+				"getSpecific": "specialization retrieved successfully",
+				"invalid": "invalid specialization data"
+			}
+		}
 	},
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",

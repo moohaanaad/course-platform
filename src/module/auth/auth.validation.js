@@ -21,10 +21,10 @@ export const signupVal = joi.object({
         new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=[\\]{};:"\\\\|,.<>/?]).+$')
     ).required(),
     gender: joi.string().valid(...Object.values(genderTypes)),
-    university: joi.string().min(3).max(30).required(),
-    faculty: joi.string().min(3).max(30).required(),
+    university: joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+    faculty: joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
     Specializations: joi.array().items(
-        joi.string().trim().min(1).required()
+        joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
     ),
     deviceId: joi.string().required(),
 })

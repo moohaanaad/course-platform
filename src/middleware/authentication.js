@@ -20,7 +20,11 @@ export const isAuthenticate = () => {
 
         //check user existence
 
-        const userExist = await User.findOne({ _id: result._id, isActive: true })
+        const userExist = await User.findOne(
+            { _id: result._id, isActive: true }
+        ).populate('university', 'name')
+            .populate('faculty', 'name')
+            .populate('Specializations', 'name')
         if (!userExist)
             return next(new Error(messages.token.unauthenticate, { cause: 401 }))
 

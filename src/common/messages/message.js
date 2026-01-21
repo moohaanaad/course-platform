@@ -94,6 +94,15 @@ export const messages = {
         getAllInstructors: "instructor.getAllInstructors",
         salaryCannotBeNegative: "instructor.salaryCannotBeNegative"
     },
+    university:{
+        faculty:{
+            specialization: {
+                ...generateMessageKeys("university.faculty.specialization"),
+            },
+            ...generateMessageKeys("university.faculty"),
+        },
+        ...generateMessageKeys("university"),
+    },
     notAuthorized: "general.notAuthorized",
     internalServicerError: "general.internalServicerError"
 };

@@ -1,2676 +1,3589 @@
 {
-	"info": {
-		"_postman_id": "f199b506-81db-4892-9254-ea5a20d39a08",
-		"name": "Gradia",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31480997"
-	},
-	"item": [
-		{
-			"name": "auth",
-			"item": [
-				{
-					"name": "signUp",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept-Language",
-								"value": "ar",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "firstname",
-									"value": "{\"ar\": \"مهند\",\"en\":\"mohanad\" }",
-									"type": "text"
-								},
-								{
-									"key": "lastname",
-									"value": "{ \"ar\": \"احمد\",\"en\":\"ahmed\" }",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "rapohi7474@cameltok.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "Moahcka@312",
-									"type": "text"
-								},
-								{
-									"key": "phone",
-									"value": "+201242100980232",
-									"type": "text"
-								},
-								{
-									"key": "gender",
-									"value": "male",
-									"type": "text"
-								},
-								{
-									"key": "university",
-									"value": "AUW",
-									"type": "text"
-								},
-								{
-									"key": "faculty",
-									"value": "computer sience",
-									"type": "text"
-								},
-								{
-									"key": "Specializations",
-									"value": "[\"AI\"]",
-									"type": "text"
-								},
-								{
-									"key": "civilIdPic",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/digital-art-landscape-sunset-sky-wallpaper-thumb.jpg"
-								},
-								{
-									"key": "deviceId",
-									"value": "honda",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/signup",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let response = pm.response.json()\r",
-									"pm.environment.set(\"access_token\", response.data.access_token)\r",
-									"pm.environment.set(\"refresh_token\", response.data.refresh_token)"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"password\":\"mohanadahmeddd\",\r\n    \"deviceId\": \"honda\" \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "refresh token",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"let response = pm.response.json();\r",
-									"pm.environment.set(\"access_token\", response.access_token);"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n \r\n    \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTRjM2UzYzgxZjc0MDNjZjQyN2IxNTgiLCJpYXQiOjE3NjY2MDQ5NTksImV4cCI6MTc2NzIwOTc1OX0.vm63eWhG-zGnQFT2OWVPgPpBu_Mcyp0HJrRIDaUJW4M\",\r\n    \"deviceId\":\"honda\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/refresh-token",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"refresh-token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "verify",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"rapohi7474@cameltok.com\",\r\n    \"otp\" : \"09706\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/verify-account",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"verify-account"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "resend",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/resend",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"resend"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "forget password",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/forget-password",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"forget-password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "change password",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"05995\",\r\n    \"password\": \"mohanadahmeddd\",\r\n    \"repassword\": \"mohanadahmeddd\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/auth/change-password",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"auth",
-								"change-password"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "banner",
-			"item": [
-				{
-					"name": "banner",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "ar",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "banner",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/super-mario-pixel-art-super-mario-kart-computer-mushroom-hd-wallpaper-preview.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/banner",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"banner"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "banner",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "ar",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/banner",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"banner"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "specific banner",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"banner",
-								"69189b600660df74faa4cc69"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update banner",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "banner",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/wp2618282.png"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/banner/694a94b8d7b4ba01858a48a3",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"banner",
-								"694a94b8d7b4ba01858a48a3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "banner",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/banner/694a94b8d7b4ba01858a48a3",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"banner",
-								"694a94b8d7b4ba01858a48a3"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "user",
-			"item": [
-				{
-					"name": "update user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": {\"ar\": \"مهند\",\"en\":\"mohanad\" },\r\n    \"lastname\": {\"ar\": \"احمد\",\"en\":\"ahmed\" },\r\n    \"phone\": \"201211009822\",\r\n    \"university\": \"AUW\",\r\n    \"faculty\": \"computer sience\",\r\n    \"Specializations\": [\r\n        \"backend\",\r\n        \"ai\"\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/user/profile",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "change profile pic",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "profilePic",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/heavy-bike-harley-davidson.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/user/profile-pic",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"profile-pic"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "change civil Id pic",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "civilIdPic",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/wallpapers/digital-art-landscape-sunset-sky-wallpaper-thumb.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/user/civilid-pic",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"civilid-pic"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "user profile",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/user/profile",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all certificates of user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "ar",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/user/my-certificates",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"my-certificates"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "specific certificate of user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "ar",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/user/my-certificates/6939ac0dd62667c2e7f3ab81",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"my-certificates",
-								"6939ac0dd62667c2e7f3ab81"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "course",
-			"item": [
-				{
-					"name": "sections",
-					"item": [
-						{
-							"name": "update section",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "sections",
-											"value": "[{\"name\":{\"ar\": \"سكشن\",\"en\":\"sectoin\" }, \"price\":200,\n\"videos\":[{\"name\":{\"ar\": \"فيديو \",\"en\":\"video1\" }},{\"name\":{\"ar\": \"فيديو \",\"en\":\"video6\" }}]\n}]",
-											"type": "text"
-										},
-										{
-											"key": "sections[0].videos[0].video",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-										},
-										{
-											"key": "sections[0].videos[1].video",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-										},
-										{
-											"key": "sections[0].videos[0].materials",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-										},
-										{
-											"key": "sections[0].videos[1].materials",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{baseUrl}}/course/section/694af53070cb35c5ed63eaed",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"section",
-										"694af53070cb35c5ed63eaed"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "add question",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "ar",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"question\": \"dvsvbwevid\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151/question",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"section",
-										"6930579f50250605b24f9151",
-										"question"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "join section",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "ar",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/course/section/694af53070cb35c5ed63eaed/join",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"section",
-										"694af53070cb35c5ed63eaed",
-										"join"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get specific section",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "ar",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"section",
-										"6930579f50250605b24f9151"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "certificate",
-					"item": [
-						{
-							"name": "create certificate",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "certificate",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{baseUrl}}/course/certificate/693057d050250605b24f9159",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"certificate",
-										"693057d050250605b24f9159"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "take certificate",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "en",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/course/certificate/693057d050250605b24f9159",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"certificate",
-										"693057d050250605b24f9159"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "update certificate",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "PATCH",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "en",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "certificate",
-											"type": "file",
-											"src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{baseUrl}}/course/certificate/694acad231987fb6eb9ad21b",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"certificate",
-										"694acad231987fb6eb9ad21b"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get certificate of course",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "ar",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/course/certificate/6939ac0dd62667c2e7f3ab81",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"certificate",
-										"6939ac0dd62667c2e7f3ab81"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "open certificate",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "ar",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/course/certificate/specific/694acad231987fb6eb9ad21b",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"certificate",
-										"specific",
-										"694acad231987fb6eb9ad21b"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "all certificates",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "token",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "ar",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/course/certificate",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"course",
-										"certificate"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "create course",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "en",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "{\"ar\": \" كورس \",\"en\":\"course1\" }",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "{\"ar\": \"جصثج\",\"en\":\"ggwb\" }",
-									"type": "text"
-								},
-								{
-									"key": "price",
-									"value": "100",
-									"type": "text"
-								},
-								{
-									"key": "freeVideo",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections",
-									"value": "[{\"name\":{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\"videos\":[\n{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}, \n{\"name\":{\"ar\": \"فيديو اتنين \",\"en\":\"video1\" }}\n]}\n,{\"name\":{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\"videos\":[{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}]}]",
-									"type": "text"
-								},
-								{
-									"key": "sections[0].videos[0].video",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections[0].videos[1].video",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections[1].videos[0].video",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections[0].videos[0].materials",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-								},
-								{
-									"key": "sections[0].videos[1].materials",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-								},
-								{
-									"key": "startAt",
-									"value": "2025-12-30T13:04:40",
-									"type": "text"
-								},
-								{
-									"key": "endAt",
-									"value": "2026-01-30T16:59:40",
-									"type": "text"
-								},
-								{
-									"key": "instructor",
-									"value": "69259c5d66c019836942e353",
-									"type": "text"
-								},
-								{
-									"key": "instructorRatio",
-									"value": "10",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/course",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update course",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "{\"en\":\"porgramming\", \"ar\":\"برمجة\"}",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "{\"en\":\"will learn fullstack\", \"ar\":\"سأتعلم تطوير تطبيقات الويب المتكاملة\"}",
-									"type": "text"
-								},
-								{
-									"key": "price",
-									"value": "1000",
-									"type": "text"
-								},
-								{
-									"key": "sections",
-									"value": "[{\n\"name\":\n{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\n\"videos\":[\n{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}, \n{\"name\":{\"ar\": \"فيديو اتنين \",\"en\":\"video1\" }}\n]\n}]",
-									"type": "text"
-								},
-								{
-									"key": "sections[0].videos[0].video",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections[0].videos[1].video",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								},
-								{
-									"key": "sections[0].videos[0].materials",
-									"type": "file",
-									"src": [
-										"/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf",
-										"/C:/Users/ASUS/Desktop/CV/Islam's Resume.pdf"
-									]
-								},
-								{
-									"key": "sections[0].videos[1].materials",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
-								},
-								{
-									"key": "startAt",
-									"value": "2025-12-29T13:04:40",
-									"type": "text"
-								},
-								{
-									"key": "endAt",
-									"value": "2025-12-30T16:59:40",
-									"type": "text"
-								},
-								{
-									"key": "freeVideo",
-									"type": "file",
-									"src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"694af53070cb35c5ed63eaec"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "join course",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/join",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"694af53070cb35c5ed63eaec",
-								"join"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "specific course",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/6930579f50250605b24f9150",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"6930579f50250605b24f9150"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "specific payed course or section",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/69231fc5b143cd7684eda345/payed",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"69231fc5b143cd7684eda345",
-								"payed"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all payed course or section",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Accept-Language",
-								"value": "en",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/payed/all",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"payed",
-								"all"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get free video",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/free-video",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"694af53070cb35c5ed63eaec",
-								"free-video"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get video",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/video/694af53070cb35c5ed63eaed/694af53070cb35c5ed63eaef",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"694af53070cb35c5ed63eaec",
-								"video",
-								"694af53070cb35c5ed63eaed",
-								"694af53070cb35c5ed63eaef"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get video materials",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/video/694af53070cb35c5ed63eaed/694af53070cb35c5ed63eaef/material",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"694af53070cb35c5ed63eaec",
-								"video",
-								"694af53070cb35c5ed63eaed",
-								"694af53070cb35c5ed63eaef",
-								"material"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "course",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/course/692327675486241162588ea6",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"course",
-								"692327675486241162588ea6"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "admin",
-			"item": [
-				{
-					"name": "create user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": {\r\n        \"en\": \"mohanad\",\r\n        \"ar\": \"معتل\"\r\n    },\r\n    \"lastname\": {\r\n        \"en\": \"saleh\",\r\n        \"ar\": \"معتل\"\r\n    },\r\n    \"email\": \"gradia_admin@test.com\",\r\n    \"password\": \"Gradia_123\",\r\n    \"phone\": \"+201211009828\",\r\n    \"gender\": \"male\",\r\n    \"role\": \"admin\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "remove device id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/admin/694c3e3c81f7403cf427b158",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"694c3e3c81f7403cf427b158"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "salary deduction of instructor",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"amount\": -5\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin/instructors/69259c5d66c019836942e353/salary",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"instructors",
-								"69259c5d66c019836942e353",
-								"salary"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all instructors",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/admin/instructors",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"instructors"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "instructor salary",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/admin/instructors/69259c5d66c019836942e353/salary",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"instructors",
-								"69259c5d66c019836942e353",
-								"salary"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "instructor",
-			"item": [
-				{
-					"name": "all course of instructor",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer  {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/instructor",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"instructor"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all certificates of instructor",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/instructor/certificates",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"instructor",
-								"certificates"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "specific certificate of instructor",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/instructor/certificates/6939abf92ab0f380cb841332",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"instructor",
-								"certificates",
-								"6939abf92ab0f380cb841332"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "salary",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/instructor/salary",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"instructor",
-								"salary"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "baseUrl",
-			"value": "",
-			"type": "default"
-		}
-	]
+  "info": {
+    "_postman_id": "f199b506-81db-4892-9254-ea5a20d39a08",
+    "name": "Gradia",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31480997"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "signUp",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstname",
+                  "value": "{\"ar\": \"مهند\",\"en\":\"mohanad\" }",
+                  "type": "text"
+                },
+                {
+                  "key": "lastname",
+                  "value": "{ \"ar\": \"احمد\",\"en\":\"ahmed\" }",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "rmohanadahmed2616@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "Moahcka@312",
+                  "type": "text"
+                },
+                {
+                  "key": "phone",
+                  "value": "+201242100980211",
+                  "type": "text"
+                },
+                {
+                  "key": "gender",
+                  "value": "male",
+                  "type": "text"
+                },
+                {
+                  "key": "university",
+                  "value": "6970ba18bc75830f3c79e277",
+                  "type": "text",
+                  "uuid": "980d9a1c-6513-4e62-a488-bf15abddce7f"
+                },
+                {
+                  "key": "faculty",
+                  "value": "6970ba70bc75830f3c79e27c",
+                  "type": "text",
+                  "uuid": "7e6f4ea3-2d6a-4113-8533-424829537a1c"
+                },
+                {
+                  "key": "Specializations",
+                  "value": "[\"6970ba9dbc75830f3c79e282\",\"6970bacdbc75830f3c79e289\" ]",
+                  "type": "text",
+                  "uuid": "008307e5-64f1-4eaa-875a-aea20c6bcfdb"
+                },
+                {
+                  "key": "civilIdPic",
+                  "type": "file",
+                  "uuid": "6789be41-0aca-4e78-a4e2-47a39ee102d9",
+                  "src": "/C:/Users/ASUS/Desktop/wallpapers/digital-art-landscape-sunset-sky-wallpaper-thumb.jpg"
+                },
+                {
+                  "key": "deviceId",
+                  "value": "honda",
+                  "type": "text",
+                  "uuid": "6d887c2c-d085-4de5-9a51-1194085377c2"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json()\r",
+                  "pm.environment.set(\"access_token\", response.data.access_token)\r",
+                  "pm.environment.set(\"refresh_token\", response.data.refresh_token)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"rapohi7474@cameltok.com\",\r\n    \"password\":\"Moahcka@312\",\r\n    \"deviceId\": \"honda\" \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "pm.environment.set(\"access_token\", response.access_token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \r\n    \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTRjM2UzYzgxZjc0MDNjZjQyN2IxNTgiLCJpYXQiOjE3NjY2MDQ5NTksImV4cCI6MTc2NzIwOTc1OX0.vm63eWhG-zGnQFT2OWVPgPpBu_Mcyp0HJrRIDaUJW4M\",\r\n    \"deviceId\":\"honda\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "verify",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"rapohi7474@cameltok.com\",\r\n    \"otp\" : \"09706\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/verify-account",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "verify-account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "resend",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/resend",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "resend"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "forget password",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/forget-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change password",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"mohanadahmed266@gmail.com\",\r\n    \"otp\": \"05995\",\r\n    \"password\": \"mohanadahmeddd\",\r\n    \"repassword\": \"mohanadahmeddd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "banner",
+      "item": [
+        {
+          "name": "banner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "banner",
+                  "type": "file",
+                  "uuid": "6789be41-0aca-4e78-a4e2-47a39ee102d9",
+                  "src": "/C:/Users/ASUS/Desktop/wallpapers/super-mario-pixel-art-super-mario-kart-computer-mushroom-hd-wallpaper-preview.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/banner",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banner"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "banner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/banner",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banner"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "specific banner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/banner/69189b600660df74faa4cc69",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banner",
+                "69189b600660df74faa4cc69"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update banner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "banner",
+                  "type": "file",
+                  "uuid": "cce54a02-b79a-4de3-9005-6b6296d339b8",
+                  "src": "/C:/Users/ASUS/Desktop/wallpapers/wp2618282.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/banner/694a94b8d7b4ba01858a48a3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banner",
+                "694a94b8d7b4ba01858a48a3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "banner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/banner/694a94b8d7b4ba01858a48a3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banner",
+                "694a94b8d7b4ba01858a48a3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "update user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstname\": {\"ar\": \"مهند\",\"en\":\"mohanad\" },\r\n    \"lastname\": {\"ar\": \"احمد\",\"en\":\"ahmed\" },\r\n    \"phone\": \"201211009822\",\r\n    \"university\": \"6970ba18bc75830f3c79e277\",\r\n    \"faculty\": \"6970ba70bc75830f3c79e27c\",\r\n    \"Specializations\": [\"6970ba9dbc75830f3c79e282\",\"6970bacdbc75830f3c79e289\" ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change profile pic",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profilePic",
+                  "type": "file",
+                  "uuid": "e9ecdd9c-1291-430d-9784-8eac6527e975",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/wallpapers/wallpaperflare.com_wallpaper (1).jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/profile-pic",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "profile-pic"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change civil Id pic",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "civilIdPic",
+                  "type": "file",
+                  "uuid": "e9ecdd9c-1291-430d-9784-8eac6527e975",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/wallpapers/Adventure Time Jake Book.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/civilid-pic",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "civilid-pic"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all certificates of user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/my-certificates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "my-certificates"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "specific certificate of user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/my-certificates/6939ac0dd62667c2e7f3ab81",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "my-certificates",
+                "6939ac0dd62667c2e7f3ab81"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "course",
+      "item": [
+        {
+          "name": "sections",
+          "item": [
+            {
+              "name": "update section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "sections",
+                      "value": "[{\"name\":{\"ar\": \"سكشن\",\"en\":\"sectoin\" }, \"price\":200,\n\"videos\":[{\"name\":{\"ar\": \"فيديو \",\"en\":\"video1\" }},{\"name\":{\"ar\": \"فيديو \",\"en\":\"video6\" }}]\n}]",
+                      "type": "text",
+                      "uuid": "a7be4a5e-9536-411c-bcdb-674f4ffc15fc"
+                    },
+                    {
+                      "key": "sections[0].videos[0].video",
+                      "type": "file",
+                      "uuid": "1381a6eb-bc04-4de6-95a5-10088b2a0fe8",
+                      "src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+                    },
+                    {
+                      "key": "sections[0].videos[1].video",
+                      "type": "file",
+                      "uuid": "9420f00c-fddf-48c9-a5c2-eb684beb6556",
+                      "src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+                    },
+                    {
+                      "key": "sections[0].videos[0].materials",
+                      "type": "file",
+                      "uuid": "1e01c3c5-f1ed-43c8-960f-f94139b345cb",
+                      "src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+                    },
+                    {
+                      "key": "sections[0].videos[1].materials",
+                      "type": "file",
+                      "uuid": "34f8bc53-a164-4375-b299-71bdf64aa3d8",
+                      "src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/course/section/694af53070cb35c5ed63eaed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "section",
+                    "694af53070cb35c5ed63eaed"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "add question",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ar",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"question\": \"dvsvbwevid\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151/question",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "section",
+                    "6930579f50250605b24f9151",
+                    "question"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "join section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ar",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/course/section/694af53070cb35c5ed63eaed/join",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "section",
+                    "694af53070cb35c5ed63eaed",
+                    "join"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get specific section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ar",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/course/section/6930579f50250605b24f9151",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "section",
+                    "6930579f50250605b24f9151"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "certificate",
+          "item": [
+            {
+              "name": "create certificate",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "certificate",
+                      "type": "file",
+                      "uuid": "77d303e3-517a-4765-8708-294490e541ab",
+                      "src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/course/certificate/693057d050250605b24f9159",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "certificate",
+                    "693057d050250605b24f9159"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "take certificate",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/course/certificate/693057d050250605b24f9159",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "certificate",
+                    "693057d050250605b24f9159"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update certificate",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "certificate",
+                      "type": "file",
+                      "uuid": "2ddcbac4-908f-4a3b-bfa4-b38a021af09d",
+                      "src": "/C:/Users/ASUS/Desktop/CV/CV.pdf"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/course/certificate/694acad231987fb6eb9ad21b",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "certificate",
+                    "694acad231987fb6eb9ad21b"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get certificate of course",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ar",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/course/certificate/6939ac0dd62667c2e7f3ab81",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "certificate",
+                    "6939ac0dd62667c2e7f3ab81"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "open certificate",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ar",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/course/certificate/specific/694acad231987fb6eb9ad21b",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "certificate",
+                    "specific",
+                    "694acad231987fb6eb9ad21b"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "all certificates",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ar",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/course/certificate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "course",
+                    "certificate"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "create course",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "{\"ar\": \" كورس \",\"en\":\"course1\" }",
+                  "type": "text",
+                  "uuid": "ef1dc077-ee68-4cf6-9cce-611b58d6c330"
+                },
+                {
+                  "key": "description",
+                  "value": "{\"ar\": \"جصثج\",\"en\":\"ggwb\" }",
+                  "type": "text",
+                  "uuid": "528be2ad-7db5-4ca6-acbd-de444bbb6906"
+                },
+                {
+                  "key": "price",
+                  "value": "100",
+                  "type": "text",
+                  "uuid": "503f8d57-218f-436f-9052-b450d1539cf1"
+                },
+                {
+                  "key": "freeVideo",
+                  "type": "file",
+                  "uuid": "a6232cc4-e52b-4c94-98c8-95c9a61eb2fb",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/CV/I think this is the most beautiful video I've ever recorded.mp4"
+                },
+                {
+                  "key": "sections",
+                  "value": "[{\"name\":{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\"videos\":[\n{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}, \n{\"name\":{\"ar\": \"فيديو اتنين \",\"en\":\"video1\" }}\n]}\n,{\"name\":{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\"videos\":[{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}]}]",
+                  "type": "text",
+                  "uuid": "a7be4a5e-9536-411c-bcdb-674f4ffc15fc"
+                },
+                {
+                  "key": "sections[0].videos[0].video",
+                  "type": "file",
+                  "uuid": "1381a6eb-bc04-4de6-95a5-10088b2a0fe8",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/CV/I think this is the most beautiful video I've ever recorded.mp4"
+                },
+                {
+                  "key": "sections[0].videos[1].video",
+                  "type": "file",
+                  "uuid": "9420f00c-fddf-48c9-a5c2-eb684beb6556",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/CV/I think this is the most beautiful video I've ever recorded.mp4"
+                },
+                {
+                  "key": "sections[1].videos[0].video",
+                  "type": "file",
+                  "uuid": "6be85c4c-2b65-4dac-bddf-671fe4fefff3",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/CV/I think this is the most beautiful video I've ever recorded.mp4"
+                },
+                {
+                  "key": "sections[0].videos[0].materials",
+                  "type": "file",
+                  "uuid": "1e01c3c5-f1ed-43c8-960f-f94139b345cb",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/CV/Mohanad-CV.pdf"
+                },
+                {
+                  "key": "sections[0].videos[1].materials",
+                  "type": "file",
+                  "uuid": "34f8bc53-a164-4375-b299-71bdf64aa3d8",
+                  "src": "/C:/Users/ASUS/OneDrive/Desktop/CV/Mohanad-CV.pdf"
+                },
+                {
+                  "key": "startAt",
+                  "value": "2026-01-19T13:04:40",
+                  "type": "text",
+                  "uuid": "94667ccc-8fe2-4f79-813e-3fe623f4a925"
+                },
+                {
+                  "key": "endAt",
+                  "value": "2027-01-30T16:59:40",
+                  "type": "text",
+                  "uuid": "ffb4ce99-c864-4788-8576-5e38ee06a40d"
+                },
+                {
+                  "key": "instructor",
+                  "value": "6968d6d573df7a25f5d0c135",
+                  "type": "text",
+                  "uuid": "098dead6-930e-46c8-b6d9-8b72e1361d1f"
+                },
+                {
+                  "key": "instructorRatio",
+                  "value": "10",
+                  "type": "text",
+                  "uuid": "dc41720d-9868-4394-8cdd-99c840acab1d"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update course",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "{\"en\":\"porgramming\", \"ar\":\"برمجة\"}",
+                  "type": "text",
+                  "uuid": "ef1dc077-ee68-4cf6-9cce-611b58d6c330"
+                },
+                {
+                  "key": "description",
+                  "value": "{\"en\":\"will learn fullstack\", \"ar\":\"سأتعلم تطوير تطبيقات الويب المتكاملة\"}",
+                  "type": "text",
+                  "uuid": "528be2ad-7db5-4ca6-acbd-de444bbb6906"
+                },
+                {
+                  "key": "price",
+                  "value": "1000",
+                  "type": "text",
+                  "uuid": "503f8d57-218f-436f-9052-b450d1539cf1"
+                },
+                {
+                  "key": "sections",
+                  "value": "[{\n\"name\":\n{\"ar\": \"سكشن \",\"en\":\"section\" },\"price\":50,\n\"videos\":[\n{\"name\":{\"ar\": \"فيديو\",\"en\":\"video\" }}, \n{\"name\":{\"ar\": \"فيديو اتنين \",\"en\":\"video1\" }}\n]\n}]",
+                  "type": "text",
+                  "uuid": "a7be4a5e-9536-411c-bcdb-674f4ffc15fc"
+                },
+                {
+                  "key": "sections[0].videos[0].video",
+                  "type": "file",
+                  "uuid": "1381a6eb-bc04-4de6-95a5-10088b2a0fe8",
+                  "src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+                },
+                {
+                  "key": "sections[0].videos[1].video",
+                  "type": "file",
+                  "uuid": "9420f00c-fddf-48c9-a5c2-eb684beb6556",
+                  "src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+                },
+                {
+                  "key": "sections[0].videos[0].materials",
+                  "type": "file",
+                  "uuid": "1e01c3c5-f1ed-43c8-960f-f94139b345cb",
+                  "src": [
+                    "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf",
+                    "/C:/Users/ASUS/Desktop/CV/Islam's Resume.pdf"
+                  ]
+                },
+                {
+                  "key": "sections[0].videos[1].materials",
+                  "type": "file",
+                  "uuid": "34f8bc53-a164-4375-b299-71bdf64aa3d8",
+                  "src": "/C:/Users/ASUS/Desktop/CV/Mohanad-CV.pdf"
+                },
+                {
+                  "key": "startAt",
+                  "value": "2025-12-29T13:04:40",
+                  "type": "text",
+                  "uuid": "94667ccc-8fe2-4f79-813e-3fe623f4a925"
+                },
+                {
+                  "key": "endAt",
+                  "value": "2025-12-30T16:59:40",
+                  "type": "text",
+                  "uuid": "ffb4ce99-c864-4788-8576-5e38ee06a40d"
+                },
+                {
+                  "key": "freeVideo",
+                  "type": "file",
+                  "uuid": "fa250b0e-8d99-429c-9b07-6f76ed77ef8b",
+                  "src": "/C:/Users/ASUS/Desktop/CV/WhatsApp Video 2025-08-14 at 04.10.26_9e2521bf.mp4"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "694af53070cb35c5ed63eaec"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "join course",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/696a935282a745e00c4ae223/join",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "696a935282a745e00c4ae223",
+                "join"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "search",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/search?name=c",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "specific course",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/6930579f50250605b24f9150",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "6930579f50250605b24f9150"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "specific payed course or section",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/696a935282a745e00c4ae223/payed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "696a935282a745e00c4ae223",
+                "payed"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all payed course or section",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/payed/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "payed",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get free video",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/696a935282a745e00c4ae223/free-video",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "696a935282a745e00c4ae223",
+                "free-video"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get video",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/{{courseId}}/video/{{sectionId}}/{{videoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "{{courseId}}",
+                "video",
+                "{{sectionId}}",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get video materials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/694af53070cb35c5ed63eaec/video/694af53070cb35c5ed63eaed/694af53070cb35c5ed63eaef/material",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "694af53070cb35c5ed63eaec",
+                "video",
+                "694af53070cb35c5ed63eaed",
+                "694af53070cb35c5ed63eaef",
+                "material"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "course",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/course/692327675486241162588ea6",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "course",
+                "692327675486241162588ea6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "item": [
+        {
+          "name": "create user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstname\": {\r\n        \"en\": \"mohanad\",\r\n        \"ar\": \"معتل\"\r\n    },\r\n    \"lastname\": {\r\n        \"en\": \"saleh\",\r\n        \"ar\": \"معتل\"\r\n    },\r\n    \"email\": \"gradia_admin@test.com\",\r\n    \"password\": \"Gradia_123\",\r\n    \"phone\": \"+201211009828\",\r\n    \"gender\": \"male\",\r\n    \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "remove device id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/694c3e3c81f7403cf427b158",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "694c3e3c81f7403cf427b158"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "salary deduction of instructor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\": -5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/instructors/69259c5d66c019836942e353/salary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "instructors",
+                "69259c5d66c019836942e353",
+                "salary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all instructors",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/instructors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "instructors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "instructor salary",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/instructors/69259c5d66c019836942e353/salary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "instructors",
+                "69259c5d66c019836942e353",
+                "salary"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "instructor",
+      "item": [
+        {
+          "name": "all course of instructor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer  {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instructor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "instructor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all certificates of instructor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instructor/certificates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "instructor",
+                "certificates"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "specific certificate of instructor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instructor/certificates/6939abf92ab0f380cb841332",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "instructor",
+                "certificates",
+                "6939abf92ab0f380cb841332"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "salary",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instructor/salary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "instructor",
+                "salary"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "university",
+      "item": [
+        {
+          "name": "faculty",
+          "item": [
+            {
+              "name": "create faculty",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": {\r\n        \"en\": \"computer science\",\r\n        \"ar\": \"علوم حاسب\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/university/{{universityId}}/faculty",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "{{universityId}}",
+                    "faculty"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "all faculties",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/university/6970b5fc7202ed850758e459/faculty",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "6970b5fc7202ed850758e459",
+                    "faculty"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "specific faculty",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update faculty",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": {\r\n        \"en\": \"engineering\",\r\n        \"ar\": \"هندسة\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete faculty",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "specialization",
+          "item": [
+            {
+              "name": "create specialization",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": {\r\n        \"en\": \"artificial Intelligence\",\r\n        \"ar\": \"ذكاء اصطناعي\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/university/{{universityId}}/faculty/{{facultyId}}/specialization",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "{{universityId}}",
+                    "faculty",
+                    "{{facultyId}}",
+                    "specialization"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "all specializations",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59/specialization",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59",
+                    "specialization"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "specific specialization",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59/specialization/6970b33b06826090a8dcfe0a",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59",
+                    "specialization",
+                    "6970b33b06826090a8dcfe0a"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update specialization",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": {\r\n        \"en\": \"engineering\",\r\n        \"ar\": \"هندسة\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59/specialization/6970b33b06826090a8dcfe0a",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59",
+                    "specialization",
+                    "6970b33b06826090a8dcfe0a"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete specialization",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "token",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb/faculty/696ea6d8a8fa8ba94d3cec59/specialization/6970b33b06826090a8dcfe0a",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "university",
+                    "696ea0fba8016d777fd651fb",
+                    "faculty",
+                    "696ea6d8a8fa8ba94d3cec59",
+                    "specialization",
+                    "6970b33b06826090a8dcfe0a"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "create university",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": {\r\n        \"en\": \"Cairo university\",\r\n        \"ar\": \"جامعة البقاهره\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/university",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "university"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all university",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/university",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "university"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get specific university",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "university",
+                "696ea0fba8016d777fd651fb"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update university",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": {\r\n        \"en\": \"eim shams university\",\r\n        \"ar\": \"جامعة عين شمس\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/university/696ea0fba8016d777fd651fb",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "university",
+                "696ea0fba8016d777fd651fb"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete university",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "token",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/university/6970b488ccdfe8041bc036c9",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "university",
+                "6970b488ccdfe8041bc036c9"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    }
+  ]
 }

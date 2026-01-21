@@ -41,7 +41,7 @@
 		"invalid": "توكن غير صالح",
 		"unauthenticate": "غير مصرح",
 		"unauthorized": "غير مصرح به",
-		"refreshToken":"رمز التحديث"
+		"refreshToken": "رمز التحديث"
 	},
 	"banner": {
 		"notFound": "البانر غير موجود",
@@ -56,7 +56,7 @@
 	"notAuthorized": "غير مصرح لك بالقيام بهذا",
 	"internalServicerError": "يرجى المحاولة مرة أخرى لاحقاً",
 	"course": {
-		"searchNameRequired":"من فضلك اكتب كلمة للبحث",
+		"searchNameRequired": "من فضلك اكتب كلمة للبحث",
 		"notFound": "الكورس غير موجود",
 		"alreadyExist": "الكورس موجود بالفعل",
 		"failToCreate": "فشل في إنشاء الكورس",
@@ -113,6 +113,42 @@
 		"getSalary": "تم جلب الراتب بنجاح",
 		"getAllInstructors": "تم جلب جميع المُدرّسين بنجاح",
 		"salaryCannotBeNegative": "لا يمكن أن يكون الراتب سالبًا"
+	},
+	"university": {
+		"notFound": "الجامعة غير موجودة",
+		"alreadyExist": "الجامعة موجودة بالفعل",
+		"failToCreate": "فشل في إنشاء الجامعة",
+		"failToUpdate": "فشل في تحديث الجامعة",
+		"createdSuccessfully": "تم إنشاء الجامعة بنجاح",
+		"updatedSuccessfully": "تم تحديث الجامعة بنجاح",
+		"deletedSuccessfully": "تم حذف الجامعة بنجاح",
+		"getAll": "تم جلب جميع الجامعات بنجاح",
+		"getSpecific": "تم جلب الجامعة بنجاح",
+		"invalid": "بيانات الجامعة غير صحيحة",
+		"faculty": {
+			"notFound": "الكلية غير موجودة",
+			"alreadyExist": "الكلية موجودة بالفعل",
+			"failToCreate": "فشل في إنشاء الكلية",
+			"failToUpdate": "فشل في تحديث الكلية",
+			"createdSuccessfully": "تم إنشاء الكلية بنجاح",
+			"updatedSuccessfully": "تم تحديث الكلية بنجاح",
+			"deletedSuccessfully": "تم حذف الكلية بنجاح",
+			"getAll": "تم جلب جميع الكليات بنجاح",
+			"getSpecific": "تم جلب الكلية بنجاح",
+			"invalid": "بيانات الكلية غير صحيحة",
+			"specialization": {
+				"notFound": "التخصص غير موجود",
+				"alreadyExist": "التخصص موجود بالفعل",
+				"failToCreate": "فشل في إنشاء التخصص",
+				"failToUpdate": "فشل في تحديث التخصص",
+				"createdSuccessfully": "تم إنشاء التخصص بنجاح",
+				"updatedSuccessfully": "تم تحديث التخصص بنجاح",
+				"deletedSuccessfully": "تم حذف التخصص بنجاح",
+				"getAll": "تم جلب جميع التخصصات بنجاح",
+				"getSpecific": "تم جلب التخصص بنجاح",
+				"invalid": "بيانات التخصص غير صحيحة"
+			}
+		}
 	},
 	"الفيديو[object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له": "الفيديو[object Object] يحتوي على اسم ولكن لم يتم رفع أي ملف له",
 	"الفيديوفيديو يحتوي على اسم ولكن لم يتم رفع أي ملف له": "الفيديوفيديو يحتوي على اسم ولكن لم يتم رفع أي ملف له",

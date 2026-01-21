@@ -1,283 +1,326 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Your C-Company Educational Platform Verification Code</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Your Gradia Educational Platform Verification Code</title>
     <style>
-        /* Reset styles for email clients */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      /* Reset styles for email clients */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #1B1B1B;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #1b1b1b;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
 
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-top: 3px solid #1b2a36;
+        border-bottom: 3px solid #1b2a36;
+      }
+
+      .email-header {
+        padding: 30px 40px 20px;
+        border-bottom: 1px solid #e9e9e9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .logo-section {
+        flex: 0 0 auto;
+        margin-right: 20px;
+      }
+
+      .logo-section img {
+        max-width: 150px;
+        max-height: 50px;
+        height: auto;
+        width: auto;
+      }
+
+      .header-content {
+        flex: 1;
+        text-align: center;
+        min-width: 250px;
+      }
+
+      .email-header h1 {
+        color: #1b2a36;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .email-body {
+        padding: 30px 40px;
+      }
+
+      .email-body p {
+        margin-bottom: 20px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .otp-section {
+        text-align: center;
+        margin: 30px 0;
+        padding: 25px;
+        background-color: #fefefe;
+        border: 2px solid #e9e9e9;
+        border-radius: 8px;
+      }
+
+      .otp-label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #1b2a36;
+      }
+
+      .otp-code {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1b1b1b;
+        background-color: #ffffff;
+        padding: 20px 25px;
+        border: 2px solid #1b2a36;
+        border-radius: 6px;
+        letter-spacing: 4px;
+        display: inline-block;
+        margin: 25px 0;
+        font-family: "Courier New", monospace;
+      }
+
+      .validity-notice {
+        background-color: #fa5734;
+        border: 1px solid #1b2a36;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+        color: #ffffff;
+      }
+
+      .security-warning {
+        background-color: #f8f9fa;
+        border-left: 4px solid #1b2a36;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+        color: #495057;
+      }
+
+      .support-info {
+        background-color: #e9ecef;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+      }
+
+      .support-info a {
+        color: #1b2a36;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .support-info a:hover {
+        text-decoration: underline;
+      }
+
+      .closing {
+        margin-top: 30px;
+        font-size: 16px;
+      }
+
+      .email-footer {
+        background-color: #f8f9fa;
+        padding: 20px 40px;
+        text-align: center;
+        border-top: 1px solid #e9e9e9;
+        font-size: 12px;
+        color: #6c757d;
+      }
+
+      /* Responsive design */
+      @media only screen and (max-width: 600px) {
         .email-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            border-top: 3px solid #D7B36A;
-            border-bottom: 3px solid #D7B36A;
+          margin: 0;
+          width: 100% !important;
+        }
+
+        .email-header,
+        .email-body,
+        .email-footer {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
         }
 
         .email-header {
-            padding: 30px 40px 20px;
-            border-bottom: 1px solid #e9e9e9;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+          flex-direction: column;
+          text-align: center;
         }
 
         .logo-section {
-            flex: 0 0 auto;
-            margin-right: 20px;
+          margin-right: 0;
+          margin-bottom: 15px;
         }
 
         .logo-section img {
-            max-width: 150px;
-            max-height: 50px;
-            height: auto;
-            width: auto;
+          max-width: 120px;
+          max-height: 40px;
         }
 
         .header-content {
-            flex: 1;
-            text-align: center;
-            min-width: 250px;
+          min-width: auto;
         }
 
         .email-header h1 {
-            color: #D7B36A;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .email-body {
-            padding: 30px 40px;
-        }
-
-        .email-body p {
-            margin-bottom: 20px;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .otp-section {
-            text-align: center;
-            margin: 30px 0;
-            padding: 25px;
-            background-color: #FEFEFE;
-            border: 2px solid #e9e9e9;
-            border-radius: 8px;
-        }
-
-        .otp-label {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #1B1B1B;
+          font-size: 20px;
         }
 
         .otp-code {
-            font-size: 32px;
-            font-weight: bold;
-            color: #1B1B1B;
-            background-color: #FFFFFF;
-            padding: 20px 25px;
-            border: 2px solid #1B1B1B;
-            border-radius: 6px;
-            letter-spacing: 4px;
-            display: inline-block;
-            margin: 25px 0;
-            font-family: 'Courier New', monospace;
+          font-size: 28px;
+          letter-spacing: 2px;
+          padding: 15px 20px;
+          margin: 20px 0;
         }
 
-        .validity-notice {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 14px;
-            color: #856404;
+        .email-body p {
+          font-size: 14px;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .otp-section {
+          padding: 15px;
+          margin: 20px 0;
         }
 
-        .security-warning {
-            background-color: #f8f9fa;
-            border-left: 4px solid #D7B36A;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 14px;
-            color: #495057;
+        .otp-code {
+          font-size: 24px;
+          letter-spacing: 1px;
+          padding: 12px 15px;
+          margin: 15px 0;
         }
-
-        .support-info {
-            background-color: #e9ecef;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-
-        .support-info a {
-            color: #D7B36A;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .support-info a:hover {
-            text-decoration: underline;
-        }
-
-        .closing {
-            margin-top: 30px;
-            font-size: 16px;
-        }
-
-        .email-footer {
-            background-color: #f8f9fa;
-            padding: 20px 40px;
-            text-align: center;
-            border-top: 1px solid #e9e9e9;
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        /* Responsive design */
-        @media only screen and (max-width: 600px) {
-            .email-container {
-                margin: 0;
-                width: 100% !important;
-            }
-
-            .email-header,
-            .email-body,
-            .email-footer {
-                padding-left: 20px !important;
-                padding-right: 20px !important;
-            }
-
-            .email-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .logo-section {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-
-            .logo-section img {
-                max-width: 120px;
-                max-height: 40px;
-            }
-
-            .header-content {
-                min-width: auto;
-            }
-
-            .email-header h1 {
-                font-size: 20px;
-            }
-
-            .otp-code {
-                font-size: 28px;
-                letter-spacing: 2px;
-                padding: 15px 20px;
-                margin: 20px 0;
-            }
-        
-            .email-body p {
-                font-size: 14px;
-            }
-        }
-        
-        @media only screen and (max-width: 480px) {
-            .otp-section {
-                padding: 15px;
-                margin: 20px 0;
-            }
-        
-            .otp-code {
-                font-size: 24px;
-                letter-spacing: 1px;
-                padding: 12px 15px;
-                margin: 15px 0;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="width: 100%; background-color: #f4f4f4;">
-    <tr>
-        <td style="padding: 20px 0;">
-            <div class="email-container">
-                <div class="email-header">
-                    <div class="logo-section">
-                        <img src="./c-logo.png" alt="C-Company Educational Platform Logo" />
-                    </div>
+  </head>
+  <body>
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      style="width: 100%; background-color: #f4f4f4"
+    >
+      <tr>
+        <td style="padding: 20px 0">
+          <div class="email-container">
+            <div class="email-header">
+              <div class="logo-section">
+                <img
+                  src="https://gradia.fra1.digitaloceanspaces.com/uploads/gradia-logo.png"
+                  alt="Gradia Educational Platform Logo"
+                />
+              </div>
 
-                    <div class="header-content">
-                        <h1>Verify Your Email Address</h1>
-                        <p style="margin: 0; color: #6c757d; font-size: 14px;">C-Company Educational Platform</p>
-                    </div>
-                </div>
-
-                <div class="email-body">
-                    <p><strong>Hello {{userName}},</strong></p>
-
-                    <p>Thank you for starting your registration with the C-Company Educational Platform. To verify your email address, please use the verification code below.</p>
-
-                    <div class="otp-section">
-                        <div class="otp-label">Your Verification Code is:</div>
-                        <div class="otp-code" role="img" aria-label="Verification code: {{otpCode}}">{{otpCode}}</div>
-                    </div>
-
-                    <div class="validity-notice">
-                        <strong>⏰ Important:</strong> This verification code is valid for {{otpValidityMinutes}} minutes from the time of this email.
-                    </div>
-
-                    <p>To complete your registration, copy the 6-digit code above and paste it into the verification field on the email verification page on the C-Company Educational Platform. This will activate your account.</p>
-
-                    <div class="security-warning">
-                        <strong>🔒 Security Notice:</strong> If you did not attempt to register for a C-Company Educational Platform account, please disregard this email. No account will be created without successful verification.
-                    </div>
-
-                    <div class="support-info">
-                        <strong>Need Help?</strong><br>
-                        Having trouble or have questions? Contact C-Company Support at <a href="mailto:{{supportEmail}}">{{supportEmail}}</a> or visit our <a href="{{helpCenterUrl}}">Help Center</a>.
-                    </div>
-
-                    <p style="font-size: 14px; color: #6c757d; border-left: 3px solid #D7B36A; padding-left: 15px; margin: 25px 0;">
-                        <strong>Security Reminder:</strong> For your security, C-Company will never ask you for your password or this verification code via phone or unsolicited email.
-                    </p>
-
-                    <div class="closing">
-                        <p>Sincerely,<br>
-                            <strong>The C-Company Educational Platform Team</strong></p>
-                    </div>
-                </div>
-
-                <div class="email-footer">
-                    <p>&copy; {{currentYear}} C-Company. All rights reserved.</p>
-                </div>
+              <div class="header-content">
+                <h1>Verify Your Email Address</h1>
+                <p style="margin: 0; color: #6c757d; font-size: 14px">
+                  Gradia Educational Platform
+                </p>
+              </div>
             </div>
+
+            <div class="email-body">
+              <p><strong>Hello {{userName}},</strong></p>
+
+              <p>
+                Thank you for starting your registration with the Gradia
+                Educational Platform. To verify your email address, please use
+                the verification code below.
+              </p>
+
+              <div class="otp-section">
+                <div class="otp-label">Your Verification Code is:</div>
+                <div
+                  class="otp-code"
+                  role="img"
+                >
+                  {{otpCode}}
+                </div>
+              </div>
+
+              <div class="validity-notice">
+                <strong>⏰ Important:</strong> This verification code is valid
+                for {{otpValidityMinutes}} minutes from the time of this email.
+              </div>
+
+              <p>
+                To complete your registration, copy the 6-digit code above and
+                paste it into the verification field on the email verification
+                page on the Gradia Educational Platform. This will activate your
+                account.
+              </p>
+
+              <div class="security-warning">
+                <strong>🔒 Security Notice:</strong> If you did not attempt to
+                register for a Gradia Educational Platform account, please
+                disregard this email. No account will be created without
+                successful verification.
+              </div>
+
+              <div class="support-info">
+                <strong>Need Help?</strong><br />
+                Having trouble or have questions? Contact Gradia Support at
+                <a href="mailto:">{{supportEmail}}</a> or visit
+                our <a href="{{helpCenterUrl}}">Help Center</a>.
+              </div>
+
+              <p
+                style="
+                  font-size: 14px;
+                  color: #6c757d;
+                  border-left: 3px solid #1b2a36;
+                  padding-left: 15px;
+                  margin: 25px 0;
+                "
+              >
+                <strong>Security Reminder:</strong> For your security, Gradia
+                will never ask you for your password or this verification code
+                via phone or unsolicited email.
+              </p>
+
+              <div class="closing">
+                <p>
+                  Sincerely,<br />
+                  <strong>The Gradia Educational Platform Team</strong>
+                </p>
+              </div>
+            </div>
+
+            <div class="email-footer">
+              <p>&copy; {{currentYear}} Heda Firm. All rights reserved.</p>
+            </div>
+          </div>
         </td>
-    </tr>
-</table>
-</body>
+      </tr>
+    </table>
+  </body>
 </html>

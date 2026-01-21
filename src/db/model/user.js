@@ -21,17 +21,23 @@ const userSchema = new Schema({
     role: { type: String, enum: Object.values(roleTypes), default: roleTypes.STUDENT },
 
     university: {
-        type: String, trim: true, required: function () {
+        type: Schema.Types.ObjectId,
+        ref:"University",
+         trim: true, required: function () {
             return this.role == roleTypes.STUDENT ? true : false
         }
     },
     faculty: {
-        type: String, trim: true, required: function () {
+        type: Schema.Types.ObjectId,
+        ref:"Faculty",
+         trim: true, required: function () {
             return this.role == roleTypes.STUDENT ? true : false
         }
     },
     Specializations: [{
-        type: String, trim: true, required: function () {
+        type: Schema.Types.ObjectId,
+        ref:"Specialization",
+         trim: true, required: function () {
             return this.role == roleTypes.STUDENT ? true : false
         }
     }],

@@ -1,7 +1,39 @@
 import nodemailer from "nodemailer"
+import fs from "fs";
+import path from "path";
+export const sendEmail = async ({ to, subject, otp, type }) => {
+    let htmlContent = ""
+    if (type === "sendOtp") {
+        const htmlPath = path.join(
+            process.cwd(),
+            "src",
+            "templates",
+            "otp.template.html"
+        );
 
-export const sendEmail = async ({ to, subject, otp  }) => {
+         htmlContent = fs.readFileSync(htmlPath, "utf8");
 
+        htmlContent = htmlContent.replace("{{otpCode}}", otp);
+        htmlContent = htmlContent.replace("{{userName}}", to);
+        htmlContent = htmlContent.replace("{{otpValidityMinutes}}", 15);
+        htmlContent = htmlContent.replace("{{supportEmail}}", "Gradia.kwt@gmail.com");
+
+    } else {
+
+        const htmlPath = path.join(
+            process.cwd(),
+            "src",
+            "templates",
+            "resete-password.template.html"
+        );
+
+        htmlContent = fs.readFileSync(htmlPath, "utf8");
+
+        htmlContent = htmlContent.replace("{{otpCode}}", otp);
+        htmlContent = htmlContent.replace("{{userName}}", to);
+        htmlContent = htmlContent.replace("{{otpValidityMinutes}}", 15);
+        htmlContent = htmlContent.replace("{{supportEmail}}", "Gradia.kwt@gmail.com");
+    }
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -13,9 +45,7 @@ export const sendEmail = async ({ to, subject, otp  }) => {
         from: 'social-media 👻', // sender address
         to, // list of receivers
         subject, // Subject line
-        html: `<p>
-        your OTP is : ${otp} 
-        </p>`// html body
+        html: htmlContent// html body
     });
-    
+
 }

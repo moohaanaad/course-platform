@@ -1,0 +1,41 @@
+import { Router } from "express";
+import { asyncHandler, isAuthenticate, isValid } from "../../middleware/index.js";
+import * as universityController from "./university.controller.js";
+import facultyRouter from "./faculty/faculty.routes.js";
+import * as Val from "./university.validation.js";
+import { idVal } from "../../common/common.validation.js";
+
+
+const universityRouter = Router()
+universityRouter.use('/:universityId/faculty', facultyRouter)
+universityRouter.use(isAuthenticate())
+//create university
+universityRouter.post('/',
+    isValid(Val.createUniversityVal),
+    asyncHandler(universityController.createUniversity)
+)
+
+//get all university
+universityRouter.get('/',
+    asyncHandler(universityController.getAllUniversities)
+)
+
+//get specific university
+universityRouter.get('/:universityId',
+    isValid(idVal("universityId")),
+    asyncHandler(universityController.getUniversityById)
+)
+
+//update university
+universityRouter.put('/:universityId',
+    isValid(Val.updateUniversityVal),
+    asyncHandler(universityController.updateUniversity)
+)
+
+//delete university
+universityRouter.delete('/:universityId',
+    isValid(idVal("universityId")),
+    asyncHandler(universityController.deleteUniversity)
+)
+
+export default universityRouter

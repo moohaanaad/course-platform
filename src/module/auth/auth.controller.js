@@ -8,7 +8,7 @@ import { comparePassword, hashPassword } from "../../utils/bcrypt/index.js"
 import { errorResponse, successResponse } from "../../utils/res/index.js"
 import { verifyToken } from "../../utils/token/verify.js"
 import randomstring from 'randomstring'
-export const sendOtpToEmail = async (email, res) => {
+export const sendOtpToEmail = async (email, res, type) => {
     //check Existence 
     const userOTP = await Otp.findOne({ email })
     if (userOTP) errorResponse({ res, message: messages.OTP.haveOTP, statusCode: 400 })
@@ -18,8 +18,9 @@ export const sendOtpToEmail = async (email, res) => {
     await Otp.create({ email, otp })
     await sendEmail({
         to: email,
-        subject: "verify your account before 15 minutes",
-        otp
+        subject: "Gradia Educational Platform",
+        otp,
+        type
     })
 }
 
@@ -53,7 +54,7 @@ export const signup = async (req, res, next) => {
     const createdUser = await User.create(req.body)
 
     //send email
-    await sendOtpToEmail(email, res)
+    await sendOtpToEmail(email, res, "sendOtp")
 
     return successResponse({
         res,
@@ -68,7 +69,7 @@ export const resendOTP = async (req, res, next) => {
 
     const { email } = req.body
 
-    await sendOtpToEmail(email, res)
+    await sendOtpToEmail(email, res, "sendOtp")
 
     return successResponse({
         res,
@@ -195,7 +196,7 @@ export const forgetPassword = async (req, res, next) => {
     if (userExist.isConfirmed == false) errorResponse({ res, message: messages.user.notConfirmed, statusCode: 403 })
 
     //send otp email
-    await sendOtpToEmail(email, res)
+    await sendOtpToEmail(email, res, "forgetPassword")
     userExist.isActive = false
     userExist.isConfirmed = false
     await userExist.save()

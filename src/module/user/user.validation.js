@@ -14,9 +14,9 @@ export const updateUserVal = joi.object({
         en: joi.string().min(3).max(30).required(),
     }),
     phone: joi.string().pattern(/^\+?[1-9]\d{1,14}$/),
-    university: joi.string().min(3).max(30),
-    faculty: joi.string().min(3).max(30),
+    university: joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+    faculty: joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
     Specializations: joi.array().items(
-        joi.string().trim().min(1)
-    ),
+        joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+    )
 })
