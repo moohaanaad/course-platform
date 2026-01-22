@@ -8,7 +8,6 @@ import { roleTypes } from "../../../common/constant/user.js";
 
 const facultyRouter = Router({ mergeParams: true })
 facultyRouter.use('/:facultyId/specialization', specializationRouter)
-facultyRouter.use(isAuthenticate())
 
 //get all faculty 
 facultyRouter.get('/',
@@ -20,7 +19,7 @@ facultyRouter.get('/:facultyId',
     asyncHandler(facultyController.getSpecificFaculty)
 )
 
-facultyRouter.use(isAuthorized([roleTypes.ADMIN]))
+facultyRouter.use(isAuthenticate(), isAuthorized([roleTypes.ADMIN]))
 
 //create faculty 
 facultyRouter.post('/',

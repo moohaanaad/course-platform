@@ -9,7 +9,6 @@ import { roleTypes } from "../../common/constant/user.js";
 
 const universityRouter = Router()
 universityRouter.use('/:universityId/faculty', facultyRouter)
-universityRouter.use(isAuthenticate())
 
 //get all university
 universityRouter.get('/',
@@ -22,7 +21,7 @@ universityRouter.get('/:universityId',
     asyncHandler(universityController.getUniversityById)
 )
 
-universityRouter.use(isAuthorized([roleTypes.ADMIN]))
+universityRouter.use(isAuthenticate(), isAuthorized([roleTypes.ADMIN]))
 
 //create university
 universityRouter.post('/',
