@@ -153,5 +153,22 @@
 	"Video \"Video 1\" has name but no file uploaded": "Video \"Video 1\" has name but no file uploaded",
 	"Video \"Video 2\" has name but no file uploaded": "Video \"Video 2\" has name but no file uploaded",
 	"updated": "updated",
-	"section notfound": "section notfound"
+	"section notfound": "section notfound",
+	"Payment required to join this course. Please complete payment first.": "Payment required to join this course. Please complete payment first.",
+	"Payment session created successfully": "Payment session created successfully",
+	"Request failed with status code 400": "Request failed with status code 400",
+	"connect ETIMEDOUT 103": {
+		"55": {
+			"149": {
+				"32": "443"
+			}
+		}
+	},
+	"Request failed with status code 404": "Request failed with status code 404",
+	"Cannot read properties of undefined (reading 'id')": "Cannot read properties of undefined (reading 'id')",
+	"Failed to create payment session": "Failed to create payment session",
+	"Payment session ready": "Payment session ready",
+	"Cannot destructure property 'courseId' of 'req.body' as it is undefined.": "Cannot destructure property 'courseId' of 'req.body' as it is undefined.",
+	"course or section notfound": "course or section notfound",
+	"Payment not successfull": "Payment not successfull"
 }

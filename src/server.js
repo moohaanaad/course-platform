@@ -5,6 +5,7 @@ import authRouter from "./module/auth/auth.route.js"
 import bannerRouter from "./module/banner/banner.route.js"
 import courseRouter from "./module/course/course.routes.js"
 import instructorRoutour from "./module/instructor/instructor.routes.js"
+import paymentRouter from "./module/payment/payment.routes.js"
 import universityRouter from "./module/university/university.routes.js"
 import userRouter from "./module/user/user.route.js"
 import { globalErrorHandling } from "./utils/error/global-errorhandling.js"
@@ -29,6 +30,7 @@ const server = async (app, express) => {
     app.use('/admin', adminRouter)
     app.use('/university', universityRouter)
     app.use('/instructor', instructorRoutour)
+    app.use('/payment', paymentRouter)
 
     app.use(globalErrorHandling)
 }

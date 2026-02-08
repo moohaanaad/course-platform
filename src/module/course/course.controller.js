@@ -274,11 +274,30 @@ export const joinCourse = async (req, res, next) => {
   const { id } = req.params
   const { user } = req
 
-  //cehck exitence 
+  //check course existence 
   const courseExist = await Course.findOne({ _id: id, isActive: true })
   if (!courseExist) errorResponse({ res, message: messages.course.notFound, statusCode: 404 })
+  
+  // Check if student already joined
   const studentExist = courseExist.students.find(stu => stu.toString() == user._id.toString())
   if (studentExist) errorResponse({ res, message: messages.course.studentAlreadyJoined, statusCode: 401 })
+
+  // Check if course requires payment
+  if (courseExist.price > 0) {
+    // Verify payment before allowing enrollment
+    const userWithPayments = await User.findById(user._id);
+    const hasPaid = userWithPayments.paidCourses.some(
+      payment => payment.course.toString() === id && payment.status === 'completed'
+    );
+
+    if (!hasPaid) {
+      return errorResponse({
+        res,
+        message: "Payment required to join this course. Please complete payment first.",
+        statusCode: 402  // Payment Required status code
+      });
+    }
+  }
 
   //prepare data
   courseExist.students.push(user._id)

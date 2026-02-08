@@ -1,6 +1,6 @@
 import { messages } from "../../../common/messages/message.js"
 import { Faculty } from "../../../db/model/faculty.js"
-import { Specialization } from "../../../db/model/Specialization.js"
+import { Specialization } from "../../../db/model/specialization.js"
 import { University } from "../../../db/model/university.js"
 import { errorResponse, successResponse } from "../../../utils/res/index.js"
 
